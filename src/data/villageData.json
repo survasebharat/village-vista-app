@@ -1,0 +1,240 @@
+{
+  "village": {
+    "name": "Hariyali Gram Panchayat",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "pincode": "411001",
+    "established": "1995",
+    "area": "15.2 sq km",
+    "population": {
+      "total": 8450,
+      "male": 4320,
+      "female": 4130,
+      "literacy": "78.5%"
+    },
+    "geography": {
+      "latitude": "18.5204",
+      "longitude": "73.8567",
+      "altitude": "560 meters"
+    },
+    "description": "A progressive village known for its sustainable farming practices, rich cultural heritage, and strong community participation in development activities.",
+    "vision": "To become a model village demonstrating sustainable development, digital empowerment, and inclusive growth.",
+    "culture": [
+      "Gudi Padwa Festival",
+      "Ganesh Chaturthi",
+      "Diwali Celebrations", 
+      "Harvest Festival",
+      "Traditional Folk Dance",
+      "Village Sports Tournament"
+    ]
+  },
+  "panchayat": {
+    "sarpanch": {
+      "name": "Mrs. Sunita Sharma",
+      "contact": "+91 98765 43210",
+      "email": "sarpanch@hariyaligram.gov.in",
+      "tenure": "2020-2025",
+      "education": "M.A. Rural Development",
+      "message": "Together we build a stronger, more prosperous village for our future generations."
+    },
+    "members": [
+      {
+        "name": "Rajesh Kumar",
+        "position": "Ward Member 1",
+        "contact": "+91 98765 43211",
+        "ward": "Central Ward"
+      },
+      {
+        "name": "Priya Patel",
+        "position": "Ward Member 2", 
+        "contact": "+91 98765 43212",
+        "ward": "Eastern Ward"
+      },
+      {
+        "name": "Amit Singh",
+        "position": "Ward Member 3",
+        "contact": "+91 98765 43213", 
+        "ward": "Western Ward"
+      },
+      {
+        "name": "Kavita Desai",
+        "position": "Ward Member 4",
+        "contact": "+91 98765 43214",
+        "ward": "Northern Ward"
+      },
+      {
+        "name": "Suresh Jadhav",
+        "position": "Ward Member 5",
+        "contact": "+91 98765 43215",
+        "ward": "Southern Ward"
+      }
+    ],
+    "secretary": {
+      "name": "Mr. Prakash Rathod",
+      "contact": "+91 98765 43216",
+      "email": "secretary@hariyaligram.gov.in",
+      "office_hours": "9:00 AM - 5:00 PM"
+    }
+  },
+  "announcements": [
+    {
+      "id": 1,
+      "title": "Gram Sabha Meeting - November 2024",
+      "date": "2024-11-15",
+      "content": "Monthly Gram Sabha meeting scheduled for November 15th, 2024 at 10:00 AM in the Community Hall. All villagers are requested to attend.",
+      "type": "meeting",
+      "priority": "high"
+    },
+    {
+      "id": 2,
+      "title": "New Water Supply Project Approved",
+      "date": "2024-10-28",
+      "content": "₹50 lakhs approved for new water supply infrastructure. Work to begin from December 2024.",
+      "type": "development",
+      "priority": "medium"
+    },
+    {
+      "id": 3,
+      "title": "Digital India Initiative",
+      "date": "2024-10-20",
+      "content": "Free computer training program for youth aged 18-35. Registration open at Panchayat Office.",
+      "type": "scheme",
+      "priority": "medium"
+    }
+  ],
+  "schemes": [
+    {
+      "name": "PM Kisan Samman Nidhi",
+      "description": "Direct income support of ₹6000 per year to farmer families",
+      "eligibility": "Small and marginal farmers",
+      "benefits": "₹2000 per installment, 3 times per year",
+      "application": "Online at pmkisan.gov.in or Panchayat Office",
+      "documents": ["Aadhaar Card", "Bank Details", "Land Records"]
+    },
+    {
+      "name": "Ayushman Bharat",
+      "description": "Health insurance scheme providing coverage up to ₹5 lakhs per family per year",
+      "eligibility": "Families listed in SECC-2011 database",
+      "benefits": "Free treatment at empaneled hospitals",
+      "application": "Visit nearest CSC or Hospital",
+      "documents": ["Aadhaar Card", "Ration Card", "Family Photo"]
+    },
+    {
+      "name": "Swachh Bharat Mission",
+      "description": "Construction of individual household toilets",
+      "eligibility": "Households without toilets",
+      "benefits": "₹12,000 incentive for toilet construction",
+      "application": "Apply at Panchayat Office",
+      "documents": ["Aadhaar Card", "Bank Details", "House Photo"]
+    },
+    {
+      "name": "MGNREGA",
+      "description": "Guaranteed 100 days of employment per rural household per year",
+      "eligibility": "Rural households willing to do manual work",
+      "benefits": "₹220 per day wages",
+      "application": "Register at Panchayat Office",
+      "documents": ["Aadhaar Card", "Bank Passbook", "Passport Photo"]
+    }
+  ],
+  "developmentWorks": [
+    {
+      "title": "Village Road Construction",
+      "status": "Completed",
+      "budget": "₹25,00,000",
+      "startDate": "2024-01-15",
+      "completionDate": "2024-06-30",
+      "description": "Construction of 5 km concrete roads connecting main village to agricultural areas",
+      "progress": 100
+    },
+    {
+      "title": "Community Health Center",
+      "status": "Ongoing",
+      "budget": "₹35,00,000", 
+      "startDate": "2024-07-01",
+      "expectedCompletion": "2024-12-31",
+      "description": "New primary health center with modern medical facilities and ambulance service",
+      "progress": 65
+    },
+    {
+      "title": "Solar Street Lighting",
+      "status": "Planned",
+      "budget": "₹12,00,000",
+      "expectedStart": "2025-01-01",
+      "description": "Installation of 150 solar LED street lights across all village roads",
+      "progress": 0
+    },
+    {
+      "title": "Digital Library",
+      "status": "Completed",
+      "budget": "₹8,00,000",
+      "startDate": "2024-03-01", 
+      "completionDate": "2024-08-15",
+      "description": "Modern library with computer lab and internet facility for students",
+      "progress": 100
+    }
+  ],
+  "gallery": [
+    {
+      "title": "Ganesh Festival 2024",
+      "type": "festival",
+      "date": "2024-09-15"
+    },
+    {
+      "title": "New Road Inauguration",
+      "type": "development", 
+      "date": "2024-07-01"
+    },
+    {
+      "title": "Health Camp",
+      "type": "healthcare",
+      "date": "2024-08-20"
+    },
+    {
+      "title": "Farmer Training Program",
+      "type": "education",
+      "date": "2024-09-05"
+    }
+  ],
+  "contact": {
+    "office": {
+      "address": "Gram Panchayat Office, Hariyali Village, Taluka Haveli, District Pune, Maharashtra - 411001",
+      "phone": "+91 20 2567 8901",
+      "email": "info@hariyaligram.gov.in",
+      "website": "www.hariyaligram.gov.in",
+      "hours": "Monday to Friday: 9:00 AM - 5:00 PM, Saturday: 9:00 AM - 1:00 PM"
+    },
+    "emergency": {
+      "police": "100",
+      "fire": "101", 
+      "ambulance": "108",
+      "local_emergency": "+91 98765 43999"
+    }
+  },
+  "documents": [
+    {
+      "name": "Birth Certificate Application",
+      "type": "form",
+      "description": "Application form for birth certificate registration"
+    },
+    {
+      "name": "Death Certificate Application", 
+      "type": "form",
+      "description": "Application form for death certificate registration"
+    },
+    {
+      "name": "Property Tax Form",
+      "type": "form", 
+      "description": "Annual property tax payment form"
+    },
+    {
+      "name": "RTI Application",
+      "type": "form",
+      "description": "Right to Information application form"
+    },
+    {
+      "name": "Gram Sabha Resolution 2024",
+      "type": "document",
+      "description": "Annual resolutions passed in Gram Sabha meetings"
+    }
+  ]
+}
