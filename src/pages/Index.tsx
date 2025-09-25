@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Panchayat from "@/components/Panchayat";
 import Announcements from "@/components/Announcements";
 import Schemes from "@/components/Schemes";
+import Services from "@/components/Services";
 import Development from "@/components/Development";
 import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
@@ -87,6 +88,9 @@ const Index = () => {
         
         {/* Government Schemes */}
         <Schemes />
+        
+        {/* Village Services */}
+        <Services />
         
         {/* Development Projects */}
         <Development />
