@@ -1,18 +1,23 @@
 import { useState } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "./LanguageToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About Village", href: "#about" },
-    { name: "Panchayat", href: "#panchayat" },
-    { name: "Schemes", href: "#schemes" },
-    { name: "Development", href: "#development" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Contact", href: "#contact" },
+    { name: t("nav.home"), href: "#home" },
+    { name: t("nav.about"), href: "#about" },
+    { name: t("nav.panchayat"), href: "#panchayat" },
+    { name: t("nav.schemes"), href: "#schemes" },
+    { name: t("nav.development"), href: "#development" },
+    { name: t("nav.services"), href: "#services" },
+    { name: t("nav.gallery"), href: "#gallery" },
+    { name: t("nav.announcements"), href: "#announcements" },
+    { name: t("nav.contact"), href: "#contact" },
   ];
 
   return (
@@ -27,7 +32,7 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              <span>info@hariyaligram.gov.in</span>
+              <span>info@shivankedgram.gov.in</span>
             </div>
           </div>
           <div className="text-sm">
@@ -40,11 +45,11 @@ const Header = () => {
           {/* Logo & Title */}
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl">
-              हरी
+              शि
             </div>
             <div>
               <h1 className="text-xl font-bold text-gradient">
-                Hariyali Gram Panchayat
+                Shivankhed Gram Panchayat
               </h1>
               <p className="text-sm text-muted-foreground">
                 Maharashtra, Pune District
@@ -53,18 +58,21 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Button
-                key={item.name}
-                variant="ghost"
-                className="text-foreground hover:text-primary hover:bg-primary/10"
-                asChild
-              >
-                <a href={item.href}>{item.name}</a>
-              </Button>
-            ))}
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="hidden lg:flex items-center gap-1">
+              {navItems.map((item) => (
+                <Button
+                  key={item.name}
+                  variant="ghost"
+                  className="text-foreground hover:text-primary hover:bg-primary/10"
+                  asChild
+                >
+                  <a href={item.href}>{item.name}</a>
+                </Button>
+              ))}
+            </nav>
+            <LanguageToggle />
+          </div>
 
           {/* Mobile Menu Toggle */}
           <Button

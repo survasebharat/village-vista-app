@@ -2,10 +2,12 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useLanguage } from "@/contexts/LanguageContext";
 import villageData from "@/data/villageData.json";
 
 const Hero = () => {
   const { village, panchayat } = villageData;
+  const { t } = useLanguage();
 
   return (
     <section id="home" className="relative min-h-screen flex items-center">
@@ -35,7 +37,7 @@ const Hero = () => {
           {/* Hero Text */}
           <div className="text-white animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Welcome to{" "}
+              {t('hero.welcome')}{" "}
               <span className="text-accent-light">
                 {village.name}
               </span>
@@ -46,7 +48,7 @@ const Hero = () => {
             </p>
             
             <p className="text-lg mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              {village.description}
+              {t('hero.subtitle')}
             </p>
 
             {/* Sarpanch Message */}
@@ -75,7 +77,7 @@ const Hero = () => {
                 size="lg" 
                 className="bg-accent text-accent-foreground hover:bg-accent-light font-semibold"
               >
-                Explore Our Village
+                {t('hero.explore')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 

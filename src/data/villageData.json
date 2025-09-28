@@ -1,6 +1,6 @@
 {
   "village": {
-    "name": "Hariyali Gram Panchayat",
+    "name": "Shivankhed Gram Panchayat",
     "state": "Maharashtra",
     "district": "Pune",
     "pincode": "411001",
@@ -46,7 +46,7 @@
     "sarpanch": {
       "name": "Mrs. Sunita Sharma",
       "contact": "+91 98765 43210",
-      "email": "sarpanch@hariyaligram.gov.in",
+      "email": "sarpanch@shivankedgram.gov.in",
       "tenure": "2020-2025",
       "education": "M.A. Rural Development",
       "message": "Together we build a stronger, more prosperous village for our future generations.",
@@ -92,7 +92,7 @@
     "secretary": {
       "name": "Mr. Prakash Rathod",
       "contact": "+91 98765 43216",
-      "email": "secretary@hariyaligram.gov.in",
+      "email": "secretary@shivankedgram.gov.in",
       "office_hours": "9:00 AM - 5:00 PM",
       "image": "/api/placeholder/300/300"
     },
@@ -248,10 +248,10 @@
   ],
   "contact": {
     "office": {
-      "address": "Gram Panchayat Office, Hariyali Village, Taluka Haveli, District Pune, Maharashtra - 411001",
+      "address": "Gram Panchayat Office, Shivankhed Village, Taluka Haveli, District Pune, Maharashtra - 411001",
       "phone": "+91 20 2567 8901",
-      "email": "info@hariyaligram.gov.in",
-      "website": "www.hariyaligram.gov.in",
+      "email": "info@shivankedgram.gov.in",
+      "website": "www.shivankedgram.gov.in",
       "hours": "Monday to Friday: 9:00 AM - 5:00 PM, Saturday: 9:00 AM - 1:00 PM"
     },
     "emergency": {
