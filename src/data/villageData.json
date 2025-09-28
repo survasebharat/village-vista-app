@@ -1,9 +1,9 @@
 {
   "village": {
-    "name": "Hariyali Gram Panchayat",
+    "name": "Shivankhed Gram Panchayat",
     "state": "Maharashtra",
-    "district": "Pune",
-    "pincode": "411001",
+    "district": "Latur",
+    "pincode": "413518",
     "established": "1995",
     "area": "15.2 sq km",
     "population": {
@@ -13,15 +13,15 @@
       "literacy": "78.5%"
     },
     "geography": {
-      "latitude": "18.5204",
-      "longitude": "73.8567",
+      "latitude": "18.5302",
+      "longitude": "76.3300",
       "altitude": "560 meters"
     },
     "description": "A progressive village known for its sustainable farming practices, rich cultural heritage, and strong community participation in development activities.",
     "vision": "To become a model village demonstrating sustainable development, digital empowerment, and inclusive growth.",
     "heroImages": [
       {
-        "src": "/api/placeholder/1920/1080",
+        "src": "/sample/hero1.png",
         "alt": "Village panoramic view"
       },
       {
@@ -46,11 +46,11 @@
     "sarpanch": {
       "name": "Mrs. Sunita Sharma",
       "contact": "+91 98765 43210",
-      "email": "sarpanch@hariyaligram.gov.in",
+      "email": "sarpanch@shivankhed.gov.in",
       "tenure": "2020-2025",
       "education": "M.A. Rural Development",
       "message": "Together we build a stronger, more prosperous village for our future generations.",
-      "image": "/api/placeholder/300/300"
+      "image": "https://www.aljazeera.com/wp-content/uploads/2025/02/AFP__20250220__36Y494C__v1__HighRes__IndiaPoliticsDelhi-1740042938.jpg?resize=770%2C513&quality=80"
     },
     "wardMembers": [
       {
@@ -58,43 +58,43 @@
         "position": "Ward Member 1",
         "contact": "+91 98765 43211",
         "ward": "Central Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "https://i.pinimg.com/474x/b4/7c/2f/b47c2f80bcc55ef1561656e5e57db895.jpg"
       },
       {
         "name": "Priya Patel",
         "position": "Ward Member 2", 
         "contact": "+91 98765 43212",
         "ward": "Eastern Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "https://static.toiimg.com/thumb/msid-122119247,imgsize-23786,width-400,resizemode-4/Supriya-Sule-in-city-today-to-meet-party-workers.jpg"
       },
       {
         "name": "Amit Singh",
         "position": "Ward Member 3",
         "contact": "+91 98765 43213", 
         "ward": "Western Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "https://msbsvet.edu.in/App_Themes/default/images/AjitPawar.jpg"
       },
       {
         "name": "Kavita Desai",
         "position": "Ward Member 4",
         "contact": "+91 98765 43214",
         "ward": "Northern Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "https://indianexpress.com/wp-content/uploads/2024/10/images-5_prev_ui.png"
       },
       {
         "name": "Suresh Jadhav",
         "position": "Ward Member 5",
         "contact": "+91 98765 43215",
         "ward": "Southern Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "https://i.redd.it/who-are-some-of-the-most-attractive-faces-in-politics-v0-p7dnxip00p2e1.jpg?width=800&format=pjpg&auto=webp&s=11dbc8a6e8eea888beee55a3ac6eba182e981a07"
       }
     ],
     "secretary": {
       "name": "Mr. Prakash Rathod",
       "contact": "+91 98765 43216",
-      "email": "secretary@hariyaligram.gov.in",
+      "email": "secretary@shivankhed.gov.in",
       "office_hours": "9:00 AM - 5:00 PM",
-      "image": "/api/placeholder/300/300"
+      "image": "https://data1.ibtimes.co.in/en/full/821464/actor-politician-vijay-begins-tvks-first-poll-campaign-tiruchi.jpg?h=450&l=50&t=40"
     },
     "staff": [
       {
@@ -102,28 +102,28 @@
         "position": "Talati",
         "contact": "+91 98765 43217",
         "department": "Revenue",
-        "image": "/api/placeholder/300/300"
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/17/Uday_Samant.jpg"
       },
       {
         "name": "Ganesh Bhosale",
         "position": "Postman",
         "contact": "+91 98765 43218",
         "department": "Postal Services",
-        "image": "/api/placeholder/300/300"
+        "image": "https://www.cag.org.in/sites/default/files/inline-images/Indian%20postman_Owen%20Young_Flickr%20.png"
       },
       {
         "name": "Santosh Yadav",
         "position": "Lineman",
         "contact": "+91 98765 43219",
         "department": "Electricity",
-        "image": "/api/placeholder/300/300"
+        "image": "https://pbs.twimg.com/media/GHuf0s5aEAAng-l.jpg"
       },
       {
         "name": "Kiran Jadhav",
         "position": "Anganwadi Worker",
         "contact": "+91 98765 43220",
         "department": "Women & Child Development",
-        "image": "/api/placeholder/300/300"
+        "image": "https://www.shutterstock.com/image-photo/indian-anganwadi-worker-standing-confidently-260nw-2636991793.jpg"
       }
     ]
   },
@@ -131,7 +131,7 @@
     {
       "id": 1,
       "title": "Gram Sabha Meeting - November 2024",
-      "date": "2024-11-15",
+      "date": "2025-10-25",
       "content": "Monthly Gram Sabha meeting scheduled for November 15th, 2024 at 10:00 AM in the Community Hall. All villagers are requested to attend.",
       "type": "meeting",
       "priority": "high"
@@ -139,7 +139,7 @@
     {
       "id": 2,
       "title": "New Water Supply Project Approved",
-      "date": "2024-10-28",
+      "date": "2025-1-28",
       "content": "₹50 lakhs approved for new water supply infrastructure. Work to begin from December 2024.",
       "type": "development",
       "priority": "medium"
@@ -244,13 +244,23 @@
       "title": "Farmer Training Program",
       "type": "education",
       "date": "2024-09-05"
+    },
+     {
+      "title": "Dasara Festival 2024",
+      "type": "festival",
+      "date": "2024-09-15"
+    },
+    {
+      "title": "Diwali Festival 2024",
+      "type": "festival",
+      "date": "2024-09-15"
     }
   ],
   "contact": {
     "office": {
       "address": "Gram Panchayat Office, Hariyali Village, Taluka Haveli, District Pune, Maharashtra - 411001",
       "phone": "+91 20 2567 8901",
-      "email": "info@hariyaligram.gov.in",
+      "email": "info@shivankhed.gov.in",
       "website": "www.hariyaligram.gov.in",
       "hours": "Monday to Friday: 9:00 AM - 5:00 PM, Saturday: 9:00 AM - 1:00 PM"
     },
@@ -298,7 +308,7 @@
           "contact": "+91 98765 44001",
           "address": "Main Market Road",
           "hours": "6:00 AM - 10:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://www.onlinesanchore.com/wp-content/uploads/2020/01/Shree-Shiv-General-Store-Sanchore-1024x682.jpg"
         },
         {
           "name": "Patel General Store",
@@ -306,7 +316,15 @@
           "contact": "+91 98765 44002",
           "address": "Village Center",
           "hours": "7:00 AM - 9:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://content3.jdmagicbox.com/comp/raichur/g5/9999p8532.8532.110815113924.s7g5/catalogue/shiv-shankar-kirana-store-manvi-raichur-grocery-stores-5pqd92ifdh.jpg"
+        },
+        {
+          "name": "Gavkari General Store",
+          "owner": "Patil Ramesh",
+          "contact": "+91 98765 43502",
+          "address": "Village Center",
+          "hours": "7:00 AM - 9:00 PM",
+          "image": "https://content.jdmagicbox.com/comp/thiruvananthapuram/t9/0471px471.x471.200205183525.b9t9/catalogue/p-s-store-palayamkunnu-thiruvananthapuram-supermarkets-dcc64zbkhx.jpg"
         }
       ]
     },
@@ -319,7 +337,7 @@
           "contact": "+91 98765 44003",
           "vehicle": "Tata Indica",
           "routes": "Village to Pune City",
-          "image": "/api/placeholder/300/200"
+          "image": "https://www.shutterstock.com/image-photo/foucs-on-mobile-cab-driver-260nw-2120666423.jpg"
         },
         {
           "name": "Auto Rickshaw Service",
@@ -327,7 +345,15 @@
           "contact": "+91 98765 44004",
           "vehicle": "Bajaj Auto",
           "routes": "Local transport within village",
-          "image": "/api/placeholder/300/200"
+          "image": "https://thumbs.dreamstime.com/b/indian-auto-rickshaw-taxi-driver-man-kovalam-india-dec-fishing-village-kovalam-kerala-india-55982010.jpg"
+        },
+         {
+          "name": "Auto Rickshaw Service",
+          "owner": "Dipti Yadav",
+          "contact": "+91 93265 44004",
+          "vehicle": "Bajaj Auto",
+          "routes": "Local transport within village",
+          "image": "https://img.theepochtimes.com/assets/uploads/2014/10/14/20140913-Sunita-Chowdhary-auto-venus-upadhayaya.jpg"
         }
       ]
     },
@@ -340,7 +366,23 @@
           "contact": "+91 98765 44005",
           "deity": "Lord Ganesha",
           "timings": "5:00 AM - 8:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://panditpujalu.in/wp-content/uploads/2024/05/pexels-djvvadi-13405691-1-1024x683.jpg"
+        },
+         {
+          "name": "Village Temple",
+          "pujari": "Pandit Deepak Varma",
+          "contact": "+91 7465 43005",
+          "deity": "Lord Mahadev",
+          "timings": "5:00 AM - 8:00 PM",
+          "image": "https://hindupriest.club/wp-content/uploads/2024/12/Pandit-Ji-performing-a-marriage-ceremony-in-Patna-Bihar.webp"
+        },
+         {
+          "name": "Village Temple",
+          "pujari": "Pandit Akash Sharma",
+          "contact": "+91 98765 44005",
+          "deity": "Lord Hanuman",
+          "timings": "5:00 AM - 8:00 PM",
+          "image": "https://bmpassets.s3.ap-south-1.amazonaws.com/uploadedfile/reducedshanichandravishyogshanti.jpg"
         }
       ]
     },
@@ -353,7 +395,15 @@
           "contact": "+91 98765 44006",
           "subjects": "Mathematics, Science, English",
           "timing": "4:00 PM - 7:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcMPclCyZr_RRr5lCRpEwBoSZcqIGQWSNT9w&s"
+        },
+         {
+          "name": "Coaching Classes",
+          "teacher": "Prof. Ram dev",
+          "contact": "+91 98765 44556",
+          "subjects": "Mathematics, Science, English",
+          "timing": "4:00 PM - 7:00 PM",
+          "image": "https://images.hindustantimes.com/rf/image_size_640x362/HT/p2/2016/04/18/Pictures/_ba85361e-0583-11e6-80c7-86ecee87a31c.JPG"
         },
         {
           "name": "Computer Training Center",
@@ -361,7 +411,7 @@
           "contact": "+91 98765 44007",
           "courses": "Basic Computer, MS Office, Internet",
           "timing": "9:00 AM - 6:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://news-images.dhan.co/cyient-foundation-launches-ai-labs-in-50-government-schools-empowering-25-000-students-in-andhra-pradesh.jpg"
         }
       ]
     },
@@ -374,7 +424,23 @@
           "contact": "+91 98765 44008",
           "speciality": "Tea, Vada, Samosa",
           "timing": "6:00 AM - 10:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://img.freepik.com/premium-photo/bangladeshi-tea-stall-owner-smiling-serving-tea-bustling-street_1265129-1061.jpg"
+        },
+         {
+          "name": "Chai Dukan (Tea Stall)",
+          "owner": "Raghav Wagh",
+          "contact": "+91 75465 44008",
+          "speciality": "Tea, Vada, Samosa",
+          "timing": "6:00 AM - 10:00 PM",
+          "image": "https://imgcdn.stablediffusionweb.com/2024/4/12/90ed786a-af57-46f3-8c05-b8e00bcacae7.jpg"
+        },
+         {
+          "name": "Bhargav Hotel",
+          "owner": "Raghav Wagh",
+          "contact": "+91 75465 44008",
+          "speciality": "BreakFast, Lunch, Dinner",
+          "timing": "6:00 AM - 10:00 PM",
+          "image": "https://content.jdmagicbox.com/comp/def_content/indian-restaurants/indian-restaurants1-indian-restaurants-1-1yjyf.jpg"
         }
       ]
     },
@@ -387,7 +453,7 @@
           "contact": "+91 98765 44009",
           "services": "General Medicine, Vaccination",
           "timing": "9:00 AM - 5:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://nhsrcindia.org/sites/default/files/3D_VIEW_01.jpg"
         },
         {
           "name": "Ayurvedic Clinic",
@@ -395,7 +461,15 @@
           "contact": "+91 98765 44010",
           "services": "Ayurvedic Treatment, Panchakarma",
           "timing": "8:00 AM - 1:00 PM, 4:00 PM - 8:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "https://images.indianexpress.com/2024/01/postcard.jpg"
+        },
+        {
+          "name": "Gov Clinic",
+          "doctor": "Ram Muskawad",
+          "contact": "+91 98765 44010",
+          "services": "surgery",
+          "timing": "8:00 AM - 1:00 PM, 4:00 PM - 8:00 PM",
+          "image": "https://www.civilsocietyonline.com/static/media/uploads/2019/07/01/cs-7.jpg"
         }
       ]
     }

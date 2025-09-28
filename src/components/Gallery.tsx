@@ -156,7 +156,7 @@ const Gallery = () => {
         </Card>
 
         {/* Upload Section */}
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <Card className="card-elegant max-w-2xl mx-auto">
             <CardContent className="p-8">
               <div className="text-6xl mb-4">📷</div>
@@ -179,7 +179,7 @@ const Gallery = () => {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
       </div>
     </section>
   );

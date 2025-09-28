@@ -27,7 +27,7 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              <span>info@hariyaligram.gov.in</span>
+              <span>info@shivankhed.gov.in</span>
             </div>
           </div>
           <div className="text-sm">
@@ -44,10 +44,10 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-gradient">
-                Hariyali Gram Panchayat
+                Shivankhed Gram Panchayat
               </h1>
               <p className="text-sm text-muted-foreground">
-                Maharashtra, Pune District
+                Maharashtra, Latur District
               </p>
             </div>
           </div>

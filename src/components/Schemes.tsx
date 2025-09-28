@@ -70,11 +70,11 @@ const Schemes = () => {
                     <IndianRupee className="h-4 w-4 text-success" />
                     Benefits
                   </h4>
-                  <div className="bg-success/5 rounded-lg p-4 border border-success/20">
-                    <p className="text-success-foreground font-medium">
+                  {/* <div className="bg-success/5 rounded-lg p-4 border border-success/20"> */}
+                    <p className="text-sm text-muted-foreground bg-muted/30 rounded-lg p-3">
                       {scheme.benefits}
                     </p>
-                  </div>
+                  {/* </div> */}
                 </div>
 
                 {/* Eligibility */}

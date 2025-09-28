@@ -138,7 +138,7 @@ const Footer = () => {
                 </a>
               </div>
 
-              <div className="flex items-center gap-3">
+              {/* <div className="flex items-center gap-3">
                 <Globe className="h-4 w-4 text-primary-foreground/70 flex-shrink-0" />
                 <a
                   href={`https://${contact.office.website}`}
@@ -148,7 +148,7 @@ const Footer = () => {
                 >
                   {contact.office.website}
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -195,16 +195,14 @@ const Footer = () => {
       <div className="bg-primary-glow/20 border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-wrap justify-center gap-4 text-xs">
-            <span className="text-primary-foreground/60">Official Links:</span>
-            <a href="https://www.india.gov.in" className="text-primary-foreground/70 hover:text-primary-foreground">
-              india.gov.in
+            <span className="text-primary-foreground/60">Developed By:</span>
+            <a href="https://www.linkedin.com/in/ramdas-bhingole-8333b127/" className="text-primary-foreground/70 hover:text-primary-foreground">
+              @ramdasbhingole
             </a>
-            <a href="https://panchayat.gov.in" className="text-primary-foreground/70 hover:text-primary-foreground">
-              panchayat.gov.in
+            <a href="https://pirajisurvase.vercel.app" className="text-primary-foreground/70 hover:text-primary-foreground">
+              @pirajisurvase
             </a>
-            <a href="https://egramswaraj.gov.in" className="text-primary-foreground/70 hover:text-primary-foreground">
-              egramswaraj.gov.in
-            </a>
+          
           </div>
         </div>
       </div>

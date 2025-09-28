@@ -140,7 +140,7 @@ const Announcements = () => {
         </div>
 
         {/* Subscribe to Updates */}
-        <Card className="card-elegant max-w-2xl mx-auto mt-12 animate-fade-in">
+        {/* <Card className="card-elegant max-w-2xl mx-auto mt-12 animate-fade-in">
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-3 text-2xl">
               <Megaphone className="h-6 w-6 text-primary" />
@@ -171,7 +171,7 @@ const Announcements = () => {
               Contact for Updates
             </Button>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </section>
   );

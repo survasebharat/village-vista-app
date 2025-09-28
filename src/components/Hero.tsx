@@ -11,7 +11,7 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center">
       {/* Background Carousel */}
       <div className="absolute inset-0">
-        <Carousel className="w-full h-full">
+        {/* <Carousel className="w-full h-full">
           <CarouselContent>
             {village.heroImages.map((image, index) => (
               <CarouselItem key={index}>
@@ -25,7 +25,12 @@ const Hero = () => {
           </CarouselContent>
           <CarouselPrevious className="left-4" />
           <CarouselNext className="right-4" />
-        </Carousel>
+        </Carousel> */}
+        <img
+                  src={village.heroImages[0].src}
+                  alt={village.heroImages[0].alt}
+                  className="w-full h-full object-cover"
+                />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-transparent" />
       </div>
 
@@ -81,7 +86,7 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
+                className="border-white text-accent-foreground hover:bg-white hover:text-primary"
               >
                 View Schemes & Services
               </Button>
