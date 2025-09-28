@@ -2,10 +2,12 @@ import { Phone, Mail, MapPin, Clock, User, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import villageData from "@/data/villageData.json";
 
 const Panchayat = () => {
   const { panchayat } = villageData;
+  const { t } = useLanguage();
 
   return (
     <section id="panchayat" className="py-20 bg-background">
@@ -13,7 +15,7 @@ const Panchayat = () => {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold mb-4 text-gradient">
-            Panchayat Representatives
+            {t('panchayat.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Meet our elected representatives who work tirelessly for the development 
@@ -36,7 +38,7 @@ const Panchayat = () => {
                 {panchayat.sarpanch.name}
               </CardTitle>
               <Badge variant="secondary" className="text-lg px-4 py-2">
-                Sarpanch
+                {t('panchayat.sarpanch')}
               </Badge>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -46,13 +48,13 @@ const Panchayat = () => {
                 </p>
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
-                  <span>Tenure: {panchayat.sarpanch.tenure}</span>
+                  <span>{t('panchayat.tenure')}: {panchayat.sarpanch.tenure}</span>
                 </div>
               </div>
 
               <div className="bg-primary/5 rounded-lg p-6 border-l-4 border-primary">
                 <blockquote className="text-lg italic text-center text-foreground mb-4">
-                  "{panchayat.sarpanch.message}"
+                  "{t('panchayat.message')}"
                 </blockquote>
               </div>
 
@@ -73,7 +75,7 @@ const Panchayat = () => {
         {/* Ward Members Section */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8 text-gradient">
-            Ward Members
+            {t('panchayat.wardMembers')}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {panchayat.wardMembers.map((member, index) => (
@@ -123,14 +125,14 @@ const Panchayat = () => {
               </div>
               <CardTitle className="text-2xl">{panchayat.secretary.name}</CardTitle>
               <Badge variant="secondary" className="mx-auto">
-                Panchayat Secretary
+                {t('panchayat.secretary')}
               </Badge>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center">
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
                   <Clock className="h-4 w-4" />
-                  <span>Office Hours: {panchayat.secretary.office_hours}</span>
+                  <span>{t('panchayat.officeHours')}: {panchayat.secretary.office_hours}</span>
                 </div>
               </div>
 
@@ -158,7 +160,7 @@ const Panchayat = () => {
         {/* Staff Section */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8 text-gradient">
-            Village Staff
+            {t('panchayat.staff')}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {panchayat.staff.map((staff, index) => (

@@ -28,7 +28,7 @@ const Header = () => {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
-              <span>+91 20 2567 8901</span>
+              <span>+91 2382 234567</span>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
@@ -52,7 +52,7 @@ const Header = () => {
                 Shivankhed Gram Panchayat
               </h1>
               <p className="text-sm text-muted-foreground">
-                Maharashtra, Pune District
+                Maharashtra, Latur District
               </p>
             </div>
           </div>

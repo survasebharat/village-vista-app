@@ -2,10 +2,12 @@ import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart } 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import villageData from "@/data/villageData.json";
 
 const Services = () => {
   const { services } = villageData;
+  const { t } = useLanguage();
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
@@ -32,7 +34,7 @@ const Services = () => {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold mb-4 text-gradient">
-            Village Services
+            {t('services.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Discover all the essential services available in our village community, 
@@ -56,7 +58,7 @@ const Services = () => {
                     <IconComponent className="h-5 w-5" />
                   </div>
                   <h3 className="text-2xl font-bold text-gradient">
-                    {category.category}
+                    {t(`services.category.${category.category.toLowerCase().replace(/[^a-z0-9]/g, '')}`)}
                   </h3>
                 </div>
                 
@@ -79,25 +81,25 @@ const Services = () => {
                         {service.owner && (
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <User className="h-4 w-4" />
-                            <span>Owner: {service.owner}</span>
+                            <span>{t('services.owner')}: {service.owner}</span>
                           </div>
                         )}
                         {service.doctor && (
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <User className="h-4 w-4" />
-                            <span>Doctor: {service.doctor}</span>
+                            <span>{t('services.doctor')}: {service.doctor}</span>
                           </div>
                         )}
                         {service.teacher && (
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <User className="h-4 w-4" />
-                            <span>Teacher: {service.teacher}</span>
+                            <span>{t('services.teacher')}: {service.teacher}</span>
                           </div>
                         )}
                         {service.pujari && (
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <User className="h-4 w-4" />
-                            <span>Pujari: {service.pujari}</span>
+                            <span>{t('services.pujari')}: {service.pujari}</span>
                           </div>
                         )}
                       </CardHeader>

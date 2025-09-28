@@ -1,10 +1,12 @@
 import { MapPin, Users, GraduationCap, Calendar, Mountain, Compass } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/contexts/LanguageContext";
 import villageData from "@/data/villageData.json";
 
 const About = () => {
   const { village } = villageData;
+  const { t } = useLanguage();
 
   const geographyStats = [
     {
@@ -57,11 +59,10 @@ const About = () => {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold mb-4 text-gradient">
-            About Our Village
+            {t('about.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Discover the rich heritage, vibrant culture, and progressive development 
-            of {village.name}, a model village in {village.state}.
+            {t('about.description')}
           </p>
         </div>
 
@@ -94,16 +95,16 @@ const About = () => {
                   <p className="text-sm text-muted-foreground mb-2">Administrative Details</p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="font-medium">District:</span> {village.district}
+                      <span className="font-medium">{t('common.district')}:</span> {village.district}
                     </div>
                     <div>
-                      <span className="font-medium">State:</span> {village.state}
+                      <span className="font-medium">{t('common.state')}:</span> {village.state}
                     </div>
                     <div>
                       <span className="font-medium">PIN Code:</span> {village.pincode}
                     </div>
                     <div>
-                      <span className="font-medium">Established:</span> {village.established}
+                      <span className="font-medium">{t('about.established')}:</span> {village.established}
                     </div>
                   </div>
                 </div>
@@ -117,7 +118,7 @@ const About = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-2xl">
                   <Users className="h-6 w-6 text-primary" />
-                  Demographics
+                  {t('about.population')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -162,7 +163,7 @@ const About = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-2xl">
               <Calendar className="h-6 w-6 text-primary" />
-              Culture & Festivals
+              {t('about.culture')}
             </CardTitle>
           </CardHeader>
           <CardContent>

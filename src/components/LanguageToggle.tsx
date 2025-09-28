@@ -6,7 +6,26 @@ export const LanguageToggle = () => {
   const { language, setLanguage } = useLanguage();
 
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'mr' : 'en');
+    if (language === 'en') {
+      setLanguage('mr');
+    } else if (language === 'mr') {
+      setLanguage('hi');
+    } else {
+      setLanguage('en');
+    }
+  };
+
+  const getLanguageLabel = () => {
+    switch (language) {
+      case 'en':
+        return 'मराठी';
+      case 'mr':
+        return 'हिन्दी';
+      case 'hi':
+        return 'English';
+      default:
+        return 'English';
+    }
   };
 
   return (
@@ -17,7 +36,7 @@ export const LanguageToggle = () => {
       className="gap-2 text-primary-foreground hover:bg-primary/20"
     >
       <Globe className="h-4 w-4" />
-      {language === 'en' ? 'मराठी' : 'English'}
+      {getLanguageLabel()}
     </Button>
   );
 };

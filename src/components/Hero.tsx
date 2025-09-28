@@ -44,7 +44,7 @@ const Hero = () => {
             </h1>
             
             <p className="text-xl md:text-2xl mb-4 text-gray-100">
-              {village.state}, {village.district} District
+              {village.state}, {t('common.district')} {village.district}
             </p>
             
             <p className="text-lg mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
@@ -54,7 +54,7 @@ const Hero = () => {
             {/* Sarpanch Message */}
             <Card className="bg-white/10 backdrop-blur-sm border-white/20 p-6 mb-8 max-w-2xl mx-auto">
               <blockquote className="text-gray-100 italic text-lg mb-4">
-                "{panchayat.sarpanch.message}"
+                "{t('panchayat.message')}"
               </blockquote>
               <div className="flex items-center justify-center gap-3">
                 <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold">
@@ -65,7 +65,7 @@ const Hero = () => {
                     {panchayat.sarpanch.name}
                   </p>
                   <p className="text-sm text-gray-300">
-                    Sarpanch ({panchayat.sarpanch.tenure})
+                    {t('panchayat.sarpanch')} ({panchayat.sarpanch.tenure})
                   </p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ const Hero = () => {
                 size="lg"
                 className="border-white text-white hover:bg-white hover:text-primary"
               >
-                View Schemes & Services
+                {t('hero.schemes')}
               </Button>
             </div>
           </div>
