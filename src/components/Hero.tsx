@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from 'react-i18next';
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 import villageData from "@/data/villageData.json";
 import villageScene1 from "@/assets/village-scene-1.jpg";
 import villageScene2 from "@/assets/village-scene-2.jpg";
@@ -11,6 +13,7 @@ import villageScene3 from "@/assets/village-scene-3.jpg";
 const Hero = () => {
   const { village, panchayat } = villageData;
   const { t } = useTranslation();
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   
   const carouselImages = [
     { src: villageScene1, alt: "Shivankhed Village Landscape" },
@@ -22,22 +25,31 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center">
       {/* Background Carousel */}
       <div className="absolute inset-0">
-        <Carousel className="w-full h-full">
+        <Carousel 
+          className="w-full h-full"
+          plugins={[plugin.current]}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+        >
           <CarouselContent>
             {carouselImages.map((image, index) => (
               <CarouselItem key={index}>
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-screen">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4" />
-          <CarouselNext className="right-4" />
+          <CarouselPrevious className="left-4 bg-white/20 border-white/30 text-white hover:bg-white/30" />
+          <CarouselNext className="right-4 bg-white/20 border-white/30 text-white hover:bg-white/30" />
         </Carousel>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
       </div>
 
       {/* Content */}
@@ -81,7 +93,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-accent text-accent-foreground hover:bg-accent-light font-semibold"
+                className="bg-accent hover:bg-accent-light text-accent-foreground font-semibold px-8 py-6 text-lg animate-pulse-glow"
               >
                 {t('hero.explore')}
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -89,7 +101,7 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
+                className="border-2 border-white/80 text-white hover:bg-white hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm"
               >
                 {t('hero.contact')}
               </Button>
