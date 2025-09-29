@@ -1,12 +1,12 @@
 import { MapPin, Users, GraduationCap, Calendar, Mountain, Compass } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const About = () => {
   const { village } = villageData;
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   const geographyStats = [
     {
