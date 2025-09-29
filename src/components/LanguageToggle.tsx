@@ -1,31 +1,22 @@
-import { Globe } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from 'react-i18next';
 
-export const LanguageToggle = () => {
-  const { language, setLanguage } = useLanguage();
-
+const LanguageToggle = () => {
+  const { i18n } = useTranslation();
+  
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'hi', name: 'हिंदी' },
+    { code: 'mr', name: 'मराठी' }
+  ];
+  
+  const currentIndex = languages.findIndex(lang => lang.code === i18n.language);
+  
   const toggleLanguage = () => {
-    if (language === 'en') {
-      setLanguage('mr');
-    } else if (language === 'mr') {
-      setLanguage('hi');
-    } else {
-      setLanguage('en');
-    }
-  };
-
-  const getLanguageLabel = () => {
-    switch (language) {
-      case 'en':
-        return 'मराठी';
-      case 'mr':
-        return 'हिन्दी';
-      case 'hi':
-        return 'English';
-      default:
-        return 'English';
-    }
+    const nextIndex = (currentIndex + 1) % languages.length;
+    const nextLanguage = languages[nextIndex];
+    i18n.changeLanguage(nextLanguage.code);
   };
 
   return (
@@ -33,10 +24,14 @@ export const LanguageToggle = () => {
       variant="ghost"
       size="sm"
       onClick={toggleLanguage}
-      className="gap-2 text-primary-foreground hover:bg-primary/20"
+      className="flex items-center gap-2 text-foreground hover:text-primary"
     >
       <Globe className="h-4 w-4" />
-      {getLanguageLabel()}
+      <span className="hidden sm:inline">
+        {languages[currentIndex]?.name || 'English'}
+      </span>
     </Button>
   );
 };
+
+export default LanguageToggle;

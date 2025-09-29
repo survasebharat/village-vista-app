@@ -1,23 +1,18 @@
 import { useState } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageToggle } from "./LanguageToggle";
+import { useTranslation } from 'react-i18next';
+import LanguageToggle from "./LanguageToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   const navItems = [
-    { name: t("nav.home"), href: "#home" },
-    { name: t("nav.about"), href: "#about" },
-    { name: t("nav.panchayat"), href: "#panchayat" },
-    { name: t("nav.schemes"), href: "#schemes" },
-    { name: t("nav.development"), href: "#development" },
-    { name: t("nav.services"), href: "#services" },
-    { name: t("nav.gallery"), href: "#gallery" },
-    { name: t("nav.announcements"), href: "#announcements" },
-    { name: t("nav.contact"), href: "#contact" },
+    { name: t("header.about"), href: "#about" },
+    { name: t("header.services"), href: "#services" },
+    { name: t("header.panchayat"), href: "#panchayat" },
+    { name: t("header.contact"), href: "#contact" },
   ];
 
   return (
@@ -49,7 +44,7 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-gradient">
-                Shivankhed Gram Panchayat
+                {t('header.title')}
               </h1>
               <p className="text-sm text-muted-foreground">
                 Maharashtra, Latur District

@@ -2,12 +2,12 @@ import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart } 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const Services = () => {
   const { services } = villageData;
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {

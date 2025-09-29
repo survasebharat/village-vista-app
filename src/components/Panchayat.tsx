@@ -2,12 +2,12 @@ import { Phone, Mail, MapPin, Clock, User, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const Panchayat = () => {
   const { panchayat } = villageData;
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   return (
     <section id="panchayat" className="py-20 bg-background">

@@ -2,10 +2,13 @@ import { Calendar, Clock, AlertCircle, Users, FileText, Megaphone } from "lucide
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const Announcements = () => {
   const { announcements } = villageData;
+  const { t } = useTranslation();
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -73,70 +76,73 @@ const Announcements = () => {
         {/* Section Header */}
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl font-bold mb-4 text-gradient">
-            Latest Announcements
+            {t('announcements.title')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Stay updated with important notices, meeting schedules, and development updates 
-            from your Gram Panchayat.
+            {t('announcements.description')}
           </p>
         </div>
 
-        {/* Announcements List */}
-        <div className="space-y-6 max-w-4xl mx-auto">
-          {announcements
-            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-            .map((announcement, index) => (
-              <Card 
-                key={announcement.id} 
-                className="card-elegant hover-lift animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-start gap-4">
-                    {/* Icon and Priority */}
-                    <div className="flex items-center gap-3 md:flex-col md:items-center md:min-w-[80px]">
-                      <div className={`p-3 rounded-full bg-primary/10 ${getTypeColor(announcement.type)}`}>
-                        {getTypeIcon(announcement.type)}
-                      </div>
-                      <Badge className={getPriorityColor(announcement.priority)}>
-                        {announcement.priority}
-                      </Badge>
-                    </div>
+        {/* Announcements Carousel */}
+        <div className="max-w-4xl mx-auto">
+          <Carousel className="w-full">
+            <CarouselContent>
+              {announcements
+                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .map((announcement, index) => (
+                  <CarouselItem key={announcement.id}>
+                    <Card className="card-elegant hover-lift">
+                      <CardContent className="p-6">
+                        <div className="flex flex-col md:flex-row md:items-start gap-4">
+                          {/* Icon and Priority */}
+                          <div className="flex items-center gap-3 md:flex-col md:items-center md:min-w-[80px]">
+                            <div className={`p-3 rounded-full bg-primary/10 ${getTypeColor(announcement.type)}`}>
+                              {getTypeIcon(announcement.type)}
+                            </div>
+                            <Badge className={getPriorityColor(announcement.priority)}>
+                              {t(`common.${announcement.priority}`)}
+                            </Badge>
+                          </div>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <h3 className="text-xl font-bold text-foreground leading-tight">
-                          {announcement.title}
-                        </h3>
-                        
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
-                          <Calendar className="h-4 w-4" />
-                          <span>{formatDate(announcement.date)}</span>
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                              <h3 className="text-xl font-bold text-foreground leading-tight">
+                                {announcement.title}
+                              </h3>
+                              
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
+                                <Calendar className="h-4 w-4" />
+                                <span>{formatDate(announcement.date)}</span>
+                              </div>
+                            </div>
+
+                            <p className="text-muted-foreground leading-relaxed mb-4">
+                              {announcement.content}
+                            </p>
+
+                            <div className="flex flex-wrap items-center justify-between gap-4">
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Clock className="h-4 w-4" />
+                                <span>{t('announcements.published')}: {formatFullDate(announcement.date)}</span>
+                              </div>
+
+                              {announcement.type === "meeting" && (
+                                <Button size="sm" variant="outline">
+                                  {t('announcements.addToCalendar')}
+                                </Button>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        {announcement.content}
-                      </p>
-
-                      <div className="flex flex-wrap items-center justify-between gap-4">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Clock className="h-4 w-4" />
-                          <span>Published: {formatFullDate(announcement.date)}</span>
-                        </div>
-
-                        {announcement.type === "meeting" && (
-                          <Button size="sm" variant="outline">
-                            Add to Calendar
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
 
         {/* Subscribe to Updates */}
@@ -144,31 +150,30 @@ const Announcements = () => {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-3 text-2xl">
               <Megaphone className="h-6 w-6 text-primary" />
-              Stay Updated
+              {t('announcements.stayUpdated')}
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground">
-              Never miss important announcements from your Gram Panchayat. 
-              Get notified about meetings, schemes, and development updates.
+              {t('announcements.neverMiss')}
             </p>
             
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
                 <Users className="h-8 w-8 text-primary mx-auto mb-2" />
-                <p className="text-sm font-medium mb-1">WhatsApp Updates</p>
-                <p className="text-xs text-muted-foreground">Join community group</p>
+                <p className="text-sm font-medium mb-1">{t('announcements.whatsapp')}</p>
+                <p className="text-xs text-muted-foreground">{t('announcements.joinGroup')}</p>
               </div>
               
               <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
                 <FileText className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium mb-1">Notice Board</p>
-                <p className="text-xs text-muted-foreground">Visit Panchayat office</p>
+                <p className="text-sm font-medium mb-1">{t('announcements.noticeBoard')}</p>
+                <p className="text-xs text-muted-foreground">{t('announcements.visitOffice')}</p>
               </div>
             </div>
 
             <Button className="w-full sm:w-auto">
-              Contact for Updates
+              {t('announcements.contactUpdates')}
             </Button>
           </CardContent>
         </Card>

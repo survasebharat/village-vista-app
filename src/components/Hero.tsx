@@ -2,12 +2,21 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
+import villageScene1 from "@/assets/village-scene-1.jpg";
+import villageScene2 from "@/assets/village-scene-2.jpg";
+import villageScene3 from "@/assets/village-scene-3.jpg";
 
 const Hero = () => {
   const { village, panchayat } = villageData;
-  const { t } = useLanguage();
+  const { t } = useTranslation();
+  
+  const carouselImages = [
+    { src: villageScene1, alt: "Shivankhed Village Landscape" },
+    { src: villageScene2, alt: "Shivankhed Village Festival" },
+    { src: villageScene3, alt: "Shivankhed Village Development" }
+  ];
 
   return (
     <section id="home" className="relative min-h-screen flex items-center">
@@ -15,7 +24,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         <Carousel className="w-full h-full">
           <CarouselContent>
-            {village.heroImages.map((image, index) => (
+            {carouselImages.map((image, index) => (
               <CarouselItem key={index}>
                 <img
                   src={image.src}
@@ -37,18 +46,15 @@ const Hero = () => {
           {/* Hero Text */}
           <div className="text-white animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              {t('hero.welcome')}{" "}
-              <span className="text-accent-light">
-                {village.name}
-              </span>
+              {t('hero.title')}
             </h1>
             
             <p className="text-xl md:text-2xl mb-4 text-gray-100">
-              {village.state}, {t('common.district')} {village.district}
+              {t('hero.subtitle')}
             </p>
             
             <p className="text-lg mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              {t('hero.subtitle')}
+              {t('hero.description')}
             </p>
 
             {/* Sarpanch Message */}
@@ -85,7 +91,7 @@ const Hero = () => {
                 size="lg"
                 className="border-white text-white hover:bg-white hover:text-primary"
               >
-                {t('hero.schemes')}
+                {t('hero.contact')}
               </Button>
             </div>
           </div>
