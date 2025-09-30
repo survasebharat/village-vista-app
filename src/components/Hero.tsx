@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center">
       {/* Background Carousel */}
-      <div className="absolute inset-0 h-screen">
+      <div className="absolute inset-0 h-full min-h-screen overflow-hidden">
         <Carousel 
           className="w-full h-full"
           plugins={[plugin.current]}
@@ -33,23 +33,24 @@ const Hero = () => {
             loop: true,
           }}
         >
-          <CarouselContent className="h-full">
+          <CarouselContent className="h-full -ml-0">
             {carouselImages.map((image, index) => (
-              <CarouselItem key={index} className="h-full">
-                <div className="relative w-full h-full">
+              <CarouselItem key={index} className="h-full pl-0 basis-full">
+                <div className="relative w-full h-full min-h-screen">
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full min-h-screen object-cover transition-transform duration-700 ease-in-out"
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4 bg-white/20 border-white/30 text-white hover:bg-white/30" />
-          <CarouselNext className="right-4 bg-white/20 border-white/30 text-white hover:bg-white/30" />
+          <CarouselPrevious className="left-2 sm:left-4 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110" />
+          <CarouselNext className="right-2 sm:right-4 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110" />
         </Carousel>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40 animate-fade-in" />
       </div>
 
       {/* Content */}

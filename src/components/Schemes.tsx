@@ -3,10 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const Schemes = () => {
   const { schemes } = villageData;
+  const { t } = useTranslation();
 
   const getSchemeIcon = (schemeName: string) => {
     if (schemeName.includes("Kisan")) return "🌾";
@@ -139,39 +141,37 @@ const Schemes = () => {
               Need Help with Applications?
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-center space-y-6">
+              <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Our Panchayat office provides free assistance for scheme applications, 
-              document verification, and status tracking. Visit during office hours 
-              or call for appointment.
+              {t('schemes.helpDescription')}
             </p>
             
             <div className="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-              <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
+              <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 hover-lift transition-all duration-300 animate-fade-in">
                 <Phone className="h-8 w-8 text-primary mx-auto mb-2" />
-                <p className="text-sm font-medium">Phone Support</p>
+                <p className="text-sm font-medium">{t('schemes.phoneSupport')}</p>
                 <p className="text-xs text-muted-foreground">+91 20 2567 8901</p>
               </div>
               
-              <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
+              <div className="p-4 rounded-lg bg-accent/5 border border-accent/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "100ms" }}>
                 <Users className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium">In-Person Help</p>
-                <p className="text-xs text-muted-foreground">Panchayat Office</p>
+                <p className="text-sm font-medium">{t('schemes.inPersonHelp')}</p>
+                <p className="text-xs text-muted-foreground">{t('contact.office')}</p>
               </div>
               
-              <div className="p-4 rounded-lg bg-success/5 border border-success/20">
+              <div className="p-4 rounded-lg bg-success/5 border border-success/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "200ms" }}>
                 <FileText className="h-8 w-8 text-success mx-auto mb-2" />
-                <p className="text-sm font-medium">Document Help</p>
-                <p className="text-xs text-muted-foreground">Free Verification</p>
+                <p className="text-sm font-medium">{t('schemes.documentHelp')}</p>
+                <p className="text-xs text-muted-foreground">{t('schemes.freeVerification')}</p>
               </div>
             </div>
 
-            <div className="flex justify-center gap-4">
-              <Button variant="outline">
-                Download Forms
+            <div className="flex justify-center gap-4 animate-fade-in" style={{ animationDelay: "300ms" }}>
+              <Button variant="outline" className="transition-all duration-300 hover:scale-105">
+                {t('schemes.downloadForms')}
               </Button>
-              <Button>
-                Contact Office
+              <Button className="transition-all duration-300 hover:scale-105">
+                {t('schemes.contactOffice')}
               </Button>
             </div>
           </CardContent>

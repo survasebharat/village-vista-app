@@ -11,17 +11,17 @@ const About = () => {
   const geographyStats = [
     {
       icon: MapPin,
-      label: "Coordinates",
+      label: t('common.coordinates'),
       value: `${village.geography.latitude}°N, ${village.geography.longitude}°E`,
     },
     {
       icon: Mountain,
-      label: "Altitude",
+      label: t('common.altitude'),
       value: village.geography.altitude,
     },
     {
       icon: Compass,
-      label: "Area",
+      label: t('common.area'),
       value: village.area,
     },
   ];
@@ -29,25 +29,25 @@ const About = () => {
   const demographics = [
     {
       icon: Users,
-      label: "Total Population",
+      label: t('common.totalPopulation'),
       value: village.population.total.toLocaleString(),
       color: "bg-primary",
     },
     {
       icon: Users,
-      label: "Male Population",
+      label: t('common.malePopulation'),
       value: village.population.male.toLocaleString(),
       color: "bg-accent",
     },
     {
       icon: Users,
-      label: "Female Population", 
+      label: t('common.femalePopulation'), 
       value: village.population.female.toLocaleString(),
       color: "bg-success",
     },
     {
       icon: GraduationCap,
-      label: "Literacy Rate",
+      label: t('common.literacyRate'),
       value: village.population.literacy,
       color: "bg-warning",
     },
@@ -73,13 +73,13 @@ const About = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-2xl">
                   <MapPin className="h-6 w-6 text-primary" />
-                  Location & Geography
+                  {t('about.location')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid gap-4">
                   {geographyStats.map((stat) => (
-                    <div key={stat.label} className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                    <div key={stat.label} className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover-lift transition-all duration-300 animate-fade-in">
                       <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
                         <stat.icon className="h-5 w-5" />
                       </div>
@@ -91,8 +91,8 @@ const About = () => {
                   ))}
                 </div>
                 
-                <div className="p-4 rounded-lg bg-primary/5 border-l-4 border-primary">
-                  <p className="text-sm text-muted-foreground mb-2">Administrative Details</p>
+                <div className="p-4 rounded-lg bg-primary/5 border-l-4 border-primary animate-slide-up">
+                  <p className="text-sm text-muted-foreground mb-2">{t('common.administrativeDetails')}</p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="font-medium">{t('common.district')}:</span> {village.district}
@@ -101,7 +101,7 @@ const About = () => {
                       <span className="font-medium">{t('common.state')}:</span> {village.state}
                     </div>
                     <div>
-                      <span className="font-medium">PIN Code:</span> {village.pincode}
+                      <span className="font-medium">{t('common.pinCode')}:</span> {village.pincode}
                     </div>
                     <div>
                       <span className="font-medium">{t('about.established')}:</span> {village.established}
@@ -126,13 +126,13 @@ const About = () => {
                   {demographics.map((stat, index) => (
                     <div 
                       key={stat.label} 
-                      className="text-center p-4 rounded-lg hover-lift"
+                      className="text-center p-4 rounded-lg hover-lift transition-all duration-300 animate-fade-in"
                       style={{ 
                         animationDelay: `${(index + 1) * 100}ms`,
                         background: `hsl(var(--muted) / 0.5)` 
                       }}
                     >
-                      <div className={`w-12 h-12 ${stat.color} text-white rounded-full flex items-center justify-center mx-auto mb-3`}>
+                      <div className={`w-12 h-12 ${stat.color} text-white rounded-full flex items-center justify-center mx-auto mb-3 transition-transform duration-300 hover:scale-110`}>
                         <stat.icon className="h-6 w-6" />
                       </div>
                       <p className="text-2xl font-bold text-foreground mb-1">
@@ -145,12 +145,12 @@ const About = () => {
                   ))}
                 </div>
                 
-                <div className="p-4 rounded-lg bg-success/5 border border-success/20">
+                <div className="p-4 rounded-lg bg-success/5 border border-success/20 animate-slide-up">
                   <p className="text-success font-semibold text-center mb-2">
-                    Gender Ratio: {Math.round((village.population.female / village.population.male) * 1000)} females per 1000 males
+                    {t('common.genderRatio')}: {Math.round((village.population.female / village.population.male) * 1000)} {t('common.femalesPerMales')}
                   </p>
                   <p className="text-sm text-muted-foreground text-center">
-                    Above national average, reflecting progressive social values
+                    {t('common.progressiveValues')}
                   </p>
                 </div>
               </CardContent>
@@ -177,7 +177,7 @@ const About = () => {
                 <Badge 
                   key={festival} 
                   variant="secondary" 
-                  className="px-4 py-2 text-sm font-medium hover-lift"
+                  className="px-4 py-2 text-sm font-medium hover-lift animate-fade-in transition-all duration-300 hover:scale-105"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {festival}

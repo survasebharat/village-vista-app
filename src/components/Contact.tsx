@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const Contact = () => {
   const { contact } = villageData;
+  const { t } = useTranslation();
 
   return (
     <section id="contact" className="py-20 bg-background">
@@ -42,34 +44,34 @@ const Contact = () => {
                 </div>
 
                 <div className="grid gap-4">
-                  <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                  <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover-lift transition-all duration-300 animate-fade-in">
                     <Phone className="h-5 w-5 text-primary flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Phone</p>
+                      <p className="font-medium">{t('contact.phone2')}</p>
                       <p className="text-muted-foreground">{contact.office.phone}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                  <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "100ms" }}>
                     <Mail className="h-5 w-5 text-primary flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Email</p>
+                      <p className="font-medium">{t('contact.email2')}</p>
                       <p className="text-muted-foreground">{contact.office.email}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30">
+                  <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/30 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "200ms" }}>
                     <Clock className="h-5 w-5 text-primary flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Office Hours</p>
+                      <p className="font-medium">{t('contact.officeHours')}</p>
                       <p className="text-muted-foreground">{contact.office.hours}</p>
                     </div>
                   </div>
                 </div>
 
-                <Button className="w-full" size="lg">
+                <Button className="w-full transition-all duration-300 hover:scale-[1.02] animate-fade-in" size="lg" style={{ animationDelay: "300ms" }}>
                   <MapPin className="h-5 w-5 mr-2" />
-                  Get Directions
+                  {t('contact.getDirections')}
                 </Button>
               </CardContent>
             </Card>
@@ -84,27 +86,27 @@ const Contact = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 rounded-lg bg-destructive/5 border border-destructive/20">
+                  <div className="text-center p-4 rounded-lg bg-destructive/5 border border-destructive/20 hover-lift transition-all duration-300 animate-fade-in">
                     <p className="text-3xl mb-2">🚔</p>
-                    <p className="font-semibold">Police</p>
+                    <p className="font-semibold">{t('contact.police')}</p>
                     <p className="text-destructive font-mono text-lg">{contact.emergency.police}</p>
                   </div>
 
-                  <div className="text-center p-4 rounded-lg bg-warning/5 border border-warning/20">
+                  <div className="text-center p-4 rounded-lg bg-warning/5 border border-warning/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "100ms" }}>
                     <p className="text-3xl mb-2">🚒</p>
-                    <p className="font-semibold">Fire</p>
+                    <p className="font-semibold">{t('contact.fire')}</p>
                     <p className="text-warning font-mono text-lg">{contact.emergency.fire}</p>
                   </div>
 
-                  <div className="text-center p-4 rounded-lg bg-success/5 border border-success/20">
+                  <div className="text-center p-4 rounded-lg bg-success/5 border border-success/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "200ms" }}>
                     <p className="text-3xl mb-2">🚑</p>
-                    <p className="font-semibold">Ambulance</p>
+                    <p className="font-semibold">{t('contact.ambulance')}</p>
                     <p className="text-success font-mono text-lg">{contact.emergency.ambulance}</p>
                   </div>
 
-                  <div className="text-center p-4 rounded-lg bg-accent/5 border border-accent/20">
+                  <div className="text-center p-4 rounded-lg bg-accent/5 border border-accent/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "300ms" }}>
                     <p className="text-3xl mb-2">📞</p>
-                    <p className="font-semibold">Local Emergency</p>
+                    <p className="font-semibold">{t('contact.localEmergency')}</p>
                     <p className="text-accent font-mono text-sm">{contact.emergency.local_emergency}</p>
                   </div>
                 </div>
@@ -123,44 +125,43 @@ const Contact = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <form className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 animate-fade-in">
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Full Name</label>
-                      <Input placeholder="Enter your full name" />
+                      <label className="text-sm font-medium mb-2 block">{t('contact.name')}</label>
+                      <Input placeholder={t('contact.enterName')} className="transition-all duration-300 focus:scale-[1.02]" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Phone Number</label>
-                      <Input placeholder="Enter your phone number" />
+                      <label className="text-sm font-medium mb-2 block">{t('contact.phone')}</label>
+                      <Input placeholder={t('contact.enterPhone')} className="transition-all duration-300 focus:scale-[1.02]" />
                     </div>
                   </div>
 
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Email Address</label>
-                    <Input type="email" placeholder="Enter your email address" />
+                  <div className="animate-fade-in" style={{ animationDelay: "100ms" }}>
+                    <label className="text-sm font-medium mb-2 block">{t('contact.email')}</label>
+                    <Input type="email" placeholder={t('contact.enterEmail')} className="transition-all duration-300 focus:scale-[1.02]" />
                   </div>
 
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Subject</label>
-                    <Input placeholder="What is this regarding?" />
+                  <div className="animate-fade-in" style={{ animationDelay: "200ms" }}>
+                    <label className="text-sm font-medium mb-2 block">{t('contact.subject')}</label>
+                    <Input placeholder={t('contact.enterSubject')} className="transition-all duration-300 focus:scale-[1.02]" />
                   </div>
 
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Message</label>
+                  <div className="animate-fade-in" style={{ animationDelay: "300ms" }}>
+                    <label className="text-sm font-medium mb-2 block">{t('contact.message')}</label>
                     <Textarea 
-                      placeholder="Please describe your query, complaint, or suggestion in detail..." 
-                      className="min-h-[120px]"
+                      placeholder={t('contact.enterMessage')} 
+                      className="min-h-[120px] transition-all duration-300 focus:scale-[1.02]"
                     />
                   </div>
 
-                  <Button className="w-full" size="lg">
-                    Send Message
+                  <Button className="w-full transition-all duration-300 hover:scale-[1.02] animate-fade-in" size="lg" style={{ animationDelay: "400ms" }}>
+                    {t('contact.submit')}
                   </Button>
                 </form>
 
-                <div className="p-4 rounded-lg bg-muted/30 border border-border">
+                <div className="p-4 rounded-lg bg-muted/30 border border-border animate-fade-in" style={{ animationDelay: "500ms" }}>
                   <p className="text-sm text-muted-foreground text-center">
-                    💡 For urgent matters, please call our office directly. 
-                    We aim to respond to all messages within 2-3 business days.
+                    💡 {t('contact.urgentNote')}
                   </p>
                 </div>
               </CardContent>
