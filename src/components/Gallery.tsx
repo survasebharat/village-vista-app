@@ -1,10 +1,28 @@
 import { Calendar, Camera, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
+import galleryFestival1 from "@/assets/gallery-festival-1.jpg";
+import galleryFestival2 from "@/assets/gallery-festival-2.jpg";
+import galleryDevelopment1 from "@/assets/gallery-development-1.jpg";
+import galleryDevelopment2 from "@/assets/gallery-development-2.jpg";
+import galleryHealthcare1 from "@/assets/gallery-healthcare-1.jpg";
+import galleryEducation1 from "@/assets/gallery-education-1.jpg";
 
 const Gallery = () => {
   const { gallery } = villageData;
+  const { t } = useTranslation();
+  
+  // Map gallery items to real images
+  const galleryImages: Record<string, string> = {
+    "Ganesh Festival 2023": galleryFestival1,
+    "Road Construction Project": galleryDevelopment1,
+    "Health Camp 2023": galleryHealthcare1,
+    "School Renovation": galleryEducation1,
+    "Diwali Celebration": galleryFestival2,
+    "Water Tank Construction": galleryDevelopment2
+  };
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -54,11 +72,10 @@ const Gallery = () => {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold mb-4 text-gradient">
-            Village Gallery
+            {t('gallery.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Explore memorable moments from our village life, festivals, development 
-            projects, and community events that showcase our rich heritage and progress.
+            {t('gallery.description')}
           </p>
         </div>
 
@@ -71,14 +88,22 @@ const Gallery = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="relative">
-                {/* Placeholder Image */}
-                <div className={`
-                  aspect-video w-full flex items-center justify-center text-white text-6xl 
-                  ${generatePlaceholderImage(item.title, item.type)}
-                  group-hover:scale-105 transition-transform duration-300
-                `}>
-                  {getTypeIcon(item.type)}
-                </div>
+                {/* Real or Placeholder Image */}
+                {galleryImages[item.title] ? (
+                  <img
+                    src={galleryImages[item.title]}
+                    alt={item.title}
+                    className="aspect-video w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className={`
+                    aspect-video w-full flex items-center justify-center text-white text-6xl 
+                    ${generatePlaceholderImage(item.title, item.type)}
+                    group-hover:scale-105 transition-transform duration-300
+                  `}>
+                    {getTypeIcon(item.type)}
+                  </div>
+                )}
                 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300"></div>
@@ -126,7 +151,7 @@ const Gallery = () => {
         <Card className="card-elegant animate-fade-in">
           <CardContent className="p-8">
             <h3 className="text-2xl font-bold text-center mb-8 text-gradient">
-              Gallery Categories
+              {t('gallery.categories')}
             </h3>
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -144,10 +169,10 @@ const Gallery = () => {
                   <div className="text-4xl mb-3">{category.icon}</div>
                   <h4 className="font-semibold mb-2">{category.label}</h4>
                   <p className="text-sm text-muted-foreground mb-3">
-                    {category.count} {category.count === 1 ? 'photo' : 'photos'}
+                    {category.count} {category.count === 1 ? t('gallery.photo') : t('gallery.photos')}
                   </p>
                   <Badge variant="outline" className="text-xs">
-                    View All
+                    {t('gallery.viewAll')}
                   </Badge>
                 </div>
               ))}
@@ -160,21 +185,19 @@ const Gallery = () => {
           <Card className="card-elegant max-w-2xl mx-auto">
             <CardContent className="p-8">
               <div className="text-6xl mb-4">📷</div>
-              <h3 className="text-2xl font-bold mb-4">Share Your Village Moments</h3>
+              <h3 className="text-2xl font-bold mb-4">{t('gallery.shareYourMoments')}</h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Have photos or videos from village events? Share them with us to be 
-                featured in our community gallery. Help us document our village's 
-                journey and celebrate our achievements together.
+                {t('gallery.uploadDescription')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Camera className="h-4 w-4" />
-                  <span>Photos & Videos Welcome</span>
+                  <span>{t('gallery.acceptedTypes')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Badge className="h-4 w-4" />
-                  <span>Community Moderated</span>
+                  <span>{t('gallery.moderation')}</span>
                 </div>
               </div>
             </CardContent>

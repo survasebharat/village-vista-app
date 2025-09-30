@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center">
       {/* Background Carousel */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 h-screen">
         <Carousel 
           className="w-full h-full"
           plugins={[plugin.current]}
@@ -33,10 +33,10 @@ const Hero = () => {
             loop: true,
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="h-full">
             {carouselImages.map((image, index) => (
-              <CarouselItem key={index}>
-                <div className="relative w-full h-screen">
+              <CarouselItem key={index} className="h-full">
+                <div className="relative w-full h-full">
                   <img
                     src={image.src}
                     alt={image.alt}

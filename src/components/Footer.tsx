@@ -1,24 +1,26 @@
 import { Mail, Phone, MapPin, Globe, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from 'react-i18next';
 import villageData from "@/data/villageData.json";
 
 const Footer = () => {
   const { village, contact } = villageData;
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "About Village", href: "#about" },
-    { name: "Panchayat Members", href: "#panchayat" },
-    { name: "Government Schemes", href: "#schemes" },
-    { name: "Development Works", href: "#development" },
+    { name: t('footer.aboutVillage'), href: "#about" },
+    { name: t('footer.panchayatMembers'), href: "#panchayat" },
+    { name: t('footer.governmentSchemes'), href: "#schemes" },
+    { name: t('footer.developmentWorks'), href: "#development" },
   ];
 
   const services = [
-    { name: "Birth Certificate", href: "#contact" },
-    { name: "Death Certificate", href: "#contact" },
-    { name: "Property Tax", href: "#contact" },
-    { name: "RTI Application", href: "#contact" },
+    { name: t('footer.birthCertificate'), href: "#contact" },
+    { name: t('footer.deathCertificate'), href: "#contact" },
+    { name: t('footer.propertyTax'), href: "#contact" },
+    { name: t('footer.rtiApplication'), href: "#contact" },
   ];
 
   return (
@@ -41,14 +43,13 @@ const Footer = () => {
                 </div>
               </div>
               <p className="text-primary-foreground/70 leading-relaxed text-sm">
-                A progressive village committed to sustainable development, 
-                transparent governance, and inclusive growth for all residents.
+                {t('footer.aboutDescription')}
               </p>
             </div>
 
             {/* Social Media */}
             <div>
-              <h4 className="font-semibold mb-3">Follow Us</h4>
+              <h4 className="font-semibold mb-3">{t('footer.followUs')}</h4>
               <div className="flex gap-2">
                 {[
                   { icon: Facebook, href: "#" },
@@ -74,7 +75,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4">{t('footer.quickLinks')}</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -91,7 +92,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="font-semibold mb-4">Services</h4>
+            <h4 className="font-semibold mb-4">{t('footer.services')}</h4>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.name}>
@@ -108,7 +109,7 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div>
-            <h4 className="font-semibold mb-4">Contact Info</h4>
+            <h4 className="font-semibold mb-4">{t('footer.contactInfo')}</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 mt-1 text-primary-foreground/70 flex-shrink-0" />
@@ -161,10 +162,10 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left">
             <p className="text-primary-foreground/70 text-sm">
-              © {currentYear} {village.name}. All rights reserved.
+              {t('footer.copyright', { year: currentYear, village: village.name })}
             </p>
             <p className="text-primary-foreground/50 text-xs mt-1">
-              Developed for transparent and efficient rural governance
+              {t('footer.tagline')}
             </p>
           </div>
 
@@ -173,19 +174,19 @@ const Footer = () => {
               href="#privacy"
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
-              Privacy Policy
+              {t('footer.privacyPolicy')}
             </a>
             <a
               href="#terms"
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
-              Terms of Service
+              {t('footer.termsOfService')}
             </a>
             <a
               href="#rti"
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
-              RTI Guidelines
+              {t('footer.rtiGuidelines')}
             </a>
           </div>
         </div>
@@ -195,7 +196,7 @@ const Footer = () => {
       <div className="bg-primary-glow/20 border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-wrap justify-center gap-4 text-xs">
-            <span className="text-primary-foreground/60">Official Links:</span>
+            <span className="text-primary-foreground/60">{t('footer.officialLinks')}:</span>
             <a href="https://www.india.gov.in" className="text-primary-foreground/70 hover:text-primary-foreground">
               india.gov.in
             </a>
