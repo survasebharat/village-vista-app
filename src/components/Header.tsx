@@ -1,19 +1,34 @@
 import { useState } from "react";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import LanguageToggle from "./LanguageToggle";
+import { useAuth } from "@/hooks/useAuth";
+import { usePageVisibility } from "@/hooks/usePageVisibility";
+import { supabase } from "@/integrations/supabase/client";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
+  const { user, isAdmin } = useAuth();
+  const { isPageVisible } = usePageVisibility();
+  const navigate = useNavigate();
 
-  const navItems = [
-    { name: t("header.about"), href: "#about" },
-    { name: t("header.services"), href: "#services" },
-    { name: t("header.panchayat"), href: "#panchayat" },
-    { name: t("header.contact"), href: "#contact" },
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsMenuOpen(false);
+  };
+
+  const allNavItems = [
+    { name: t("header.about"), href: "#about", pageKey: "about" },
+    { name: t("header.services"), href: "#services", pageKey: "services" },
+    { name: t("header.panchayat"), href: "#panchayat", pageKey: "panchayat" },
+    { name: t("header.contact"), href: "#contact", pageKey: "contact" },
   ];
+
+  // Filter navigation items based on visibility
+  const navItems = allNavItems.filter(item => isPageVisible(item.pageKey));
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
@@ -67,6 +82,44 @@ const Header = () => {
               ))}
             </nav>
             <LanguageToggle />
+            
+            {/* Auth Buttons */}
+            <div className="hidden lg:flex items-center gap-2">
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => navigate("/admin")}
+                      className="gap-2"
+                    >
+                      <Shield className="h-4 w-4" />
+                      Admin
+                    </Button>
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleLogout}
+                    className="gap-2"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={() => navigate("/auth")}
+                  className="gap-2"
+                >
+                  <LogIn className="h-4 w-4" />
+                  Login
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -99,6 +152,47 @@ const Header = () => {
                   <a href={item.href}>{item.name}</a>
                 </Button>
               ))}
+              
+              {/* Mobile Auth Buttons */}
+              <div className="mt-4 space-y-2">
+                {user ? (
+                  <>
+                    {isAdmin && (
+                      <Button
+                        variant="outline"
+                        className="w-full gap-2"
+                        onClick={() => {
+                          navigate("/admin");
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        <Shield className="h-4 w-4" />
+                        Admin Panel
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      className="w-full gap-2"
+                      onClick={handleLogout}
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    variant="default"
+                    className="w-full gap-2"
+                    onClick={() => {
+                      navigate("/auth");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    <LogIn className="h-4 w-4" />
+                    Login
+                  </Button>
+                )}
+              </div>
             </div>
           </nav>
         )}

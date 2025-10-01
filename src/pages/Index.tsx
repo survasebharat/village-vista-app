@@ -10,8 +10,10 @@ import Development from "@/components/Development";
 import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { usePageVisibility } from "@/hooks/usePageVisibility";
 
 const Index = () => {
+  const { isPageVisible } = usePageVisibility();
   useEffect(() => {
     // Update document title and meta tags for SEO
     document.title = "Hariyali Gram Panchayat | Official Website | Maharashtra";
@@ -81,25 +83,25 @@ const Index = () => {
         <Announcements />
         
         {/* About Village Section */}
-        <About />
+        {isPageVisible("about") && <About />}
         
         {/* Panchayat Information */}
-        <Panchayat />
+        {isPageVisible("panchayat") && <Panchayat />}
         
         {/* Government Schemes */}
-        <Schemes />
+        {isPageVisible("schemes") && <Schemes />}
         
         {/* Village Services */}
-        <Services />
+        {isPageVisible("services") && <Services />}
         
         {/* Development Projects */}
-        <Development />
+        {isPageVisible("development") && <Development />}
         
         {/* Gallery */}
-        <Gallery />
+        {isPageVisible("gallery") && <Gallery />}
         
         {/* Contact Information */}
-        <Contact />
+        {isPageVisible("contact") && <Contact />}
       </main>
       
       {/* Footer */}
