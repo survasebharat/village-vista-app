@@ -50,7 +50,7 @@
       "tenure": "2020-2025",
       "education": "M.A. Rural Development",
       "message": "Together we build a stronger, more prosperous village for our future generations.",
-      "image": "/api/placeholder/300/300"
+      "image": "/src/assets/sarpanch-portrait.jpg"
     },
     "wardMembers": [
       {
@@ -58,35 +58,35 @@
         "position": "Ward Member 1",
         "contact": "+91 98765 43211",
         "ward": "Central Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/ward-member-1.jpg"
       },
       {
         "name": "Priya Patel",
         "position": "Ward Member 2", 
         "contact": "+91 98765 43212",
         "ward": "Eastern Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/ward-member-2.jpg"
       },
       {
         "name": "Amit Singh",
         "position": "Ward Member 3",
         "contact": "+91 98765 43213", 
         "ward": "Western Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/ward-member-1.jpg"
       },
       {
         "name": "Kavita Desai",
         "position": "Ward Member 4",
         "contact": "+91 98765 43214",
         "ward": "Northern Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/ward-member-2.jpg"
       },
       {
         "name": "Suresh Jadhav",
         "position": "Ward Member 5",
         "contact": "+91 98765 43215",
         "ward": "Southern Ward",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/ward-member-1.jpg"
       }
     ],
     "secretary": {
@@ -94,7 +94,7 @@
       "contact": "+91 98765 43216",
       "email": "secretary@shivankedgram.gov.in",
       "office_hours": "9:00 AM - 5:00 PM",
-      "image": "/api/placeholder/300/300"
+      "image": "/src/assets/secretary-portrait.jpg"
     },
     "staff": [
       {
@@ -102,28 +102,28 @@
         "position": "Talati",
         "contact": "+91 98765 43217",
         "department": "Revenue",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/talati-portrait.jpg"
       },
       {
         "name": "Ganesh Bhosale",
         "position": "Postman",
         "contact": "+91 98765 43218",
         "department": "Postal Services",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/postman-portrait.jpg"
       },
       {
         "name": "Santosh Yadav",
         "position": "Lineman",
         "contact": "+91 98765 43219",
         "department": "Electricity",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/lineman-portrait.jpg"
       },
       {
         "name": "Kiran Jadhav",
         "position": "Anganwadi Worker",
         "contact": "+91 98765 43220",
         "department": "Women & Child Development",
-        "image": "/api/placeholder/300/300"
+        "image": "/src/assets/ward-member-2.jpg"
       }
     ]
   },
@@ -298,7 +298,7 @@
           "contact": "+91 98765 44001",
           "address": "Main Market Road",
           "hours": "6:00 AM - 10:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/kirana-store.jpg"
         },
         {
           "name": "Patel General Store",
@@ -306,7 +306,7 @@
           "contact": "+91 98765 44002",
           "address": "Village Center",
           "hours": "7:00 AM - 9:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/kirana-store.jpg"
         }
       ]
     },
@@ -319,7 +319,7 @@
           "contact": "+91 98765 44003",
           "vehicle": "Tata Indica",
           "routes": "Village to Pune City",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/transport-service.jpg"
         },
         {
           "name": "Auto Rickshaw Service",
@@ -327,7 +327,7 @@
           "contact": "+91 98765 44004",
           "vehicle": "Bajaj Auto",
           "routes": "Local transport within village",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/transport-service.jpg"
         }
       ]
     },
@@ -340,7 +340,7 @@
           "contact": "+91 98765 44005",
           "deity": "Lord Ganesha",
           "timings": "5:00 AM - 8:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/temple-service.jpg"
         }
       ]
     },
@@ -353,7 +353,7 @@
           "contact": "+91 98765 44006",
           "subjects": "Mathematics, Science, English",
           "timing": "4:00 PM - 7:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/education-service.jpg"
         },
         {
           "name": "Computer Training Center",
@@ -361,7 +361,7 @@
           "contact": "+91 98765 44007",
           "courses": "Basic Computer, MS Office, Internet",
           "timing": "9:00 AM - 6:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/education-service.jpg"
         }
       ]
     },
@@ -374,7 +374,7 @@
           "contact": "+91 98765 44008",
           "speciality": "Tea, Vada, Samosa",
           "timing": "6:00 AM - 10:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/kirana-store.jpg"
         }
       ]
     },
@@ -387,7 +387,7 @@
           "contact": "+91 98765 44009",
           "services": "General Medicine, Vaccination",
           "timing": "9:00 AM - 5:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/healthcare-service.jpg"
         },
         {
           "name": "Ayurvedic Clinic",
@@ -395,7 +395,7 @@
           "contact": "+91 98765 44010",
           "services": "Ayurvedic Treatment, Panchakarma",
           "timing": "8:00 AM - 1:00 PM, 4:00 PM - 8:00 PM",
-          "image": "/api/placeholder/300/200"
+          "image": "/src/assets/healthcare-service.jpg"
         }
       ]
     }
