@@ -60,33 +60,33 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Text */}
-          <div className="text-white animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <div className="animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-primary-foreground drop-shadow-lg">
               {t('hero.title')}
             </h1>
             
-            <p className="text-xl md:text-2xl mb-4 text-gray-100">
+            <p className="text-xl md:text-2xl mb-4 text-primary-foreground/95 drop-shadow-md">
               {t('hero.subtitle')}
             </p>
             
-            <p className="text-lg mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg mb-8 text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
               {t('hero.description')}
             </p>
 
             {/* Sarpanch Message */}
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 p-6 mb-8 max-w-2xl mx-auto">
-              <blockquote className="text-gray-100 italic text-lg mb-4">
+            <Card className="bg-card/20 backdrop-blur-md border-primary-foreground/20 p-6 mb-8 max-w-2xl mx-auto shadow-lg">
+              <blockquote className="text-primary-foreground/95 italic text-lg mb-4 drop-shadow">
                 "{t('panchayat.message')}"
               </blockquote>
               <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold">
+                <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold shadow-md">
                   {panchayat.sarpanch.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-semibold text-white">
+                  <p className="font-semibold text-primary-foreground drop-shadow">
                     {panchayat.sarpanch.name}
                   </p>
-                  <p className="text-sm text-gray-300">
+                  <p className="text-sm text-primary-foreground/80 drop-shadow-sm">
                     {t('panchayat.sarpanch')} ({panchayat.sarpanch.tenure})
                   </p>
                 </div>
@@ -97,7 +97,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-accent hover:bg-accent-light text-accent-foreground font-semibold px-8 py-6 text-lg animate-pulse-glow"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 {t('hero.explore')}
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -105,7 +105,7 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-2 border-white/80 text-white hover:bg-white hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm"
+                className="border-2 border-primary-foreground/80 bg-card/10 text-primary-foreground hover:bg-card hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 {t('hero.contact')}
               </Button>
@@ -116,8 +116,8 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+        <div className="w-6 h-10 border-2 border-primary-foreground rounded-full flex justify-center shadow-md">
+          <div className="w-1 h-3 bg-primary-foreground rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>
