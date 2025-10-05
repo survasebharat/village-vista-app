@@ -174,7 +174,7 @@ const Admin = () => {
                   <div>
                     <CardTitle className="text-2xl">Admin Panel</CardTitle>
                     <CardDescription>
-                      Manage page visibility for each village
+                      Manage page visibility and village data
                     </CardDescription>
                   </div>
                 </div>
@@ -184,6 +184,40 @@ const Admin = () => {
                 </Button>
               </div>
             </CardHeader>
+          </Card>
+
+          {/* Quick Actions */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Management</CardTitle>
+              <CardDescription>
+                Access different management sections
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-2">
+                <Button
+                  variant="outline"
+                  className="h-auto p-6 flex flex-col items-start gap-2"
+                  onClick={() => navigate("/village-management")}
+                >
+                  <div className="text-lg font-semibold">🏘️ Village Management</div>
+                  <div className="text-sm text-muted-foreground text-left">
+                    Add, edit, and manage village information
+                  </div>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="h-auto p-6 flex flex-col items-start gap-2"
+                  disabled
+                >
+                  <div className="text-lg font-semibold">📢 Announcements</div>
+                  <div className="text-sm text-muted-foreground text-left">
+                    Manage village announcements (Coming Soon)
+                  </div>
+                </Button>
+              </div>
+            </CardContent>
           </Card>
 
           {/* Village Selector */}

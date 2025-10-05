@@ -40,15 +40,18 @@ const Hero = () => {
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full min-h-screen object-cover transition-transform duration-700 ease-in-out"
+                    className="w-full h-full min-h-screen object-cover object-center transition-transform duration-700 ease-in-out"
+                    style={{
+                      objectPosition: 'center center'
+                    }}
                     loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2 sm:left-4 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110" />
-          <CarouselNext className="right-2 sm:right-4 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110" />
+          <CarouselPrevious className="left-2 sm:left-4 md:left-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
+          <CarouselNext className="right-2 sm:right-4 md:right-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
         </Carousel>
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40 animate-fade-in" />
       </div>

@@ -80,7 +80,7 @@ const Gallery = () => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
           {gallery.map((item, index) => (
             <Card 
               key={item.title} 
@@ -93,11 +93,11 @@ const Gallery = () => {
                   <img
                     src={galleryImages[item.title]}
                     alt={item.title}
-                    className="aspect-video w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="aspect-video w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
                   <div className={`
-                    aspect-video w-full flex items-center justify-center text-white text-6xl 
+                    aspect-video w-full flex items-center justify-center text-white text-4xl sm:text-6xl 
                     ${generatePlaceholderImage(item.title, item.type)}
                     group-hover:scale-105 transition-transform duration-300
                   `}>
@@ -110,30 +110,30 @@ const Gallery = () => {
                 
                 {/* Play Button for Videos */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/90 rounded-full flex items-center justify-center">
                     {item.type === "festival" ? (
-                      <Play className="h-8 w-8 text-primary ml-1" />
+                      <Play className="h-6 w-6 sm:h-8 sm:w-8 text-primary ml-1" />
                     ) : (
-                      <Camera className="h-8 w-8 text-primary" />
+                      <Camera className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                     )}
                   </div>
                 </div>
 
                 {/* Type Badge */}
-                <div className="absolute top-3 left-3">
+                <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
                   <Badge className={getTypeColor(item.type)}>
                     {item.type}
                   </Badge>
                 </div>
               </div>
 
-              <CardContent className="p-4">
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+              <CardContent className="p-3 sm:p-4">
+                <h3 className="font-semibold text-base sm:text-lg mb-2 group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
                 
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                  <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span>
                     {new Date(item.date).toLocaleDateString('en-IN', {
                       year: 'numeric',

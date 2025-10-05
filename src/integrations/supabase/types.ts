@@ -14,6 +14,103 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          announcement_date: string
+          content: string
+          created_at: string | null
+          id: string
+          priority: string | null
+          title: string
+          type: string | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          announcement_date: string
+          content: string
+          created_at?: string | null
+          id?: string
+          priority?: string | null
+          title: string
+          type?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          announcement_date?: string
+          content?: string
+          created_at?: string | null
+          id?: string
+          priority?: string | null
+          title?: string
+          type?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcements_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      development_works: {
+        Row: {
+          budget: string | null
+          completion_date: string | null
+          created_at: string | null
+          description: string | null
+          expected_completion: string | null
+          id: string
+          progress: number | null
+          start_date: string | null
+          status: string
+          title: string
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          budget?: string | null
+          completion_date?: string | null
+          created_at?: string | null
+          description?: string | null
+          expected_completion?: string | null
+          id?: string
+          progress?: number | null
+          start_date?: string | null
+          status: string
+          title: string
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          budget?: string | null
+          completion_date?: string | null
+          created_at?: string | null
+          description?: string | null
+          expected_completion?: string | null
+          id?: string
+          progress?: number | null
+          start_date?: string | null
+          status?: string
+          title?: string
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "development_works_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       page_visibility: {
         Row: {
           id: string
@@ -44,6 +141,68 @@ export type Database = {
         }
         Relationships: []
       }
+      panchayat_members: {
+        Row: {
+          contact: string | null
+          created_at: string | null
+          department: string | null
+          education: string | null
+          email: string | null
+          id: string
+          image_url: string | null
+          message: string | null
+          name: string
+          office_hours: string | null
+          role: string
+          tenure: string | null
+          updated_at: string | null
+          village_id: string | null
+          ward: string | null
+        }
+        Insert: {
+          contact?: string | null
+          created_at?: string | null
+          department?: string | null
+          education?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          message?: string | null
+          name: string
+          office_hours?: string | null
+          role: string
+          tenure?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+          ward?: string | null
+        }
+        Update: {
+          contact?: string | null
+          created_at?: string | null
+          department?: string | null
+          education?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          message?: string | null
+          name?: string
+          office_hours?: string | null
+          role?: string
+          tenure?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+          ward?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "panchayat_members_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -65,6 +224,53 @@ export type Database = {
         }
         Relationships: []
       }
+      schemes: {
+        Row: {
+          application_process: string | null
+          benefits: string | null
+          created_at: string | null
+          description: string | null
+          documents: Json | null
+          eligibility: string | null
+          id: string
+          name: string
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          application_process?: string | null
+          benefits?: string | null
+          created_at?: string | null
+          description?: string | null
+          documents?: Json | null
+          eligibility?: string | null
+          id?: string
+          name: string
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          application_process?: string | null
+          benefits?: string | null
+          created_at?: string | null
+          description?: string | null
+          documents?: Json | null
+          eligibility?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schemes_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -83,6 +289,195 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      village_gallery: {
+        Row: {
+          created_at: string | null
+          date: string | null
+          id: string
+          image_url: string | null
+          title: string
+          type: string | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          image_url?: string | null
+          title: string
+          type?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          image_url?: string | null
+          title?: string
+          type?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "village_gallery_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      village_population: {
+        Row: {
+          created_at: string | null
+          female: number | null
+          id: string
+          literacy_rate: string | null
+          male: number | null
+          total: number | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          female?: number | null
+          id?: string
+          literacy_rate?: string | null
+          male?: number | null
+          total?: number | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          female?: number | null
+          id?: string
+          literacy_rate?: string | null
+          male?: number | null
+          total?: number | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "village_population_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: true
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      village_services: {
+        Row: {
+          address: string | null
+          category: string
+          contact: string | null
+          created_at: string | null
+          hours: string | null
+          id: string
+          image_url: string | null
+          name: string
+          owner: string | null
+          speciality: string | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          address?: string | null
+          category: string
+          contact?: string | null
+          created_at?: string | null
+          hours?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          owner?: string | null
+          speciality?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          address?: string | null
+          category?: string
+          contact?: string | null
+          created_at?: string | null
+          hours?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          owner?: string | null
+          speciality?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "village_services_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      villages: {
+        Row: {
+          altitude: string | null
+          area: string | null
+          created_at: string | null
+          description: string | null
+          district: string
+          established: string | null
+          id: string
+          is_active: boolean | null
+          latitude: string | null
+          longitude: string | null
+          name: string
+          pincode: string
+          state: string
+          updated_at: string | null
+          vision: string | null
+        }
+        Insert: {
+          altitude?: string | null
+          area?: string | null
+          created_at?: string | null
+          description?: string | null
+          district: string
+          established?: string | null
+          id?: string
+          is_active?: boolean | null
+          latitude?: string | null
+          longitude?: string | null
+          name: string
+          pincode: string
+          state: string
+          updated_at?: string | null
+          vision?: string | null
+        }
+        Update: {
+          altitude?: string | null
+          area?: string | null
+          created_at?: string | null
+          description?: string | null
+          district?: string
+          established?: string | null
+          id?: string
+          is_active?: boolean | null
+          latitude?: string | null
+          longitude?: string | null
+          name?: string
+          pincode?: string
+          state?: string
+          updated_at?: string | null
+          vision?: string | null
         }
         Relationships: []
       }
