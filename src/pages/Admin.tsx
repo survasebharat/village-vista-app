@@ -209,6 +209,16 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
+                  onClick={() => navigate("/json-config")}
+                >
+                  <div className="text-lg font-semibold">📝 JSON Configuration</div>
+                  <div className="text-sm text-muted-foreground text-left">
+                    Edit village configuration data dynamically
+                  </div>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="h-auto p-6 flex flex-col items-start gap-2"
                   disabled
                 >
                   <div className="text-lg font-semibold">📢 Announcements</div>

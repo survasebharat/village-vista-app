@@ -1,0 +1,82 @@
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import villageDataStatic from '@/data/villageData.json';
+
+export interface VillageConfig {
+  village: any;
+  panchayat: any;
+  announcements: any[];
+  schemes: any[];
+  developmentWorks: any;
+  gallery: any[];
+  contact: any;
+  documents: any[];
+  services: any[];
+}
+
+export const useVillageConfig = (villageName?: string) => {
+  const [config, setConfig] = useState<VillageConfig | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // If no village name specified, use static data as fallback
+        if (!villageName) {
+          setConfig(villageDataStatic as any);
+          setLoading(false);
+          return;
+        }
+
+        // Fetch village ID
+        const { data: villageData, error: villageError } = await supabase
+          .from('villages')
+          .select('id')
+          .eq('name', villageName)
+          .single();
+
+        if (villageError) {
+          console.error('Error fetching village:', villageError);
+          // Fallback to static data
+          setConfig(villageDataStatic as any);
+          setLoading(false);
+          return;
+        }
+
+        // Fetch config from database
+        const { data: configData, error: configError } = await supabase
+          .from('village_config')
+          .select('config_data')
+          .eq('village_id', villageData.id)
+          .maybeSingle();
+
+        if (configError) {
+          console.error('Error fetching config:', configError);
+          setError(configError.message);
+          // Fallback to static data
+          setConfig(villageDataStatic as any);
+        } else if (configData) {
+          setConfig(configData.config_data as any);
+        } else {
+          // No config in database, use static data
+          setConfig(villageDataStatic as any);
+        }
+      } catch (err) {
+      console.error('Error in fetchConfig:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error');
+      // Fallback to static data
+      setConfig(villageDataStatic as any);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchConfig();
+  }, [villageName]);
+
+  return { config, loading, error };
+};

@@ -292,6 +292,41 @@ export type Database = {
         }
         Relationships: []
       }
+      village_config: {
+        Row: {
+          config_data: Json
+          created_at: string
+          id: string
+          updated_at: string
+          updated_by: string | null
+          village_id: string
+        }
+        Insert: {
+          config_data: Json
+          created_at?: string
+          id?: string
+          updated_at?: string
+          updated_by?: string | null
+          village_id: string
+        }
+        Update: {
+          config_data?: Json
+          created_at?: string
+          id?: string
+          updated_at?: string
+          updated_by?: string | null
+          village_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "village_config_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: true
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       village_gallery: {
         Row: {
           created_at: string | null
