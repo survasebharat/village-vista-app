@@ -12,6 +12,33 @@ export const usePageVisibility = () => {
 
   useEffect(() => {
     fetchPageVisibility();
+
+    // Set up real-time subscription for page visibility updates
+    const channel = supabase
+      .channel('page-visibility-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'page_visibility'
+        },
+        (payload) => {
+          console.log('Page visibility updated:', payload);
+          if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
+            const newData = payload.new as any;
+            setVisibility((prev) => ({
+              ...prev,
+              [newData.page_key]: newData.is_visible ?? true
+            }));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const fetchPageVisibility = async () => {

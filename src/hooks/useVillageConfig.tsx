@@ -66,16 +66,40 @@ export const useVillageConfig = (villageName?: string) => {
           setConfig(villageDataStatic as any);
         }
       } catch (err) {
-      console.error('Error in fetchConfig:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
-      // Fallback to static data
-      setConfig(villageDataStatic as any);
+        console.error('Error in fetchConfig:', err);
+        setError(err instanceof Error ? err.message : 'Unknown error');
+        // Fallback to static data
+        setConfig(villageDataStatic as any);
       } finally {
         setLoading(false);
       }
     };
 
     fetchConfig();
+
+    // Set up real-time subscription for village config updates
+    const channel = supabase
+      .channel('village-config-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'village_config'
+        },
+        (payload) => {
+          console.log('Village config updated:', payload);
+          if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
+            const newData = payload.new as any;
+            setConfig(newData.config_data as any);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [villageName]);
 
   return { config, loading, error };
