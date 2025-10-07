@@ -18,13 +18,6 @@ const Index = () => {
   const { isPageVisible } = usePageVisibility();
   const { config, loading } = useVillageConfig();
   
-  if (loading || !config) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
   useEffect(() => {
     // Update document title and meta tags for SEO
     document.title = "Hariyali Gram Panchayat | Official Website | Maharashtra";
@@ -79,6 +72,14 @@ const Index = () => {
       }
     };
   }, []);
+
+  if (loading || !config) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
