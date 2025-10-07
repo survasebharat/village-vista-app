@@ -95,11 +95,12 @@ const Gallery = ({ gallery }: GalleryProps) => {
                   <img
                     src={galleryImages[item.title]}
                     alt={item.title}
-                    className="aspect-video w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    className="aspect-video w-full h-48 sm:h-56 md:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                 ) : (
                   <div className={`
-                    aspect-video w-full flex items-center justify-center text-white text-4xl sm:text-6xl 
+                    aspect-video w-full h-48 sm:h-56 md:h-64 flex items-center justify-center text-white text-4xl sm:text-6xl 
                     ${generatePlaceholderImage(item.title, item.type)}
                     group-hover:scale-105 transition-transform duration-300
                   `}>

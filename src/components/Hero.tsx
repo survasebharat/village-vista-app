@@ -25,9 +25,9 @@ const Hero = ({ village, panchayat }: HeroProps) => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center">
+    <section id="home" className="relative min-h-[100svh] flex items-center">
       {/* Background Carousel */}
-      <div className="absolute inset-0 h-full min-h-screen overflow-hidden">
+      <div className="absolute inset-0 h-full overflow-hidden">
         <Carousel 
           className="w-full h-full"
           plugins={[plugin.current]}
@@ -39,14 +39,11 @@ const Hero = ({ village, panchayat }: HeroProps) => {
           <CarouselContent className="h-full -ml-0">
             {carouselImages.map((image, index) => (
               <CarouselItem key={index} className="h-full pl-0 basis-full">
-                <div className="relative w-full h-full min-h-screen">
+                <div className="relative w-full h-screen">
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full min-h-screen object-cover object-center transition-transform duration-700 ease-in-out"
-                    style={{
-                      objectPosition: 'center center'
-                    }}
+                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out"
                     loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
