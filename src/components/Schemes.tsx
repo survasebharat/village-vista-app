@@ -4,10 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 
-const Schemes = () => {
-  const { schemes } = villageData;
+interface SchemesProps {
+  schemes: any[];
+}
+
+const Schemes = ({ schemes }: SchemesProps) => {
   const { t } = useTranslation();
 
   const getSchemeIcon = (schemeName: string) => {

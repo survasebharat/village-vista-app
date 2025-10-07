@@ -5,13 +5,16 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useTranslation } from 'react-i18next';
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import villageData from "@/data/villageData.json";
 import villageScene1 from "@/assets/village-scene-1.jpg";
 import villageScene2 from "@/assets/village-scene-2.jpg";
 import villageScene3 from "@/assets/village-scene-3.jpg";
 
-const Hero = () => {
-  const { village, panchayat } = villageData;
+interface HeroProps {
+  village: any;
+  panchayat: any;
+}
+
+const Hero = ({ village, panchayat }: HeroProps) => {
   const { t } = useTranslation();
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   

@@ -2,10 +2,12 @@ import { MapPin, Users, GraduationCap, Calendar, Mountain, Compass } from "lucid
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 
-const About = () => {
-  const { village } = villageData;
+interface AboutProps {
+  village: any;
+}
+
+const About = ({ village }: AboutProps) => {
   const { t } = useTranslation();
 
   const geographyStats = [

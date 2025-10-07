@@ -3,10 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 
-const Panchayat = () => {
-  const { panchayat } = villageData;
+interface PanchayatProps {
+  panchayat: any;
+}
+
+const Panchayat = ({ panchayat }: PanchayatProps) => {
   const { t } = useTranslation();
 
   return (

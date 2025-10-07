@@ -3,10 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 
-const Services = () => {
-  const { services } = villageData;
+interface ServicesProps {
+  services: any[];
+}
+
+const Services = ({ services }: ServicesProps) => {
   const { t } = useTranslation();
 
   const getCategoryIcon = (category: string) => {

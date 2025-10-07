@@ -2,7 +2,6 @@ import { Calendar, Camera, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 import galleryFestival1 from "@/assets/gallery-festival-1.jpg";
 import galleryFestival2 from "@/assets/gallery-festival-2.jpg";
 import galleryDevelopment1 from "@/assets/gallery-development-1.jpg";
@@ -10,8 +9,11 @@ import galleryDevelopment2 from "@/assets/gallery-development-2.jpg";
 import galleryHealthcare1 from "@/assets/gallery-healthcare-1.jpg";
 import galleryEducation1 from "@/assets/gallery-education-1.jpg";
 
-const Gallery = () => {
-  const { gallery } = villageData;
+interface GalleryProps {
+  gallery: any[];
+}
+
+const Gallery = ({ gallery }: GalleryProps) => {
   const { t } = useTranslation();
   
   // Map gallery items to real images

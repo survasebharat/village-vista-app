@@ -2,10 +2,12 @@ import { Calendar, IndianRupee, CheckCircle, Clock, AlertCircle, Calendar as Cal
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import villageData from "@/data/villageData.json";
 
-const Development = () => {
-  const { developmentWorks } = villageData;
+interface DevelopmentProps {
+  developmentWorks: any[];
+}
+
+const Development = ({ developmentWorks }: DevelopmentProps) => {
 
   const getStatusIcon = (status: string) => {
     switch (status) {

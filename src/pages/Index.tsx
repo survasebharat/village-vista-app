@@ -11,9 +11,20 @@ import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { usePageVisibility } from "@/hooks/usePageVisibility";
+import { useVillageConfig } from "@/hooks/useVillageConfig";
+import { Loader2 } from "lucide-react";
 
 const Index = () => {
   const { isPageVisible } = usePageVisibility();
+  const { config, loading } = useVillageConfig();
+  
+  if (loading || !config) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
   useEffect(() => {
     // Update document title and meta tags for SEO
     document.title = "Hariyali Gram Panchayat | Official Website | Maharashtra";
@@ -77,28 +88,28 @@ const Index = () => {
       {/* Main Content */}
       <main>
         {/* Hero Section */}
-        <Hero />
+        <Hero village={config.village} panchayat={config.panchayat} />
         
         {/* Latest Announcements */}
         <Announcements />
         
         {/* About Village Section */}
-        {isPageVisible("about") && <About />}
+        {isPageVisible("about") && <About village={config.village} />}
         
         {/* Panchayat Information */}
-        {isPageVisible("panchayat") && <Panchayat />}
+        {isPageVisible("panchayat") && <Panchayat panchayat={config.panchayat} />}
         
         {/* Government Schemes */}
-        {isPageVisible("schemes") && <Schemes />}
+        {isPageVisible("schemes") && <Schemes schemes={config.schemes} />}
         
         {/* Village Services */}
-        {isPageVisible("services") && <Services />}
+        {isPageVisible("services") && <Services services={config.services} />}
         
         {/* Development Projects */}
-        {isPageVisible("development") && <Development />}
+        {isPageVisible("development") && <Development developmentWorks={config.developmentWorks} />}
         
         {/* Gallery */}
-        {isPageVisible("gallery") && <Gallery />}
+        {isPageVisible("gallery") && <Gallery gallery={config.gallery} />}
         
         {/* Contact Information */}
         {isPageVisible("contact") && <Contact />}
