@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Globe, Facebook, Twitter, Instagram, Youtube, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from 'react-i18next';
@@ -17,10 +17,10 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: t('footer.birthCertificate'), href: "/quick-services" },
-    { name: t('footer.deathCertificate'), href: "/quick-services" },
-    { name: "Emergency Help", href: "/emergency-help" },
-    { name: "Notice Board", href: "/notice-board" },
+    { name: t('footer.birthCertificate'), href: "#contact" },
+    { name: t('footer.deathCertificate'), href: "#contact" },
+    { name: t('footer.propertyTax'), href: "#contact" },
+    { name: t('footer.rtiApplication'), href: "#contact" },
   ];
 
   return (
@@ -50,13 +50,12 @@ const Footer = () => {
             {/* Social Media */}
             <div>
               <h4 className="font-semibold mb-3">{t('footer.followUs')}</h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex gap-2">
                 {[
-                  { icon: MessageCircle, href: "https://wa.me/919876543210", label: "WhatsApp" },
-                  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-                  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-                  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-                  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+                  { icon: Facebook, href: "#" },
+                  { icon: Twitter, href: "#" },
+                  { icon: Instagram, href: "#" },
+                  { icon: Youtube, href: "#" },
                 ].map((social, index) => (
                   <Button
                     key={index}
@@ -64,7 +63,6 @@ const Footer = () => {
                     size="icon"
                     className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
-                    title={social.label}
                   >
                     <a href={social.href} target="_blank" rel="noopener noreferrer">
                       <social.icon className="h-5 w-5" />
