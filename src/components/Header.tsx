@@ -45,15 +45,12 @@ const Header = () => {
               <span>info@shivankedgram.gov.in</span>
             </div>
           </div>
-          <div className="text-sm">
-            Office Hours: Mon-Fri 9:00 AM - 5:00 PM
-          </div>
         </div>
 
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo & Title */}
-          <div className="flex items-center gap-4">
+          <a href="/" className="flex items-center gap-4 hover:opacity-90 transition-opacity">
             <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl shadow-sm">
               शि
             </div>
@@ -65,7 +62,7 @@ const Header = () => {
                 Maharashtra, Latur District
               </p>
             </div>
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="flex items-center gap-4">
