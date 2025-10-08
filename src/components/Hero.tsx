@@ -1,8 +1,9 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import villageScene1 from "@/assets/village-scene-1.jpg";
@@ -16,6 +17,7 @@ interface HeroProps {
 
 const Hero = ({ village, panchayat }: HeroProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   
   const carouselImages = [
@@ -97,17 +99,20 @@ const Hero = ({ village, panchayat }: HeroProps) => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                onClick={() => navigate("/contact")}
               >
-                {t('hero.explore')}
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <Mail className="mr-2 h-5 w-5" />
+                Contact Panchayat
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-2 border-primary-foreground/80 bg-card/10 text-primary-foreground hover:bg-card hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
+                className="border-2 border-white bg-white/10 text-white hover:bg-white/20 font-semibold px-8 py-6 text-lg backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
+                onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
               >
-                {t('hero.contact')}
+                <MapPin className="mr-2 h-5 w-5" />
+                Explore Village
               </Button>
             </div>
           </div>

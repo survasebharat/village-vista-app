@@ -1,14 +1,16 @@
-import { Calendar, Clock, AlertCircle, Users, FileText, Megaphone } from "lucide-react";
+import { Calendar, Clock, AlertCircle, Users, FileText, Megaphone, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 import villageData from "@/data/villageData.json";
 
 const Announcements = () => {
   const { announcements } = villageData;
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -75,9 +77,14 @@ const Announcements = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl font-bold mb-4 text-gradient">
-            {t('announcements.title')}
-          </h2>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <h2 className="text-3xl font-bold text-gradient">
+              {t('announcements.title')}
+            </h2>
+            <Button variant="outline" size="sm" onClick={() => navigate("/notice-board")}>
+              View All <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t('announcements.description')}
           </p>
