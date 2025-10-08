@@ -24,7 +24,10 @@ const Header = () => {
     { name: t("header.about"), href: "#about", pageKey: "about" },
     { name: t("header.services"), href: "#services", pageKey: "services" },
     { name: t("header.panchayat"), href: "#panchayat", pageKey: "panchayat" },
-    { name: t("header.contact"), href: "#contact", pageKey: "contact" },
+    { name: "Notice Board", href: "/notice-board", pageKey: "announcements" },
+    { name: "Emergency Help", href: "/emergency-help", pageKey: "emergency" },
+    { name: "Quick Services", href: "/quick-services", pageKey: "services" },
+    { name: t("header.contact"), href: "/contact", pageKey: "contact" },
   ];
 
   // Filter navigation items based on visibility
@@ -74,7 +77,11 @@ const Header = () => {
                   className="text-foreground hover:text-primary hover:bg-primary/10"
                   asChild
                 >
-                  <a href={item.href}>{item.name}</a>
+                  {item.href.startsWith('#') ? (
+                    <a href={item.href}>{item.name}</a>
+                  ) : (
+                    <a href={item.href} onClick={(e) => { e.preventDefault(); navigate(item.href); }}>{item.name}</a>
+                  )}
                 </Button>
               ))}
             </nav>
@@ -146,7 +153,11 @@ const Header = () => {
                   asChild
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <a href={item.href}>{item.name}</a>
+                  {item.href.startsWith('#') ? (
+                    <a href={item.href}>{item.name}</a>
+                  ) : (
+                    <a href={item.href} onClick={(e) => { e.preventDefault(); navigate(item.href); setIsMenuOpen(false); }}>{item.name}</a>
+                  )}
                 </Button>
               ))}
               

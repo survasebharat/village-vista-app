@@ -17,10 +17,10 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: t('footer.birthCertificate'), href: "#contact" },
-    { name: t('footer.deathCertificate'), href: "#contact" },
-    { name: t('footer.propertyTax'), href: "#contact" },
-    { name: t('footer.rtiApplication'), href: "#contact" },
+    { name: t('footer.birthCertificate'), href: "/quick-services" },
+    { name: t('footer.deathCertificate'), href: "/quick-services" },
+    { name: "Emergency Help", href: "/emergency-help" },
+    { name: "Notice Board", href: "/notice-board" },
   ];
 
   return (
