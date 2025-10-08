@@ -4,10 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 
-const Announcements = () => {
-  const { announcements } = villageData;
+const Announcements = ({announcements}) => {
   const { t } = useTranslation();
 
   const getPriorityColor = (priority: string) => {

@@ -16,17 +16,17 @@ import { Loader2 } from "lucide-react";
 
 const Index = () => {
   const { isPageVisible } = usePageVisibility();
-  const { config, loading } = useVillageConfig();
+  const { config, loading } = useVillageConfig("Shivankhed");
   
   useEffect(() => {
     // Update document title and meta tags for SEO
-    document.title = "Hariyali Gram Panchayat | Official Website | Maharashtra";
+    document.title = "Shivankhed Khurd Gram Panchayat | Official Website | Maharashtra";
     
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 
-        'Official website of Hariyali Gram Panchayat, Pune District, Maharashtra. Access government schemes, development projects, announcements, and services for rural development and transparent governance.'
+        'Official website of Shivankhed Khurd Gram Panchayat, Pune District, Maharashtra. Access government schemes, development projects, announcements, and services for rural development and transparent governance.'
       );
     }
 
@@ -34,14 +34,14 @@ const Index = () => {
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "GovernmentOrganization",
-      "name": "Hariyali Gram Panchayat",
+      "name": "Shivankhed Khurd Gram Panchayat",
       "description": "Village Panchayat serving the rural community with transparent governance and development initiatives",
       "url": window.location.origin,
       "telephone": "+91-20-2567-8901",
-      "email": "info@hariyaligram.gov.in",
+      "email": "info@shivankhedkhurdgram.gov.in",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Gram Panchayat Office, Hariyali Village",
+        "streetAddress": "Gram Panchayat Office, Shivankhed Khurd Village",
         "addressLocality": "Pune",
         "addressRegion": "Maharashtra",
         "postalCode": "411001",
@@ -81,6 +81,8 @@ const Index = () => {
     );
   }
 
+  console.log("Shivankhed", config)
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header Navigation */}
@@ -92,7 +94,7 @@ const Index = () => {
         <Hero village={config.village} panchayat={config.panchayat} />
         
         {/* Latest Announcements */}
-        <Announcements />
+        {isPageVisible("about") && <Announcements announcements={config.announcements} /> }
         
         {/* About Village Section */}
         {isPageVisible("about") && <About village={config.village} />}
@@ -113,7 +115,9 @@ const Index = () => {
         {isPageVisible("gallery") && <Gallery gallery={config.gallery} />}
         
         {/* Contact Information */}
-        {isPageVisible("contact") && <Contact />}
+        {isPageVisible("contact") && <Contact contact={config.contact}
+          documents={config.documents}
+         />}
       </main>
       
       {/* Footer */}

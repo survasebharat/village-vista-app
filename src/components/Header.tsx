@@ -42,7 +42,7 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              <span>info@shivankedgram.gov.in</span>
+              <span>info@shivankhedkhurd.gov.in</span>
             </div>
           </div>
           <div className="text-sm">

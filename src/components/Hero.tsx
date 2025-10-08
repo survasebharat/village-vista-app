@@ -37,7 +37,7 @@ const Hero = ({ village, panchayat }: HeroProps) => {
           }}
         >
           <CarouselContent className="h-full -ml-0">
-            {carouselImages.map((image, index) => (
+            {[...village.heroImages || carouselImages].map((image, index) => (
               <CarouselItem key={index} className="h-full pl-0 basis-full">
                 <div className="relative w-full h-screen">
                   <img
@@ -79,9 +79,14 @@ const Hero = ({ village, panchayat }: HeroProps) => {
                 "{t('panchayat.message')}"
               </blockquote>
               <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold shadow-md">
-                  {panchayat.sarpanch.name.charAt(0)}
-                </div>
+                {/* image */}
+                {panchayat.sarpanch.image ? (
+                  <img src={panchayat.sarpanch.image} alt={panchayat.sarpanch.name}  className="inline-block size-10 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5" />
+                ) : (
+                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold shadow-md">
+                    {panchayat.sarpanch.name.charAt(0)} 
+                  </div>
+                )}
                 <div>
                   <p className="font-semibold text-primary-foreground drop-shadow">
                     {panchayat.sarpanch.name}
@@ -94,7 +99,7 @@ const Hero = ({ village, panchayat }: HeroProps) => {
             </Card>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
                 className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
@@ -109,17 +114,17 @@ const Hero = ({ village, panchayat }: HeroProps) => {
               >
                 {t('hero.contact')}
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-primary-foreground rounded-full flex justify-center shadow-md">
           <div className="w-1 h-3 bg-primary-foreground rounded-full mt-2 animate-pulse"></div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

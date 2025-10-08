@@ -5,10 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
 
-const Contact = () => {
-  const { contact } = villageData;
+const Contact = ({contact, documents=[]}) => {
   const { t } = useTranslation();
 
   return (
@@ -177,19 +175,13 @@ const Contact = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3">
-                  {[
-                    "Birth Certificate Application",
-                    "Death Certificate Application", 
-                    "Property Tax Payment",
-                    "RTI Application",
-                    "Complaint Registration"
-                  ].map((service, index) => (
+                  {documents.map((service, index) => (
                     <div 
-                      key={service}
+                      key={service.name}
                       className="flex items-center justify-between p-3 rounded-lg bg-muted/20 hover-lift cursor-pointer"
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      <span className="text-sm font-medium">{service}</span>
+                      <span className="text-sm font-medium">{service.name || ""}</span>
                       <Badge variant="outline" className="text-xs">
                         Apply
                       </Badge>

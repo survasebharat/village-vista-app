@@ -167,15 +167,6 @@ const Schemes = ({ schemes }: SchemesProps) => {
                 <p className="text-xs text-muted-foreground">{t('schemes.freeVerification')}</p>
               </div>
             </div>
-
-            <div className="flex justify-center gap-4 animate-fade-in" style={{ animationDelay: "300ms" }}>
-              <Button variant="outline" className="transition-all duration-300 hover:scale-105">
-                {t('schemes.downloadForms')}
-              </Button>
-              <Button className="transition-all duration-300 hover:scale-105">
-                {t('schemes.contactOffice')}
-              </Button>
-            </div>
           </CardContent>
         </Card>
       </div>
