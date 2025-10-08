@@ -24,10 +24,7 @@ const Header = () => {
     { name: t("header.about"), href: "#about", pageKey: "about" },
     { name: t("header.services"), href: "#services", pageKey: "services" },
     { name: t("header.panchayat"), href: "#panchayat", pageKey: "panchayat" },
-    { name: "Notice Board", href: "/notice-board", pageKey: "announcements" },
-    { name: "Emergency Help", href: "/emergency-help", pageKey: "emergency" },
-    { name: "Quick Services", href: "/quick-services", pageKey: "services" },
-    { name: t("header.contact"), href: "/contact", pageKey: "contact" },
+    { name: t("header.contact"), href: "#contact", pageKey: "contact" },
   ];
 
   // Filter navigation items based on visibility
@@ -48,12 +45,15 @@ const Header = () => {
               <span>info@shivankedgram.gov.in</span>
             </div>
           </div>
+          <div className="text-sm">
+            Office Hours: Mon-Fri 9:00 AM - 5:00 PM
+          </div>
         </div>
 
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo & Title */}
-          <a href="/" className="flex items-center gap-4 hover:opacity-90 transition-opacity">
+          <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl shadow-sm">
               शि
             </div>
@@ -65,7 +65,7 @@ const Header = () => {
                 Maharashtra, Latur District
               </p>
             </div>
-          </a>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="flex items-center gap-4">
@@ -77,11 +77,7 @@ const Header = () => {
                   className="text-foreground hover:text-primary hover:bg-primary/10"
                   asChild
                 >
-                  {item.href.startsWith('#') ? (
-                    <a href={item.href}>{item.name}</a>
-                  ) : (
-                    <a href={item.href} onClick={(e) => { e.preventDefault(); navigate(item.href); }}>{item.name}</a>
-                  )}
+                  <a href={item.href}>{item.name}</a>
                 </Button>
               ))}
             </nav>
@@ -153,11 +149,7 @@ const Header = () => {
                   asChild
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.href.startsWith('#') ? (
-                    <a href={item.href}>{item.name}</a>
-                  ) : (
-                    <a href={item.href} onClick={(e) => { e.preventDefault(); navigate(item.href); setIsMenuOpen(false); }}>{item.name}</a>
-                  )}
+                  <a href={item.href}>{item.name}</a>
                 </Button>
               ))}
               
