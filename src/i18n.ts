@@ -6,22 +6,22 @@ const resources = {
   en: {
     translation: {
       // Header
-      "header.title": "Shivankhed Khurd",
+      "header.title": "Shivankhed (Khurd)",
       "header.about": "About",
       "header.services": "Services", 
       "header.panchayat": "Panchayat",
       "header.contact": "Contact",
       
       // Hero
-      "hero.title": "Welcome to Shivankhed Khurd Village",
+      "hero.title": "Welcome to Shivankhed (Khurd) Village",
       "hero.subtitle": "A Progressive Village in Latur District, Maharashtra",
-      "hero.description": "Discover our vibrant community, rich culture, and development initiatives that make Shivankhed Khurd a model village in rural Maharashtra.",
+      "hero.description": "Discover our vibrant community, rich culture, and development initiatives that make Shivankhed (Khurd) a model village in rural Maharashtra.",
       "hero.explore": "Explore Village",
       "hero.contact": "Contact Panchayat",
       
       // About
       "about.title": "About Our Village",
-      "about.description": "Discover the rich heritage, vibrant culture, and progressive development of Shivankhed Khurd village.",
+      "about.description": "Discover the rich heritage, vibrant culture, and progressive development of Shivankhed (Khurd) village.",
       "about.location": "Location & Geography",
       "about.population": "Demographics",
       "about.culture": "Culture & Traditions",
@@ -198,22 +198,22 @@ const resources = {
   hi: {
     translation: {
       // Header
-      "header.title": "शिवनखेड खुर्द",
+      "header.title": "शिवनखेड (खु)",
       "header.about": "हमारे बारे में",
       "header.services": "सेवाएं",
       "header.panchayat": "पंचायत",
       "header.contact": "संपर्क",
       
       // Hero
-      "hero.title": "शिवनखेड खुर्द गांव में आपका स्वागत है",
+      "hero.title": "शिवनखेड (खु) गांव में आपका स्वागत है",
       "hero.subtitle": "लातूर जिला, महाराष्ट्र में एक प्रगतिशील गांव",
-      "hero.description": "हमारे जीवंत समुदाय, समृद्ध संस्कृति और विकास पहलों की खोज करें जो शिवनखेड खुर्द को ग्रामीण महाराष्ट्र में एक आदर्श गांव बनाते हैं।",
+      "hero.description": "हमारे जीवंत समुदाय, समृद्ध संस्कृति और विकास पहलों की खोज करें जो शिवनखेड (खु) को ग्रामीण महाराष्ट्र में एक आदर्श गांव बनाते हैं।",
       "hero.explore": "गांव देखें",
       "hero.contact": "पंचायत संपर्क",
       
       // About
       "about.title": "हमारे गांव के बारे में",
-      "about.description": "शिवनखेड खुर्द गांव की समृद्ध विरासत, जीवंत संस्कृति और प्रगतिशील विकास की खोज करें।",
+      "about.description": "शिवनखेड (खु) गांव की समृद्ध विरासत, जीवंत संस्कृति और प्रगतिशील विकास की खोज करें।",
       "about.location": "स्थान और भूगोल",
       "about.population": "जनसांख्यिकी",
       "about.culture": "संस्कृति और परंपराएं",
@@ -383,14 +383,14 @@ const resources = {
   mr: {
     translation: {
       // Header
-      "header.title": "शिवनखेड खुर्द",
+      "header.title": "शिवनखेड (खु)",
       "header.about": "आमच्याबद्दल",
       "header.services": "सेवा",
       "header.panchayat": "पंचायत",
       "header.contact": "संपर्क",
       
       // Hero
-      "hero.title": "शिवनखेड खुर्द गावात आपले स्वागत आहे",
+      "hero.title": "शिवनखेड (खु) गावात आपले स्वागत आहे",
       "hero.subtitle": "लातूर जिल्हा, महाराष्ट्रातील एक प्रगतीशील गाव",
       "hero.description": "आमच्या जोमदार समुदाय, समृद्ध संस्कृती आणि विकास उपक्रमांचा शोध घ्या जे शिवनखेड खुर्दला ग्रामीण महाराष्ट्रातील एक आदर्श गाव बनवतात।",
       "hero.explore": "गाव पहा",
@@ -398,7 +398,7 @@ const resources = {
       
       // About
       "about.title": "आमच्या गावाबद्दल",
-      "about.description": "शिवनखेड खुर्द गावाचा समृद्ध वारसा, जोमदार संस्कृती आणि प्रगतीशील विकास शोधा।",
+      "about.description": "शिवनखेड (खु) गावाचा समृद्ध वारसा, जोमदार संस्कृती आणि प्रगतीशील विकास शोधा।",
       "about.location": "स्थान आणि भूगोल",
       "about.population": "लोकसंख्याशास्त्र",
       "about.culture": "संस्कृती आणि परंपरा",
