@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { usePageVisibility } from "@/hooks/usePageVisibility";
 import { supabase } from "@/integrations/supabase/client";
 import { CUSTOM_ROUTES } from "@/custom-routes";
+import { VillageContext } from "@/context/VillageContextConfig";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +16,7 @@ const Header = () => {
   const { user, isAdmin } = useAuth();
   const { isPageVisible } = usePageVisibility();
   const navigate = useNavigate();
+  const { config } = useContext(VillageContext);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -35,35 +37,37 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         {/* Top Info Bar */}
-        <div className="hidden md:flex items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4" />
-              <span>+91 2382 234567</span>
+        {config && (
+          <div className="hidden md:flex items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                <span>{config.contact.office.phone}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                <span>{config.contact.office.email}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Mail className="h-4 w-4" />
-              <span>info@shivankhedkhurd.gov.in</span>
+            <div className="text-sm">
+              {config.contact.office.hours}
             </div>
           </div>
-          <div className="text-sm">
-            Office Hours: Mon-Fri 9:00 AM - 5:00 PM
-          </div>
-        </div>
+        )}
 
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo & Title */}
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl shadow-sm">
-              शि
+              {config?.village.name.charAt(0) || "G"}
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                {t('header.title')}
+                {config?.village.name || t('header.title')}
               </h1>
               <p className="text-sm text-muted-foreground">
-                Maharashtra, Latur District
+                {config?.village.state}, {config?.village.district}
               </p>
             </div>
           </div>

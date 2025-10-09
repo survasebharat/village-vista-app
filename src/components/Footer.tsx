@@ -1,13 +1,18 @@
+import { useContext } from "react";
 import { Mail, Phone, MapPin, Globe, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from 'react-i18next';
-import villageData from "@/data/villageData.json";
+import { VillageContext } from "@/context/VillageContextConfig";
 
 const Footer = () => {
-  const { village, contact } = villageData;
+  const { config } = useContext(VillageContext);
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+  
+  if (!config) return null;
+  
+  const { village, contact } = config;
 
   const quickLinks = [
     { name: t('footer.aboutVillage'), href: "#about" },
@@ -33,7 +38,7 @@ const Footer = () => {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-accent-foreground font-bold">
-                  शि
+                  {village.name.charAt(0)}
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">{village.name}</h3>
