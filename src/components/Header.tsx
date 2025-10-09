@@ -58,9 +58,10 @@ const Header = () => {
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo & Title */}
+          <Link to={CUSTOM_ROUTES.HOME} >
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl shadow-sm">
-              {config?.village.name.charAt(0) || "G"}
+              शि
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
@@ -71,6 +72,7 @@ const Header = () => {
               </p>
             </div>
           </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="flex items-center gap-4">
@@ -154,7 +156,7 @@ const Header = () => {
                   asChild
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <a href={item.href}>{item.name}</a>
+                  <Link to={item.href}>{item.name}</Link>
                 </Button>
               ))}
               
