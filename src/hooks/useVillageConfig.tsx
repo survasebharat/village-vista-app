@@ -139,7 +139,6 @@ export const useVillageConfig = (villageName?: string) => {
           table: "village_config",
         },
         (payload) => {
-          console.log("Village config updated:", payload);
           if (
             payload.eventType === "UPDATE" ||
             payload.eventType === "INSERT"

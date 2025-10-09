@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
@@ -82,7 +82,7 @@ const Header = () => {
                   className="text-foreground hover:text-primary hover:bg-primary/10"
                   asChild
                 >
-                  <a href={item.href}>{item.name}</a>
+                   <Link to={item.href}>{item.name}</Link>
                 </Button>
               ))}
             </nav>

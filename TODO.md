@@ -225,6 +225,9 @@ Each gallery should display images in a grid view (click to expand full image).
 * Add other forms later (e.g., water connection, income certificate, etc.)
 
 ---
+* **PWA (Progressive web application)** 
+- For Mobile APP
+
 
 ## 🎨 **Design & Look Guidelines**
 

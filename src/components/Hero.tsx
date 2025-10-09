@@ -11,7 +11,6 @@ interface HeroProps {
 
 const Hero = ({ village, panchayat }: HeroProps) => {
 
-  console.log("village", [...village.heroImages])
   const { t } = useTranslation();
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   
