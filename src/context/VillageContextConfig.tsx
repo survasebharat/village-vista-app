@@ -25,12 +25,17 @@ export const VillageProvider = ({
   children,
   villageName = "Shivankhed",
 }: VillageProviderProps) => {
-  const { config, loading, error } = useVillageConfig(villageName);
-  const { isPageVisible, loading: isLoading } = usePageVisibility();
+  const { config, loading: configLoading, error } = useVillageConfig(villageName);
+  const { isPageVisible, loading: visibilityLoading } = usePageVisibility();
 
   const value = useMemo(
-    () => ({ config, loading: loading || isLoading, error, isPageVisible }),
-    [config, loading, isLoading, error, isPageVisible]
+    () => ({ 
+      config, 
+      loading: configLoading || visibilityLoading, 
+      error, 
+      isPageVisible 
+    }),
+    [config, configLoading, visibilityLoading, error, isPageVisible]
   );
 
   return (

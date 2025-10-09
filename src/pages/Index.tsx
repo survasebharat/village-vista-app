@@ -10,11 +10,18 @@ import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import { VillageContext } from "@/context/VillageContextConfig";
 import CustomLoader from "@/components/CustomLoader";
+import { usePageSEO } from "@/hooks/usePageSEO";
 
 const Index = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
 
- if (loading || !config) return <CustomLoader />;
+  usePageSEO({
+    title: `${config?.village.name || 'Village'} Gram Panchayat | Official Website`,
+    description: config?.village.description || `Official website of ${config?.village.name || 'Village'} Gram Panchayat. Access government schemes, development projects, announcements, services, and contact information.`,
+    keywords: ['gram panchayat', 'village website', 'government schemes', 'development projects', 'village services', config?.village.name || 'village']
+  });
+
+  if (loading || !config) return <CustomLoader />;
 
   return (
     <div className="min-h-screen bg-background">

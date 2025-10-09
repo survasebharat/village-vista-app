@@ -126,7 +126,7 @@ export const useVillageConfig = (villageName?: string) => {
       }
     };
 
-    !config && fetchConfig();
+    fetchConfig();
 
     // Set up real-time subscription for village config updates
     const channel = supabase
@@ -154,7 +154,7 @@ export const useVillageConfig = (villageName?: string) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [villageName && config]);
+  }, [villageName]);
 
   return { config, loading, error };
 };

@@ -14,6 +14,7 @@ export const usePageVisibility = () => {
     fetchPageVisibility();
 
     // Set up real-time subscription for page visibility updates
+    const village = getCurrentVillage();
     const channel = supabase
       .channel('page-visibility-changes')
       .on(
@@ -21,7 +22,8 @@ export const usePageVisibility = () => {
         {
           event: '*',
           schema: 'public',
-          table: 'page_visibility'
+          table: 'page_visibility',
+          filter: `village_name=eq.${village.name}`
         },
         (payload) => {
           if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
