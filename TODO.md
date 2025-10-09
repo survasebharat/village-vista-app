@@ -25,6 +25,7 @@
 * Show the **latest announcements** dynamically.
 * Scrolling ticker format for visibility.
 * “View All Announcements” link → navigates to the full “Notice Board” page.
+  VIMP : Notice bord should be added as a new route 
 
 ---
 
@@ -32,11 +33,9 @@
 
 * Display **member photos** (village representatives, committee members).
 * Ensure each member card includes:
-
   * Name
   * Role / Designation
   * Contact (optional)
-
 ---
 
 ## 🏛️ **3. Panchayat Staff Directory**
@@ -65,17 +64,11 @@
 * Create a dedicated “Notice Board” or “Village Updates” page.
 * Should list all **announcements chronologically**.
 * Each update: Title, Date, Short Description.
-* **Remove**:
-
-  * “Contact Panchayat” button
-  * “Explore Village” button.
-
 ---
 
 ## 📱 **6. Social Media Integration**
 
 * Add footer or header icons with links to:
-
   * WhatsApp
   * Facebook
   * Instagram
@@ -91,8 +84,7 @@
 
 ## 🌐 **7. Language Options**
 
-* Add a **language switcher** in the header:
-
+* Add a **language switcher** in the header:(Only for mobile view)
   * **EN (English)**
   * **HI (Hindi)**
   * **M (Marathi)**
@@ -159,11 +151,6 @@ Add a page or section summarizing:
 
 * List **all toll-free numbers** with short descriptions.
 * Include emergency and helpline numbers (police, hospital, fire, etc.).
-* **Remove**:
-
-  * Download form button
-  * Contact office button
-
 ---
 
 ## 🛠️ **12. Development Work**
@@ -192,6 +179,7 @@ Add a page or section summarizing:
   Example:
 
   > “In 2025, Shivankhed Khurd completed 8 key projects under Panchayat Development Plan.”
+        - Display the Modal view to display about the Inprogress, Completed etc.
 
 ---
 
@@ -205,16 +193,17 @@ Sub-categories:
 * Health Camp
 * Cultural Programs
 * School Events
+* Swachyata Abhiyan 
+* dustbean & mediclore distribution  
 
 Each gallery should display images in a grid view (click to expand full image).
 
 ---
 
 ## 📞 **14. Contact Us**
-
+* Sugesstion Box.
 * Update Panchayat Office details (address, contact number, email).
 * **Form Submission**:
-
   * Store contact form submissions in **Google Sheets** (using Apps Script or API).
   * Fields: Name, Mobile, Email, Message.
 
@@ -226,14 +215,11 @@ Each gallery should display images in a grid view (click to expand full image).
 
 * **Birth Certificate – Apply**
 
-  * On clicking “Apply”, show a popup form with required fields:
+  * On clicking “Apply”, show a popup to display below items : 
+    -> Requered docuemtns 
+    -> Gov web link to apply 
+    -> How to Apply instructions  
 
-    * Applicant Name
-    * Father/Mother Name
-    * Date of Birth
-    * Address
-    * Mobile No
-    * Email (optional)
   * Add a “Submit” button → save response to Google Sheets.
 
 * Add other forms later (e.g., water connection, income certificate, etc.)
@@ -256,4 +242,3 @@ Each gallery should display images in a grid view (click to expand full image).
 * Database: Google Sheets or Firebase (for simple form data)
 * Hosting: Vercel (current)
 * All external links and assets (social media, forms) must open in new tabs.
-
