@@ -1,13 +1,8 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from 'react-i18next';
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import villageScene1 from "@/assets/village-scene-1.jpg";
-import villageScene2 from "@/assets/village-scene-2.jpg";
-import villageScene3 from "@/assets/village-scene-3.jpg";
 
 interface HeroProps {
   village: any;
@@ -15,15 +10,11 @@ interface HeroProps {
 }
 
 const Hero = ({ village, panchayat }: HeroProps) => {
+
+  console.log("village", [...village.heroImages])
   const { t } = useTranslation();
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   
-  const carouselImages = [
-    { src: villageScene1, alt: "Shivankhed Village Landscape" },
-    { src: villageScene2, alt: "Shivankhed Village Festival" },
-    { src: villageScene3, alt: "Shivankhed Village Development" }
-  ];
-
   return (
     <section id="home" className="relative min-h-[100svh] flex items-center">
       {/* Background Carousel */}
@@ -37,7 +28,7 @@ const Hero = ({ village, panchayat }: HeroProps) => {
           }}
         >
           <CarouselContent className="h-full -ml-0">
-            {[...village.heroImages || carouselImages].map((image, index) => (
+            {[...village.heroImages].map((image, index) => (
               <CarouselItem key={index} className="h-full pl-0 basis-full">
                 <div className="relative w-full h-screen">
                   <img
