@@ -161,8 +161,6 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Admin Header */}
@@ -285,8 +283,6 @@ const Admin = () => {
           </Card>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };

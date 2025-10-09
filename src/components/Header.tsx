@@ -7,6 +7,7 @@ import LanguageToggle from "./LanguageToggle";
 import { useAuth } from "@/hooks/useAuth";
 import { usePageVisibility } from "@/hooks/usePageVisibility";
 import { supabase } from "@/integrations/supabase/client";
+import { CUSTOM_ROUTES } from "@/custom-routes";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,10 +22,10 @@ const Header = () => {
   };
 
   const allNavItems = [
-    { name: t("header.about"), href: "#about", pageKey: "about" },
-    { name: t("header.services"), href: "#services", pageKey: "services" },
-    { name: t("header.panchayat"), href: "#panchayat", pageKey: "panchayat" },
-    { name: t("header.contact"), href: "#contact", pageKey: "contact" },
+    { name: t("header.about"), href: CUSTOM_ROUTES.ABOUT, pageKey: "about" },
+    { name: t("header.services"), href: CUSTOM_ROUTES.SERVICES, pageKey: "services" },
+    { name: t("header.panchayat"), href: CUSTOM_ROUTES.PANCHAYAT, pageKey: "panchayat" },
+    { name: t("header.contact"), href: CUSTOM_ROUTES.CONTACT_US, pageKey: "contact" },
   ];
 
   // Filter navigation items based on visibility

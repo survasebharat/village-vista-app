@@ -24,7 +24,6 @@ export const usePageVisibility = () => {
           table: 'page_visibility'
         },
         (payload) => {
-          console.log('Page visibility updated:', payload);
           if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
             const newData = payload.new as any;
             setVisibility((prev) => ({
