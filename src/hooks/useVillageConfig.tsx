@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import villageDataStatic from "@/data/villageData.json";
+import { getCurrentVillage } from "@/config/villageConfig";
 
 export interface Geography {
   altitude: string;
@@ -65,11 +65,14 @@ export interface VillageConfig {
   services: any[];
 }
 
-export const useVillageConfig = (villageName?: string) => {
+export const useVillageConfig = (village?: string) => {
   const [config, setConfig] = useState<VillageConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const {name} = getCurrentVillage();
 
+  let villageName = name || village
+  
   useEffect(() => {
     const fetchConfig = async () => {
       try {
@@ -78,7 +81,6 @@ export const useVillageConfig = (villageName?: string) => {
 
         // If no village name specified, use static data as fallback
         if (!villageName) {
-          setConfig(villageDataStatic as any);
           setLoading(false);
           return;
         }
@@ -93,7 +95,6 @@ export const useVillageConfig = (villageName?: string) => {
         if (villageError) {
           console.error("Error fetching village:", villageError);
           // Fallback to static data
-          setConfig(villageDataStatic as any);
           setLoading(false);
           return;
         }
@@ -109,18 +110,15 @@ export const useVillageConfig = (villageName?: string) => {
           console.error("Error fetching config:", configError);
           setError(configError.message);
           // Fallback to static data
-          setConfig(villageDataStatic as any);
         } else if (configData) {
           setConfig(configData.config_data as any);
         } else {
           // No config in database, use static data
-          setConfig(villageDataStatic as any);
         }
       } catch (err) {
         console.error("Error in fetchConfig:", err);
         setError(err instanceof Error ? err.message : "Unknown error");
         // Fallback to static data
-        setConfig(villageDataStatic as any);
       } finally {
         setLoading(false);
       }

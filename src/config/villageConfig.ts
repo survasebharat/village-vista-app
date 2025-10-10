@@ -42,7 +42,7 @@ export const getCurrentVillage = (): VillageConfig => {
 // Get filtered village data
 export const getVillageData = (allData: any) => {
   const currentVillage = getCurrentVillage();
-  
+
   // If data has village-specific structure, filter by village ID
   // For now, return all data but you can extend this to filter specific sections
   return {

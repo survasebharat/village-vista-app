@@ -39,9 +39,11 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               <CardTitle className="text-3xl text-gradient mb-2">
                 {panchayat.sarpanch.name}
               </CardTitle>
-              <Badge variant="secondary" className="text-lg px-4 py-2">
+              <div>
+                <Badge variant="secondary" className="text-lg px-3">
                 {t('panchayat.sarpanch')}
               </Badge>
+              </div>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center">

@@ -8,9 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import villageDataStatic from '@/data/villageData.json';
 
 interface Village {
   id: string;
@@ -96,13 +93,8 @@ const JsonConfigManager = () => {
 
       if (error) {
         console.error('Error loading config:', error);
-        // Use static data as template
-        setJsonContent(JSON.stringify(villageDataStatic, null, 2));
       } else if (configData) {
         setJsonContent(JSON.stringify(configData.config_data, null, 2));
-      } else {
-        // No config exists, use static data as template
-        setJsonContent(JSON.stringify(villageDataStatic, null, 2));
       }
     } catch (err) {
       console.error('Error in loadVillageConfig:', err);
