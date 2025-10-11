@@ -67,9 +67,11 @@ const Header = () => {
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                 {t('header.title')}
               </h1>
-              <p className="text-sm text-muted-foreground">
-                {config?.village.state} {config?.village.district && ","} {config?.village.district}
-              </p>
+              {config?.village && (
+                <p className="text-sm text-muted-foreground">
+                  {config.village.state} {config.village.district && ","} {config.village.district}
+                </p>
+              )}
             </div>
           </div>
           </Link>
