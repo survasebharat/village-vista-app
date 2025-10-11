@@ -47,10 +47,10 @@ const Hero = ({ village, panchayat }: HeroProps) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2 sm:left-4 md:left-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
-          <CarouselNext className="right-2 sm:right-4 md:right-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
+          {/* <CarouselPrevious className="left-2 sm:left-4 md:left-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" /> */}
+          {/* <CarouselNext className="right-2 sm:right-4 md:right-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" /> */}
         </Carousel>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary/30 animate-fade-in" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/40 to-primary/40 animate-fade-in" />
         {/* from-primary/80 via-primary/70 to-primary/40 */}
       </div>
 
@@ -59,11 +59,11 @@ const Hero = ({ village, panchayat }: HeroProps) => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Text */}
           <div className="animate-fade-in">
-            <h1 className="text-xl md:text-6xl font-bold mb-6 leading-tight text-primary-foreground drop-shadow-lg">
+            <h1 className="text-xl md:text-5xl font-bold mb-6 leading-tight text-primary-foreground drop-shadow-lg">
               {t("hero.title")}
             </h1>
 
-            <p className="text-lg md:text-2xl mb-4 text-primary-foreground/95 drop-shadow-md">
+            <p className="text-lg md:text-xl mb-4 text-primary-foreground/95 drop-shadow-md">
               {t("hero.subtitle")}
             </p>
 
