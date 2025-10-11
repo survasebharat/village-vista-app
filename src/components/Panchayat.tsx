@@ -26,8 +26,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
         </div>
 
         {/* Sarpanch Section */}
-        <div className="mb-16">
-          <Card className="card-elegant max-w-4xl mx-auto animate-slide-up">
+          {/* <Card className="card-elegant max-w-4xl mx-auto animate-slide-up">
             <CardHeader className="text-center">
               <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary">
                 <img 
@@ -73,6 +72,97 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 </Button>
               </div>
             </CardContent>
+          </Card> */}
+
+        
+        {/* Secretary Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16" >
+          <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
+            <CardHeader className="text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary">
+                <img 
+                  src={panchayat.sarpanch.image} 
+                  alt={panchayat.sarpanch.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardTitle className="text-2xl">{panchayat.sarpanch.name}</CardTitle>
+              <Badge variant="secondary" className="mx-auto">
+               {t('panchayat.sarpanch')}
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center">
+                <p className="text-lg text-muted-foreground mb-4">
+                  {panchayat.sarpanch.education}
+                </p>
+               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Clock className="h-4 w-4" />
+                  <span>{t('panchayat.tenure')}: {panchayat.sarpanch.tenure}</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  {panchayat.sarpanch.contact}
+                </Button>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  {panchayat.sarpanch.email}
+                </Button>
+              </div>
+
+              <div className="bg-muted/30 rounded-lg p-4 text-center">
+                <p className="text-sm text-muted-foreground">
+                  "{t('panchayat.message')}"
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
+            <CardHeader className="text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary">
+                <img 
+                  src={panchayat.secretary.image} 
+                  alt={panchayat.secretary.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardTitle className="text-2xl">{panchayat.secretary.name}</CardTitle>
+              <Badge variant="secondary" className="mx-auto">
+                {t('panchayat.secretary')}
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center">
+                <p className="text-lg text-muted-foreground mb-4">
+                  {panchayat.secretary.eduacation}
+                </p>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
+                  <Clock className="h-4 w-4" />
+                  <span>{t('panchayat.officeHours')}: {panchayat.secretary.office_hours}</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  {panchayat.secretary.contact}
+                </Button>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  {panchayat.secretary.email}
+                </Button>
+              </div>
+
+              <div className="bg-muted/30 rounded-lg p-4 text-center">
+                <p className="text-sm text-muted-foreground">
+                  For administrative queries, document verification, and general assistance, 
+                  please contact the Panchayat Secretary during office hours.
+                </p>
+              </div>
+            </CardContent>
           </Card>
         </div>
 
@@ -115,51 +205,8 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
             ))}
           </div>
         </div>
+        
 
-        {/* Secretary Section */}
-        <div className="mb-16">
-          <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
-            <CardHeader className="text-center">
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary">
-                <img 
-                  src={panchayat.secretary.image} 
-                  alt={panchayat.secretary.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardTitle className="text-2xl">{panchayat.secretary.name}</CardTitle>
-              <Badge variant="secondary" className="mx-auto">
-                {t('panchayat.secretary')}
-              </Badge>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
-                  <Clock className="h-4 w-4" />
-                  <span>{t('panchayat.officeHours')}: {panchayat.secretary.office_hours}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  {panchayat.secretary.contact}
-                </Button>
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  {panchayat.secretary.email}
-                </Button>
-              </div>
-
-              <div className="bg-muted/30 rounded-lg p-4 text-center">
-                <p className="text-sm text-muted-foreground">
-                  For administrative queries, document verification, and general assistance, 
-                  please contact the Panchayat Secretary during office hours.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Staff Section */}
         <div className="mb-16">
