@@ -1,6 +1,12 @@
 import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useTranslation } from 'react-i18next';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useTranslation } from "react-i18next";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef, memo } from "react";
 
@@ -10,15 +16,14 @@ interface HeroProps {
 }
 
 const Hero = ({ village, panchayat }: HeroProps) => {
-
   const { t } = useTranslation();
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
-  
+
   return (
     <section id="home" className="relative min-h-[100svh] flex items-center">
       {/* Background Carousel */}
       <div className="absolute inset-0 h-full overflow-hidden">
-        <Carousel 
+        <Carousel
           className="w-full h-full"
           plugins={[plugin.current]}
           opts={{
@@ -45,7 +50,8 @@ const Hero = ({ village, panchayat }: HeroProps) => {
           <CarouselPrevious className="left-2 sm:left-4 md:left-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
           <CarouselNext className="right-2 sm:right-4 md:right-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
         </Carousel>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40 animate-fade-in" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary/30 animate-fade-in" />
+        {/* from-primary/80 via-primary/70 to-primary/40 */}
       </div>
 
       {/* Content */}
@@ -53,38 +59,42 @@ const Hero = ({ village, panchayat }: HeroProps) => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Text */}
           <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-primary-foreground drop-shadow-lg">
-              {t('hero.title')}
+            <h1 className="text-xl md:text-6xl font-bold mb-6 leading-tight text-primary-foreground drop-shadow-lg">
+              {t("hero.title")}
             </h1>
-            
-            <p className="text-xl md:text-2xl mb-4 text-primary-foreground/95 drop-shadow-md">
-              {t('hero.subtitle')}
+
+            <p className="text-lg md:text-2xl mb-4 text-primary-foreground/95 drop-shadow-md">
+              {t("hero.subtitle")}
             </p>
-            
-            <p className="text-lg mb-8 text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-              {t('hero.description')}
+
+            <p className="text-sm mb-8 text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+              {t("hero.description")}
             </p>
 
             {/* Sarpanch Message */}
             <Card className="bg-card/20 backdrop-blur-md border-primary-foreground/20 p-6 mb-8 max-w-2xl mx-auto shadow-lg">
-              <blockquote className="text-primary-foreground/95 italic text-lg mb-4 drop-shadow">
-                "{t('panchayat.message')}"
+              <blockquote className="text-primary-foreground/95 italic text-base mb-4 drop-shadow">
+                "{t("panchayat.message")}"
               </blockquote>
               <div className="flex items-center justify-center gap-3">
                 {/* image */}
                 {panchayat.sarpanch.image ? (
-                  <img src={panchayat.sarpanch.image} alt={panchayat.sarpanch.name}  className="inline-block size-10 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5" />
+                  <img
+                    src={panchayat.sarpanch.image}
+                    alt={panchayat.sarpanch.name}
+                    className="inline-block w-10 h-10 rounded-full object-cover ring-2 ring-white outline outline-1 outline-black/5"
+                  />
                 ) : (
                   <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold shadow-md">
-                    {panchayat.sarpanch.name.charAt(0)} 
+                    {panchayat.sarpanch.name.charAt(0)}
                   </div>
                 )}
                 <div>
-                  <p className="font-semibold text-primary-foreground drop-shadow">
+                  <p className="text-sm font-semibold text-primary-foreground drop-shadow">
                     {panchayat.sarpanch.name}
                   </p>
                   <p className="text-sm text-primary-foreground/80 drop-shadow-sm">
-                    {t('panchayat.sarpanch')} ({panchayat.sarpanch.tenure})
+                    {t("panchayat.sarpanch")} ({panchayat.sarpanch.tenure})
                   </p>
                 </div>
               </div>
