@@ -8,8 +8,8 @@ import Services from "@/components/Services";
 import Development from "@/components/Development";
 import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
-import { VillageContext } from "@/context/VillageContextConfig";
 import CustomLoader from "@/components/CustomLoader";
+import { VillageContext } from "@/context/VillageContextConfig";
 import { usePageSEO } from "@/hooks/usePageSEO";
 
 const Index = () => {

@@ -1,18 +1,20 @@
 import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const LanguageToggle = () => {
   const { i18n } = useTranslation();
-  
+
   const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'hi', name: 'हिंदी' },
-    { code: 'mr', name: 'मराठी' }
+    { code: "en", name: "English" },
+    { code: "hi", name: "हिंदी" },
+    { code: "mr", name: "मराठी" },
   ];
-  
-  const currentIndex = languages.findIndex(lang => lang.code === i18n.language);
-  
+
+  const currentIndex = languages.findIndex(
+    (lang) => lang.code === i18n.language
+  );
+
   const toggleLanguage = () => {
     const nextIndex = (currentIndex + 1) % languages.length;
     const nextLanguage = languages[nextIndex];
@@ -24,11 +26,14 @@ const LanguageToggle = () => {
       variant="ghost"
       size="sm"
       onClick={toggleLanguage}
-      className="flex items-center gap-2 text-foreground hover:text-primary"
+      className="flex items-center gap-2 text-foreground hover:text-primary bg-accent"
     >
       <Globe className="h-4 w-4" />
       <span className="hidden sm:inline">
-        {languages[currentIndex]?.name || 'English'}
+        {languages[currentIndex]?.name || "English"}
+      </span>
+      <span className="sm:hidden capitalize">
+        {languages[currentIndex]?.code || "en"}
       </span>
     </Button>
   );

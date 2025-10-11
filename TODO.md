@@ -245,3 +245,7 @@ Each gallery should display images in a grid view (click to expand full image).
 * Database: Google Sheets or Firebase (for simple form data)
 * Hosting: Vercel (current)
 * All external links and assets (social media, forms) must open in new tabs.
+
+✅ **Integrate Payment Gateway:**
+* Integrate the Payment Gateway for village Tax like. Water bill, Housing Tax, etc
+

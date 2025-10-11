@@ -51,7 +51,6 @@ export const useAuth = () => {
         .eq("user_id", userId)
         .eq("role", "admin")
         .maybeSingle();
-      
       setIsAdmin(!!data);
     } catch (error) {
       console.error("Error checking admin role:", error);

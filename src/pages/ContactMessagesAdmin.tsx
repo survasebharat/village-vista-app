@@ -47,15 +47,10 @@ const ContactMessagesAdmin = () => {
   const [dateFilter, setDateFilter] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  useEffect(() => {
-    if (!authLoading && !isAdmin) {
-      navigate("/");
-      return;
-    }
-    if (isAdmin) {
-      fetchMessages();
-    }
-  }, [isAdmin, authLoading, navigate]);
+
+  useEffect(()=> {
+    fetchMessages()
+  },[])
 
   const fetchMessages = async () => {
     try {

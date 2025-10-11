@@ -33,7 +33,7 @@ const App = () => (
           {/* Auth routes without layout */}
           <Route path={CUSTOM_ROUTES.AUTH} element={<Auth />} />
 
-          {/* Admin routes with basic layout (no village context) */}
+         
 
           {/* Public routes with full layout and village context */}
           <Route
@@ -72,6 +72,7 @@ const App = () => (
                     path={CUSTOM_ROUTES.NOT_FOUND}
                     element={<NotFound />}
                   />
+                   {/* Admin routes with basic layout (no village context) */}
                   <Route path={CUSTOM_ROUTES.ADMIN} element={<Admin />} />
                   <Route
                     path={CUSTOM_ROUTES.VILLAGE_MANAGEMENT}
@@ -81,7 +82,7 @@ const App = () => (
                     path={CUSTOM_ROUTES.JSON_CONFIG}
                     element={<JsonConfigManager />}
                   />
-                  <Route path="/admin/contact-messages" element={<ContactMessagesAdmin />} />
+                  <Route path={CUSTOM_ROUTES.CONTACT_MESSAGE} element={<ContactMessagesAdmin />} />
                 </Routes>
               </Layout>
             }

@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, LogOut, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { CUSTOM_ROUTES } from "@/custom-routes";
 
 interface PageVisibility {
   id: string;
@@ -197,7 +198,7 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate("/village-management")}
+                  onClick={() => navigate(CUSTOM_ROUTES.VILLAGE_MANAGEMENT)}
                 >
                   <div className="text-lg font-semibold">🏘️ Village Management</div>
                   <div className="text-sm text-muted-foreground text-left">
@@ -207,7 +208,7 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate("/json-config")}
+                  onClick={() => navigate(CUSTOM_ROUTES.JSON_CONFIG)}
                 >
                   <div className="text-lg font-semibold">📝 JSON Configuration</div>
                   <div className="text-sm text-muted-foreground text-left">
@@ -217,7 +218,7 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate("/admin/contact-messages")}
+                  onClick={() => navigate(CUSTOM_ROUTES.CONTACT_MESSAGE)}
                 >
                   <div className="text-lg font-semibold">📧 Contact Messages</div>
                   <div className="text-sm text-muted-foreground text-left">
