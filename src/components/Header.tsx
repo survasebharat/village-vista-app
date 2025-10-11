@@ -37,7 +37,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         {/* Top Info Bar */}
-        {config && (
+        {config?.contact?.office && (
           <div className="hidden md:flex items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">

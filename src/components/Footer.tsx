@@ -10,7 +10,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   
-  if (!config) return null;
+  if (!config?.village || !config?.contact?.office) return null;
   
   const { village, contact } = config;
 
