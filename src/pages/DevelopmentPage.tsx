@@ -1,9 +1,9 @@
-import CustomLoader from "@/components/CustomLoader";
 import Development from "@/components/Development";
 import { VillageContext } from "@/context/VillageContextConfig";
 import { useContext } from "react";
 import NotFound from "./NotFound";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
 
 const DevelopmentPage = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -14,7 +14,7 @@ const DevelopmentPage = () => {
     keywords: ['development projects', 'infrastructure', 'public works', 'village development', 'ongoing projects']
   });
 
-  if (loading || !config) return <CustomLoader />;
+  if (loading || !config) return <SectionSkeleton />;
   
   return isPageVisible("development") ? (
     <Development developmentWorks={config.developmentWorks} />

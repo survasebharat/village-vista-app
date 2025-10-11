@@ -1,9 +1,9 @@
-import CustomLoader from "@/components/CustomLoader";
 import Announcements from "@/components/Announcements";
 import { VillageContext } from "@/context/VillageContextConfig";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import NotFound from "./NotFound";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
 
 const AnnouncementsPage = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -14,7 +14,7 @@ const AnnouncementsPage = () => {
     keywords: ['announcements', 'village notices', 'panchayat updates', 'village meetings']
   });
 
-  if (loading || !config) return <CustomLoader />;
+  if (loading || !config) return <SectionSkeleton />;
   
   return isPageVisible("announcement") ? (
     <Announcements announcements={config.announcements} />

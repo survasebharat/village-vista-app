@@ -2,8 +2,8 @@ import About from "@/components/About";
 import { VillageContext } from "@/context/VillageContextConfig";
 import { useContext } from "react";
 import NotFound from "./NotFound";
-import CustomLoader from "@/components/CustomLoader";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
 
 const AboutPage = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -14,7 +14,7 @@ const AboutPage = () => {
     keywords: ['village information', 'demographics', 'history', 'culture', 'about village']
   });
 
-  if (loading || !config) return <CustomLoader />;
+  if (loading || !config) return <SectionSkeleton />;
 
   return isPageVisible("about") ? (
     <About village={config.village} />

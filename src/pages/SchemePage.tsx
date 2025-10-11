@@ -1,9 +1,9 @@
-import CustomLoader from "@/components/CustomLoader";
 import Schemes from "@/components/Schemes";
 import { VillageContext } from "@/context/VillageContextConfig";
 import { useContext } from "react";
 import NotFound from "./NotFound";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
 
 const SchemePage = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -14,7 +14,7 @@ const SchemePage = () => {
     keywords: ['government schemes', 'welfare programs', 'benefits', 'eligibility', 'village schemes']
   });
 
-  if (loading || !config) return <CustomLoader />;
+  if (loading || !config) return <SectionSkeleton />;
   
   return isPageVisible("schemes") ? (
     <Schemes schemes={config.schemes} />

@@ -65,10 +65,10 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                {config?.village.name || t('header.title')}
+                {t('header.title')}
               </h1>
               <p className="text-sm text-muted-foreground">
-                {config?.village.state}, {config?.village.district}
+                {config?.village.state} {config?.village.district && ","} {config?.village.district}
               </p>
             </div>
           </div>

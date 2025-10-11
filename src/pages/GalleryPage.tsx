@@ -1,9 +1,9 @@
-import CustomLoader from "@/components/CustomLoader";
 import Gallery from "@/components/Gallery";
 import { VillageContext } from "@/context/VillageContextConfig";
 import { useContext } from "react";
 import NotFound from "./NotFound";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import GallerySkeleton from "@/components/ui/skeletons/GallerySkeleton";
 
 const GalleryPage = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -14,7 +14,7 @@ const GalleryPage = () => {
     keywords: ['village gallery', 'photos', 'events', 'festivals', 'development projects']
   });
 
-  if (loading || !config) return <CustomLoader />;
+  if (loading || !config) return <GallerySkeleton />;
   
   return isPageVisible("gallery") ? (
     <Gallery gallery={config.gallery} />

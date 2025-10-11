@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 import CustomLoader from "./components/CustomLoader";
 import { CUSTOM_ROUTES } from "./custom-routes";
 import Layout from "./components/Layout";
+import SectionSkeleton from "./components/ui/skeletons/SectionSkeleton";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -33,7 +34,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Suspense fallback={<CustomLoader />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <Routes>
             {/* Auth routes without layout */}
             <Route path={CUSTOM_ROUTES.AUTH} element={<Auth />} />

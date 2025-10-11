@@ -1,9 +1,9 @@
 import { VillageContext } from "@/context/VillageContextConfig";
 import { useContext } from "react";
 import NotFound from "./NotFound";
-import CustomLoader from "@/components/CustomLoader";
 import Services from "@/components/Services";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
 
 const ServicePage = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -14,7 +14,7 @@ const ServicePage = () => {
     keywords: ['village services', 'healthcare', 'education', 'shops', 'facilities', 'public services']
   });
 
-  if (loading || !config) return <CustomLoader />;
+  if (loading || !config) return <SectionSkeleton />;
   
   return isPageVisible("services") ? (
     <Services services={config.services} />

@@ -82,7 +82,7 @@
 
 ---
 
-## 🌐 **7. Language Options**
+## 🌐 **7. Language Options** :-> Task Completed
 
 * Add a **language switcher** in the header:(Only for mobile view)
   * **EN (English)**
@@ -200,7 +200,7 @@ Each gallery should display images in a grid view (click to expand full image).
 
 ---
 
-## 📞 **14. Contact Us**
+## 📞 **14. Contact Us** :-> Task Completed
 * Sugesstion Box.
 * Update Panchayat Office details (address, contact number, email).
 * **Form Submission**:
@@ -228,6 +228,8 @@ Each gallery should display images in a grid view (click to expand full image).
 * **PWA (Progressive web application)** 
 - For Mobile APP
 
+✅ **Integrate Payment Gateway:**
+* Integrate the Payment Gateway for village Tax like. Water bill, Housing Tax, etc
 
 ## 🎨 **Design & Look Guidelines**
 
@@ -246,6 +248,4 @@ Each gallery should display images in a grid view (click to expand full image).
 * Hosting: Vercel (current)
 * All external links and assets (social media, forms) must open in new tabs.
 
-✅ **Integrate Payment Gateway:**
-* Integrate the Payment Gateway for village Tax like. Water bill, Housing Tax, etc
 
