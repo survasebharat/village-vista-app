@@ -15,7 +15,7 @@ const Hero = ({ village, panchayat }: HeroProps) => {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   
   return (
-    <section id="home" className="relative min-h-[100svh] flex items-center">
+    <section id="home" className="relative min-h-[80vh] md:min-h-[85vh] flex items-center">
       {/* Background Carousel */}
       <div className="absolute inset-0 h-full overflow-hidden">
         <Carousel 
@@ -29,11 +29,11 @@ const Hero = ({ village, panchayat }: HeroProps) => {
           <CarouselContent className="h-full -ml-0">
             {[...village.heroImages].map((image, index) => (
               <CarouselItem key={index} className="h-full pl-0 basis-full">
-                <div className="relative w-full h-screen">
+                <div className="relative w-full h-full">
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out"
+                    className="w-full h-full object-cover object-center"
                     loading={index === 0 ? "eager" : "lazy"}
                     decoding={index === 0 ? "sync" : "async"}
                     fetchPriority={index === 0 ? "high" : "low"}
@@ -42,81 +42,54 @@ const Hero = ({ village, panchayat }: HeroProps) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-2 sm:left-4 md:left-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
-          <CarouselNext className="right-2 sm:right-4 md:right-8 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 w-10 h-10 sm:w-12 sm:h-12" />
+          <CarouselPrevious className="left-3 md:left-6 bg-white/90 backdrop-blur-sm border-white text-foreground hover:bg-white transition-all w-9 h-9 md:w-10 md:h-10" />
+          <CarouselNext className="right-3 md:right-6 bg-white/90 backdrop-blur-sm border-white text-foreground hover:bg-white transition-all w-9 h-9 md:w-10 md:h-10" />
         </Carousel>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40 animate-fade-in" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Hero Text */}
-          <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-primary-foreground drop-shadow-lg">
+      <div className="relative container mx-auto px-4 sm:px-6 py-12 md:py-16">
+        <div className="max-w-3xl">
+          <div className="space-y-4 md:space-y-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
               {t('hero.title')}
             </h1>
             
-            <p className="text-xl md:text-2xl mb-4 text-primary-foreground/95 drop-shadow-md">
+            <p className="text-base sm:text-lg md:text-xl text-white/95 font-medium">
               {t('hero.subtitle')}
             </p>
-            
-            <p className="text-lg mb-8 text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-              {t('hero.description')}
-            </p>
 
-            {/* Sarpanch Message */}
-            <Card className="bg-card/20 backdrop-blur-md border-primary-foreground/20 p-6 mb-8 max-w-2xl mx-auto shadow-lg">
-              <blockquote className="text-primary-foreground/95 italic text-lg mb-4 drop-shadow">
+            {/* Sarpanch Card */}
+            <Card className="bg-white/95 backdrop-blur-sm border-0 p-4 md:p-5 max-w-md shadow-lg">
+              <blockquote className="text-foreground/90 text-sm md:text-base mb-3 italic">
                 "{t('panchayat.message')}"
               </blockquote>
-              <div className="flex items-center justify-center gap-3">
-                {/* image */}
+              <div className="flex items-center gap-3">
                 {panchayat.sarpanch.image ? (
-                  <img src={panchayat.sarpanch.image} alt={panchayat.sarpanch.name}  className="inline-block size-10 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5" />
+                  <img 
+                    src={panchayat.sarpanch.image} 
+                    alt={panchayat.sarpanch.name}  
+                    className="w-10 h-10 rounded-full ring-2 ring-primary object-cover" 
+                  />
                 ) : (
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold shadow-md">
+                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold text-lg">
                     {panchayat.sarpanch.name.charAt(0)} 
                   </div>
                 )}
                 <div>
-                  <p className="font-semibold text-primary-foreground drop-shadow">
+                  <p className="font-semibold text-foreground text-sm md:text-base">
                     {panchayat.sarpanch.name}
                   </p>
-                  <p className="text-sm text-primary-foreground/80 drop-shadow-sm">
+                  <p className="text-xs md:text-sm text-muted-foreground">
                     {t('panchayat.sarpanch')} ({panchayat.sarpanch.tenure})
                   </p>
                 </div>
               </div>
             </Card>
-
-            {/* Action Buttons */}
-            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                {t('hero.explore')}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-2 border-primary-foreground/80 bg-card/10 text-primary-foreground hover:bg-card hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                {t('hero.contact')}
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground rounded-full flex justify-center shadow-md">
-          <div className="w-1 h-3 bg-primary-foreground rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div> */}
     </section>
   );
 };
