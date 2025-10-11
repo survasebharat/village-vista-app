@@ -112,7 +112,13 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
           setError(configError.message);
           // Fallback to static data
         } else if (configData) {
-          setConfig(configData.config_data as any);
+          // Handle nested config_data structure (if user saved entire payload)
+          let parsedConfig = configData.config_data as any;
+          if (parsedConfig?.config_data) {
+            // Data is double-nested, unwrap it
+            parsedConfig = parsedConfig.config_data;
+          }
+          setConfig(parsedConfig);
         } else {
           // No config in database, use static data
         }
@@ -143,7 +149,12 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
             payload.eventType === "INSERT"
           ) {
             const newData = payload.new as any;
-            setConfig(newData.config_data as any);
+            let parsedConfig = newData.config_data as any;
+            // Handle nested config_data structure
+            if (parsedConfig?.config_data) {
+              parsedConfig = parsedConfig.config_data;
+            }
+            setConfig(parsedConfig);
           }
         }
       )

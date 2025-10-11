@@ -167,7 +167,20 @@ const JsonConfigManager = () => {
 
     try {
       setSaving(true);
-      const parsedConfig = JSON.parse(jsonContent);
+      let parsedConfig = JSON.parse(jsonContent);
+      
+      // Strip metadata fields if they exist (in case user pasted entire request payload)
+      if (parsedConfig.village_id || parsedConfig.language || parsedConfig.updated_by) {
+        // User pasted entire payload, extract only config_data
+        if (parsedConfig.config_data) {
+          parsedConfig = parsedConfig.config_data;
+        }
+        // Remove metadata fields
+        delete parsedConfig.village_id;
+        delete parsedConfig.language;
+        delete parsedConfig.updated_by;
+      }
+      
       const { data: { user } } = await supabase.auth.getUser();
 
       // Check if config exists for this village and language
