@@ -474,7 +474,7 @@ export type Database = {
           {
             foreignKeyName: "village_config_village_id_fkey"
             columns: ["village_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "villages"
             referencedColumns: ["id"]
           },
