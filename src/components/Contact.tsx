@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
 import ContactForm from "./ContactForm";
+import { Link } from "react-router-dom";
 
 const Contact = ({contact, documents=[]}) => {
   const { t } = useTranslation();
@@ -65,11 +66,12 @@ const Contact = ({contact, documents=[]}) => {
                     </div>
                   </div>
                 </div>
-
+                <Link to="https://www.google.com/maps/place/ShivanKhed,+Maharashtra+413514/@18.5749231,77.0643175" target="_blank" >
                 <Button className="w-full transition-all duration-300 hover:scale-[1.02] animate-fade-in" size="lg" style={{ animationDelay: "300ms" }}>
                   <MapPin className="h-5 w-5 mr-2" />
                   {t('contact.getDirections')}
                 </Button>
+                </Link>
               </CardContent>
             </Card>
 

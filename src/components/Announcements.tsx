@@ -98,7 +98,7 @@ const Announcements = ({announcements}) => {
                               {getTypeIcon(announcement.type)}
                             </div>
                             <Badge className={getPriorityColor(announcement.priority)}>
-                              {t(`common.${announcement.priority}`)}
+                              {announcement.priority}
                             </Badge>
                           </div>
 
