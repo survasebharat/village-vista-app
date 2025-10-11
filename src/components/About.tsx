@@ -2,6 +2,7 @@ import { MapPin, Users, GraduationCap, Calendar, Mountain, Compass } from "lucid
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
 
 interface AboutProps {
   village: any;
@@ -200,4 +201,4 @@ const About = ({ village }: AboutProps) => {
   );
 };
 
-export default About;
+export default memo(About);

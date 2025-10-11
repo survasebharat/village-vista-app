@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from 'react-i18next';
 import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 
 interface HeroProps {
   village: any;
@@ -35,6 +35,8 @@ const Hero = ({ village, panchayat }: HeroProps) => {
                     alt={image.alt}
                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out"
                     loading={index === 0 ? "eager" : "lazy"}
+                    decoding={index === 0 ? "sync" : "async"}
+                    fetchPriority={index === 0 ? "high" : "low"}
                   />
                 </div>
               </CarouselItem>
@@ -119,4 +121,4 @@ const Hero = ({ village, panchayat }: HeroProps) => {
   );
 };
 
-export default Hero;
+export default memo(Hero);

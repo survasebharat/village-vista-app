@@ -2,6 +2,7 @@ import { Calendar, Camera, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
+import { memo } from "react";
 
 interface GalleryProps {
   gallery: any[];
@@ -83,6 +84,8 @@ const Gallery = ({ gallery }: GalleryProps) => {
                     alt={item.src}
                     className="aspect-video w-full h-48 sm:h-56 md:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                 ) : (
                   <div
@@ -222,4 +225,4 @@ const Gallery = ({ gallery }: GalleryProps) => {
   );
 };
 
-export default Gallery;
+export default memo(Gallery);

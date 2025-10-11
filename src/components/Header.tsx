@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -208,4 +208,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

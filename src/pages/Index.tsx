@@ -1,16 +1,21 @@
-import { useContext } from "react";
+import { useContext, lazy, Suspense } from "react";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Panchayat from "@/components/Panchayat";
-import Announcements from "@/components/Announcements";
-import Schemes from "@/components/Schemes";
-import Services from "@/components/Services";
-import Development from "@/components/Development";
-import Gallery from "@/components/Gallery";
-import Contact from "@/components/Contact";
 import CustomLoader from "@/components/CustomLoader";
 import { VillageContext } from "@/context/VillageContextConfig";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import HeroSkeleton from "@/components/ui/skeletons/HeroSkeleton";
+import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
+import GallerySkeleton from "@/components/ui/skeletons/GallerySkeleton";
+
+// Lazy load non-critical components
+const About = lazy(() => import("@/components/About"));
+const Panchayat = lazy(() => import("@/components/Panchayat"));
+const Announcements = lazy(() => import("@/components/Announcements"));
+const Schemes = lazy(() => import("@/components/Schemes"));
+const Services = lazy(() => import("@/components/Services"));
+const Development = lazy(() => import("@/components/Development"));
+const Gallery = lazy(() => import("@/components/Gallery"));
+const Contact = lazy(() => import("@/components/Contact"));
 
 const Index = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -26,39 +31,65 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <main>
-        {/* Hero Section */}
-        <Hero village={config.village} panchayat={config.panchayat} />
+        {/* Hero Section - Load immediately */}
+        <Suspense fallback={<HeroSkeleton />}>
+          <Hero village={config.village} panchayat={config.panchayat} />
+        </Suspense>
 
         {/* Latest Announcements */}
         {isPageVisible("announcement") && (
-          <Announcements announcements={config.announcements} />
+          <Suspense fallback={<SectionSkeleton />}>
+            <Announcements announcements={config.announcements} />
+          </Suspense>
         )}
 
         {/* About Village Section */}
-        {isPageVisible("about") && <About village={config.village} />}
+        {isPageVisible("about") && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <About village={config.village} />
+          </Suspense>
+        )}
 
         {/* Panchayat Information */}
         {isPageVisible("panchayat") && (
-          <Panchayat panchayat={config.panchayat} />
+          <Suspense fallback={<SectionSkeleton />}>
+            <Panchayat panchayat={config.panchayat} />
+          </Suspense>
         )}
 
         {/* Government Schemes */}
-        {isPageVisible("schemes") && <Schemes schemes={config.schemes} />}
+        {isPageVisible("schemes") && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Schemes schemes={config.schemes} />
+          </Suspense>
+        )}
 
         {/* Village Services */}
-        {isPageVisible("services") && <Services services={config.services} />}
+        {isPageVisible("services") && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Services services={config.services} />
+          </Suspense>
+        )}
 
         {/* Development Projects */}
         {isPageVisible("development") && (
-          <Development developmentWorks={config.developmentWorks} />
+          <Suspense fallback={<SectionSkeleton />}>
+            <Development developmentWorks={config.developmentWorks} />
+          </Suspense>
         )}
 
         {/* Gallery */}
-        {isPageVisible("gallery") && <Gallery gallery={config.gallery} />}
+        {isPageVisible("gallery") && (
+          <Suspense fallback={<GallerySkeleton />}>
+            <Gallery gallery={config.gallery} />
+          </Suspense>
+        )}
 
         {/* Contact Information */}
         {isPageVisible("contact") && (
-          <Contact contact={config.contact} documents={config.documents} />
+          <Suspense fallback={<SectionSkeleton />}>
+            <Contact contact={config.contact} documents={config.documents} />
+          </Suspense>
         )}
       </main>
     </div>

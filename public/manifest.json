@@ -1,0 +1,27 @@
+{
+  "name": "Village Vista - Gram Panchayat Portal",
+  "short_name": "Village Vista",
+  "description": "Official Gram Panchayat website for accessing government schemes, development projects, and village services",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a4d2e",
+  "theme_color": "#1a4d2e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/placeholder.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/placeholder.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["government", "utilities", "lifestyle"],
+  "lang": "en-IN",
+  "dir": "ltr"
+}

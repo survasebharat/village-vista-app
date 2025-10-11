@@ -3,23 +3,27 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Auth from "./pages/Auth";
-import Admin from "./pages/Admin";
-import VillageManagement from "./pages/VillageManagement";
-import JsonConfigManager from "./pages/JsonConfigManager";
-import ContactMessagesAdmin from "./pages/ContactMessagesAdmin";
-import NotFound from "./pages/NotFound";
-import AboutPage from "./pages/AboutPage";
+import { lazy, Suspense } from "react";
+import CustomLoader from "./components/CustomLoader";
 import { CUSTOM_ROUTES } from "./custom-routes";
 import Layout from "./components/Layout";
-import ServicePage from "./pages/ServicePage";
-import PanchayatPage from "./pages/PanchayatPage";
-import ContactUsPage from "./pages/ContactUsPage";
-import SchemePage from "./pages/SchemePage";
-import DevelopmentPage from "./pages/DevelopmentPage";
-import GalleryPage from "./pages/GalleryPage";
-import AnnouncementsPage from "./pages/AnnouncementsPage";
+
+// Lazy load pages for code splitting
+const Index = lazy(() => import("./pages/Index"));
+const Auth = lazy(() => import("./pages/Auth"));
+const Admin = lazy(() => import("./pages/Admin"));
+const VillageManagement = lazy(() => import("./pages/VillageManagement"));
+const JsonConfigManager = lazy(() => import("./pages/JsonConfigManager"));
+const ContactMessagesAdmin = lazy(() => import("./pages/ContactMessagesAdmin"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ServicePage = lazy(() => import("./pages/ServicePage"));
+const PanchayatPage = lazy(() => import("./pages/PanchayatPage"));
+const ContactUsPage = lazy(() => import("./pages/ContactUsPage"));
+const SchemePage = lazy(() => import("./pages/SchemePage"));
+const DevelopmentPage = lazy(() => import("./pages/DevelopmentPage"));
+const GalleryPage = lazy(() => import("./pages/GalleryPage"));
+const AnnouncementsPage = lazy(() => import("./pages/AnnouncementsPage"));
 
 const queryClient = new QueryClient();
 
@@ -29,9 +33,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          {/* Auth routes without layout */}
-          <Route path={CUSTOM_ROUTES.AUTH} element={<Auth />} />
+        <Suspense fallback={<CustomLoader />}>
+          <Routes>
+            {/* Auth routes without layout */}
+            <Route path={CUSTOM_ROUTES.AUTH} element={<Auth />} />
 
          
 
@@ -87,7 +92,8 @@ const App = () => (
               </Layout>
             }
           />
-        </Routes>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

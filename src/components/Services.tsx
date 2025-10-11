@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
 
 interface ServicesProps {
   services: any[];
@@ -77,6 +78,8 @@ const Services = ({ services }: ServicesProps) => {
                             src={service.image} 
                             alt={service.name}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </div>
                         <CardTitle className="text-xl">{service.name}</CardTitle>
@@ -173,4 +176,4 @@ const Services = ({ services }: ServicesProps) => {
   );
 };
 
-export default Services;
+export default memo(Services);
