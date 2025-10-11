@@ -82,13 +82,13 @@ const Announcements = ({announcements}) => {
         </div>
 
         {/* Announcements Carousel */}
-        <div className="max-w-4xl mx-auto">
-          <Carousel className="w-full">
-            <CarouselContent>
+        <div className="max-w-4xl mx-auto px-4">
+          <Carousel className="w-full" opts={{ align: "start", loop: true }}>
+            <CarouselContent className="-ml-2 md:-ml-4">
               {announcements
                 .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                 .map((announcement, index) => (
-                  <CarouselItem key={announcement.id}>
+                  <CarouselItem key={announcement.id} className="pl-2 md:pl-4">
                     <Card className="card-elegant hover-lift">
                       <CardContent className="p-6">
                         <div className="flex flex-col md:flex-row md:items-start gap-4">
@@ -138,8 +138,8 @@ const Announcements = ({announcements}) => {
                   </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="left-0 -translate-x-1/2" />
+            <CarouselNext className="right-0 translate-x-1/2" />
           </Carousel>
         </div>
 

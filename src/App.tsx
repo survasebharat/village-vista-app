@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import VillageManagement from "./pages/VillageManagement";
 import JsonConfigManager from "./pages/JsonConfigManager";
+import ContactMessagesAdmin from "./pages/ContactMessagesAdmin";
 import NotFound from "./pages/NotFound";
 import AboutPage from "./pages/AboutPage";
 import { CUSTOM_ROUTES } from "./custom-routes";
@@ -80,6 +81,7 @@ const App = () => (
                     path={CUSTOM_ROUTES.JSON_CONFIG}
                     element={<JsonConfigManager />}
                   />
+                  <Route path="/admin/contact-messages" element={<ContactMessagesAdmin />} />
                 </Routes>
               </Layout>
             }

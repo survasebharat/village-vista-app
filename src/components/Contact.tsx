@@ -1,10 +1,9 @@
-import { MapPin, Phone, Mail, Clock, MessageSquare, FileText, AlertTriangle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, AlertCircle, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
+import ContactForm from "./ContactForm";
 
 const Contact = ({contact, documents=[]}) => {
   const { t } = useTranslation();
@@ -78,7 +77,7 @@ const Contact = ({contact, documents=[]}) => {
             <Card className="card-elegant">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-2xl">
-                  <AlertTriangle className="h-6 w-6 text-destructive" />
+                  <AlertCircle className="h-6 w-6 text-destructive" />
                   Emergency Contacts
                 </CardTitle>
               </CardHeader>
@@ -116,52 +115,10 @@ const Contact = ({contact, documents=[]}) => {
           <div className="animate-slide-up" style={{ animationDelay: "200ms" }}>
             <Card className="card-elegant">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-2xl">
-                  <MessageSquare className="h-6 w-6 text-primary" />
-                  Send a Message
-                </CardTitle>
+                <CardTitle className="text-2xl">{t('contact.sendMessage')}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <form className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4 animate-fade-in">
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">{t('contact.name')}</label>
-                      <Input placeholder={t('contact.enterName')} className="transition-all duration-300 focus:scale-[1.02]" />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">{t('contact.phone')}</label>
-                      <Input placeholder={t('contact.enterPhone')} className="transition-all duration-300 focus:scale-[1.02]" />
-                    </div>
-                  </div>
-
-                  <div className="animate-fade-in" style={{ animationDelay: "100ms" }}>
-                    <label className="text-sm font-medium mb-2 block">{t('contact.email')}</label>
-                    <Input type="email" placeholder={t('contact.enterEmail')} className="transition-all duration-300 focus:scale-[1.02]" />
-                  </div>
-
-                  <div className="animate-fade-in" style={{ animationDelay: "200ms" }}>
-                    <label className="text-sm font-medium mb-2 block">{t('contact.subject')}</label>
-                    <Input placeholder={t('contact.enterSubject')} className="transition-all duration-300 focus:scale-[1.02]" />
-                  </div>
-
-                  <div className="animate-fade-in" style={{ animationDelay: "300ms" }}>
-                    <label className="text-sm font-medium mb-2 block">{t('contact.message')}</label>
-                    <Textarea 
-                      placeholder={t('contact.enterMessage')} 
-                      className="min-h-[120px] transition-all duration-300 focus:scale-[1.02]"
-                    />
-                  </div>
-
-                  <Button className="w-full transition-all duration-300 hover:scale-[1.02] animate-fade-in" size="lg" style={{ animationDelay: "400ms" }}>
-                    {t('contact.submit')}
-                  </Button>
-                </form>
-
-                <div className="p-4 rounded-lg bg-muted/30 border border-border animate-fade-in" style={{ animationDelay: "500ms" }}>
-                  <p className="text-sm text-muted-foreground text-center">
-                    💡 {t('contact.urgentNote')}
-                  </p>
-                </div>
+              <CardContent>
+                <ContactForm villageId={contact?.villageId} />
               </CardContent>
             </Card>
 

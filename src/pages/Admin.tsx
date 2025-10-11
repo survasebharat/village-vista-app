@@ -217,6 +217,16 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
+                  onClick={() => navigate("/admin/contact-messages")}
+                >
+                  <div className="text-lg font-semibold">📧 Contact Messages</div>
+                  <div className="text-sm text-muted-foreground text-left">
+                    View and manage contact form submissions
+                  </div>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="h-auto p-6 flex flex-col items-start gap-2"
                   disabled
                 >
                   <div className="text-lg font-semibold">📢 Announcements</div>
