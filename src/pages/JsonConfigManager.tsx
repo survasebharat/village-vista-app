@@ -22,9 +22,16 @@ const JsonConfigManager = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [villages, setVillages] = useState<Village[]>([]);
   const [selectedVillage, setSelectedVillage] = useState<string>('');
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
   const [jsonContent, setJsonContent] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
   const [validationSuccess, setValidationSuccess] = useState(false);
+
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'hi', name: 'Hindi (हिंदी)' },
+    { code: 'mr', name: 'Marathi (मराठी)' }
+  ];
 
   useEffect(() => {
     checkAdminAccess();
@@ -32,10 +39,10 @@ const JsonConfigManager = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedVillage) {
+    if (selectedVillage && selectedLanguage) {
       loadVillageConfig();
     }
-  }, [selectedVillage]);
+  }, [selectedVillage, selectedLanguage]);
 
   const checkAdminAccess = async () => {
     try {
@@ -89,12 +96,20 @@ const JsonConfigManager = () => {
         .from('village_config')
         .select('config_data')
         .eq('village_id', selectedVillage)
+        .eq('language', selectedLanguage)
         .maybeSingle();
 
       if (error) {
         console.error('Error loading config:', error);
       } else if (configData) {
         setJsonContent(JSON.stringify(configData.config_data, null, 2));
+      } else {
+        // No config exists for this language yet
+        setJsonContent('');
+        toast({
+          title: 'No Configuration',
+          description: `No configuration found for this village in ${languages.find(l => l.code === selectedLanguage)?.name}. You can create one by entering JSON below.`,
+        });
       }
     } catch (err) {
       console.error('Error in loadVillageConfig:', err);
@@ -155,11 +170,12 @@ const JsonConfigManager = () => {
       const parsedConfig = JSON.parse(jsonContent);
       const { data: { user } } = await supabase.auth.getUser();
 
-      // Check if config exists
+      // Check if config exists for this village and language
       const { data: existingConfig } = await supabase
         .from('village_config')
         .select('id')
         .eq('village_id', selectedVillage)
+        .eq('language', selectedLanguage)
         .maybeSingle();
 
       if (existingConfig) {
@@ -171,7 +187,8 @@ const JsonConfigManager = () => {
             updated_by: user?.id,
             updated_at: new Date().toISOString(),
           })
-          .eq('village_id', selectedVillage);
+          .eq('village_id', selectedVillage)
+          .eq('language', selectedLanguage);
 
         if (error) throw error;
       } else {
@@ -180,6 +197,7 @@ const JsonConfigManager = () => {
           .from('village_config')
           .insert({
             village_id: selectedVillage,
+            language: selectedLanguage,
             config_data: parsedConfig,
             updated_by: user?.id,
           });
@@ -243,23 +261,41 @@ const JsonConfigManager = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Select Village</label>
-              <Select value={selectedVillage} onValueChange={setSelectedVillage}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Choose a village..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {villages.map((village) => (
-                    <SelectItem key={village.id} value={village.id}>
-                      {village.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Select Village</label>
+                <Select value={selectedVillage} onValueChange={setSelectedVillage}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose a village..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {villages.map((village) => (
+                      <SelectItem key={village.id} value={village.id}>
+                        {village.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Select Language</label>
+                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {languages.map((lang) => (
+                      <SelectItem key={lang.code} value={lang.code}>
+                        {lang.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
-            {selectedVillage && (
+            {selectedVillage && selectedLanguage && (
               <>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Configuration JSON</label>

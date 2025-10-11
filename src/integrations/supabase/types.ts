@@ -58,6 +58,53 @@ export type Database = {
           },
         ]
       }
+      contact_form_submissions: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          id: string
+          message: string
+          mobile: string
+          name: string
+          status: string | null
+          subject: string | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          message: string
+          mobile: string
+          name: string
+          status?: string | null
+          subject?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          message?: string
+          mobile?: string
+          name?: string
+          status?: string | null
+          subject?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_form_submissions_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       development_works: {
         Row: {
           budget: string | null
@@ -104,6 +151,53 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "development_works_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      emergency_contacts: {
+        Row: {
+          category: string
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          name: string
+          number: string
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          number: string
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          number?: string
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "emergency_contacts_village_id_fkey"
             columns: ["village_id"]
             isOneToOne: false
             referencedRelation: "villages"
@@ -224,6 +318,62 @@ export type Database = {
         }
         Relationships: []
       }
+      quick_service_submissions: {
+        Row: {
+          additional_data: Json | null
+          address: string | null
+          applicant_name: string
+          created_at: string | null
+          date_of_birth: string | null
+          email: string | null
+          father_mother_name: string | null
+          id: string
+          mobile_number: string
+          service_type: string
+          status: string | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          additional_data?: Json | null
+          address?: string | null
+          applicant_name: string
+          created_at?: string | null
+          date_of_birth?: string | null
+          email?: string | null
+          father_mother_name?: string | null
+          id?: string
+          mobile_number: string
+          service_type: string
+          status?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          additional_data?: Json | null
+          address?: string | null
+          applicant_name?: string
+          created_at?: string | null
+          date_of_birth?: string | null
+          email?: string | null
+          father_mother_name?: string | null
+          id?: string
+          mobile_number?: string
+          service_type?: string
+          status?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quick_service_submissions_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       schemes: {
         Row: {
           application_process: string | null
@@ -297,6 +447,7 @@ export type Database = {
           config_data: Json
           created_at: string
           id: string
+          language: string
           updated_at: string
           updated_by: string | null
           village_id: string
@@ -305,6 +456,7 @@ export type Database = {
           config_data: Json
           created_at?: string
           id?: string
+          language?: string
           updated_at?: string
           updated_by?: string | null
           village_id: string
@@ -313,6 +465,7 @@ export type Database = {
           config_data?: Json
           created_at?: string
           id?: string
+          language?: string
           updated_at?: string
           updated_by?: string | null
           village_id?: string

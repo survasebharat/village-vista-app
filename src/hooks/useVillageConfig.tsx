@@ -65,7 +65,7 @@ export interface VillageConfig {
   services: any[];
 }
 
-export const useVillageConfig = (village?: string) => {
+export const useVillageConfig = (village?: string, language: string = 'en') => {
   const [config, setConfig] = useState<VillageConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -99,11 +99,12 @@ export const useVillageConfig = (village?: string) => {
           return;
         }
 
-        // Fetch config from database
+        // Fetch config from database with language filter
         const { data: configData, error: configError } = await supabase
           .from("village_config")
           .select("config_data")
           .eq("village_id", villageData.id)
+          .eq("language", language)
           .maybeSingle();
 
         if (configError) {
@@ -151,7 +152,7 @@ export const useVillageConfig = (village?: string) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [villageName]);
+  }, [villageName, language]);
 
   return { config, loading, error };
 };
