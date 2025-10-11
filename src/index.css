@@ -8,104 +8,102 @@ All colors MUST be HSL format for theming support.
 
 @layer base {
   :root {
-    /* Core Background & Text - Clean Modern */
-    --background: 0 0% 98%;
-    --foreground: 220 15% 20%;
+    /* Core Background & Text */
+    --background: 35 20% 97%;
+    --foreground: 25 25% 15%;
 
     /* Card Components */
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 20%;
+    --card-foreground: 25 25% 15%;
 
     /* Interactive Elements */
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 20%;
+    --popover-foreground: 25 25% 15%;
 
-    /* Primary - Modern Teal/Cyan */
-    --primary: 195 85% 40%;
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 195 75% 55%;
-    --primary-glow: 195 85% 50%;
+    /* Primary - Deep Forest Green (Government/Nature) */
+    --primary: 140 45% 25%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 140 35% 45%;
+    --primary-glow: 140 55% 35%;
 
-    /* Secondary - Soft Slate */
-    --secondary: 220 15% 92%;
-    --secondary-foreground: 220 15% 20%;
-    --secondary-dark: 220 15% 85%;
+    /* Secondary - Warm Earth Tone */
+    --secondary: 35 25% 85%;
+    --secondary-foreground: 25 25% 25%;
+    --secondary-dark: 35 15% 75%;
 
-    /* Accent - Vibrant Orange */
-    --accent: 25 95% 55%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 25 85% 65%;
+    /* Accent - Golden/Saffron (Traditional) */
+    --accent: 45 85% 65%;
+    --accent-foreground: 25 35% 20%;
+    --accent-light: 45 75% 75%;
 
-    /* Muted - Cool Gray */
-    --muted: 220 10% 94%;
-    --muted-foreground: 220 10% 45%;
+    /* Muted - Soft Greens */
+    --muted: 120 15% 92%;
+    --muted-foreground: 25 20% 45%;
 
     /* Status Colors */
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 150 60% 45%;
-    --success-foreground: 0 0% 100%;
-    --warning: 45 95% 55%;
-    --warning-foreground: 220 15% 20%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 140 50% 40%;
+    --success-foreground: 0 0% 98%;
+    --warning: 45 85% 65%;
+    --warning-foreground: 25 35% 20%;
 
     /* Borders & Inputs */
-    --border: 220 15% 88%;
-    --input: 220 15% 94%;
-    --ring: 195 85% 40%;
+    --border: 120 20% 88%;
+    --input: 120 20% 92%;
+    --ring: 140 45% 25%;
 
     /* Design Elements */
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Gradients - Modern & Subtle */
-    --gradient-primary: linear-gradient(135deg, hsl(195 85% 40%), hsl(195 85% 50%));
-    --gradient-hero: linear-gradient(120deg, hsl(195 85% 40%) 0%, hsl(195 75% 55%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 10% 97%) 100%);
-    --gradient-overlay: linear-gradient(to right, hsl(195 85% 40% / 0.85), hsl(195 85% 40% / 0.5));
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--accent)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
 
-    /* Shadows - Subtle */
-    --shadow-elegant: 0 8px 24px -8px hsl(195 85% 40% / 0.15);
-    --shadow-card: 0 2px 8px -2px hsl(220 15% 20% / 0.08);
-    --shadow-glow: 0 0 20px hsl(195 85% 50% / 0.2);
+    /* Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-card: 0 4px 12px -4px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 30px hsl(var(--accent) / 0.3);
 
-    /* Animations - Minimal */
-    --transition-smooth: all 0.2s ease;
-    --transition-fast: all 0.15s ease;
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 220 15% 20%;
-    --sidebar-primary: 195 85% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 10% 96%;
-    --sidebar-accent-foreground: 220 15% 20%;
-    --sidebar-border: 220 15% 90%;
-    --sidebar-ring: 195 85% 40%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     /* Dark mode colors */
-    --background: 220 20% 12%;
-    --foreground: 0 0% 95%;
-    --card: 220 20% 15%;
-    --card-foreground: 0 0% 95%;
-    --primary: 195 85% 50%;
-    --primary-light: 195 75% 60%;
-    --primary-glow: 195 85% 60%;
-    --accent: 25 95% 60%;
-    --accent-light: 25 85% 70%;
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 10% 65%;
-    --border: 220 15% 25%;
-    --input: 220 15% 20%;
-    --ring: 195 85% 50%;
-    --sidebar-background: 220 20% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 195 85% 50%;
+    --background: 25 25% 8%;
+    --foreground: 35 15% 92%;
+    --card: 25 20% 12%;
+    --card-foreground: 35 15% 92%;
+    --primary: 140 45% 45%;
+    --primary-glow: 140 55% 55%;
+    --accent: 45 75% 55%;
+    --muted: 25 15% 15%;
+    --muted-foreground: 35 10% 65%;
+    --border: 25 15% 20%;
+    --input: 25 15% 20%;
+    --ring: 140 45% 45%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 18%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 220 15% 22%;
-    --sidebar-ring: 195 85% 50%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -117,7 +115,6 @@ All colors MUST be HSL format for theming support.
   body {
     @apply bg-background text-foreground;
     scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
 
   /* Custom animations */
