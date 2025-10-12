@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => ({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "robots.txt", "placeholder.svg"],
       manifest: {
-        name: "Village Vista - Gram Panchayat Portal",
-        short_name: "Village Vista",
+        name: "शिवनखेड (खु) ग्रामपंचायत",
+        short_name: "शिवनखेड (खु)",
         description: "Official Gram Panchayat website for accessing government schemes, development projects, and village services",
         theme_color: "#1a4d2e",
         background_color: "#1a4d2e",
