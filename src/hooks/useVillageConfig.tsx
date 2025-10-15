@@ -71,7 +71,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
   const [error, setError] = useState<string | null>(null);
   const {name} = getCurrentVillage();
 
-  let villageName = name || village || "Shivankhed"
+  let villageName = name || village
   
   useEffect(() => {
     const fetchConfig = async () => {
