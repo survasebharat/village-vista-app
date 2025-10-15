@@ -26,7 +26,7 @@ const Index = () => {
     keywords: ['gram panchayat', 'village website', 'government schemes', 'development projects', 'village services', config?.village.name || 'village']
   });
 
-  if (loading || !config) return <HeroSkeleton />;
+  if (loading) return <HeroSkeleton />;
 
   return (
     <div className="min-h-screen bg-background">
