@@ -73,6 +73,9 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
 
   let villageName = name || village || "Shivankhed"
   
+  // Normalize language code to base language (e.g., 'en-US' -> 'en')
+  const normalizedLanguage = language.split('-')[0]
+  
   useEffect(() => {
     const fetchConfig = async () => {
       try {
@@ -104,7 +107,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
           .from("village_config")
           .select("config_data")
           .eq("village_id", villageData.id)
-          .eq("language", language)
+          .eq("language", normalizedLanguage)
           .maybeSingle();
 
         if (configError) {
@@ -163,7 +166,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [villageName, language]);
+  }, [villageName, normalizedLanguage]);
 
   return { config, loading, error };
 };
