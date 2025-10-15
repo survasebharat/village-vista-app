@@ -60,7 +60,7 @@ const Footer = () => {
                   { icon: Facebook, href: "#" },
                   { icon: Twitter, href: "#" },
                   { icon: Instagram, href: "#" },
-                  { icon: Youtube, href: "#" },
+                  { icon: Youtube, href: "#" }
                 ].map((social, index) => (
                   <Button
                     key={index}
