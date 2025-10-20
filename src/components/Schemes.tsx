@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { IndianRupee, FileText, Users, Phone, CheckCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from 'react-i18next';
+import DocumentsModal from './DocumentsModal';
 
 interface SchemesProps {
   schemes: any[];
@@ -11,6 +13,16 @@ interface SchemesProps {
 
 const Schemes = ({ schemes }: SchemesProps) => {
   const { t } = useTranslation();
+  const [isDocsModalOpen, setIsDocsModalOpen] = useState(false);
+  const [selectedScheme, setSelectedScheme] = useState<{ name: string; documents: string[] } | null>(null);
+
+  const handleApplyClick = (scheme: any) => {
+    setSelectedScheme({
+      name: scheme.name,
+      documents: scheme.documents || []
+    });
+    setIsDocsModalOpen(true);
+  };
 
   const getSchemeIcon = (schemeName: string) => {
     if (schemeName.includes("Kisan")) return "🌾";
@@ -123,7 +135,11 @@ const Schemes = ({ schemes }: SchemesProps) => {
                 </div>
 
                 <div className="flex gap-3 pt-4">
-                  <Button className="flex-1" size="sm">
+                  <Button 
+                    className="flex-1" 
+                    size="sm"
+                    onClick={() => handleApplyClick(scheme)}
+                  >
                     Apply Now
                   </Button>
                   <Button variant="outline" size="sm">
@@ -169,6 +185,13 @@ const Schemes = ({ schemes }: SchemesProps) => {
             </div>
           </CardContent>
         </Card>
+
+        <DocumentsModal 
+          isOpen={isDocsModalOpen}
+          onClose={() => setIsDocsModalOpen(false)}
+          serviceName={selectedScheme?.name || ''}
+          documents={selectedScheme?.documents || []}
+        />
       </div>
     </section>
   );

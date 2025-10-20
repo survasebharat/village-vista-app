@@ -10,6 +10,7 @@ import GallerySkeleton from "@/components/ui/skeletons/GallerySkeleton";
 // Lazy load non-critical components
 const About = lazy(() => import("@/components/About"));
 const Panchayat = lazy(() => import("@/components/Panchayat"));
+const GovStaff = lazy(() => import("@/components/GovStaff"));
 const Announcements = lazy(() => import("@/components/Announcements"));
 const Schemes = lazy(() => import("@/components/Schemes"));
 const Services = lazy(() => import("@/components/Services"));
@@ -54,6 +55,13 @@ const Index = () => {
         {isPageVisible("panchayat") && (
           <Suspense fallback={<SectionSkeleton />}>
             <Panchayat panchayat={config.panchayat} />
+          </Suspense>
+        )}
+
+        {/* Government Staff */}
+        {config.govStaff && config.govStaff.length > 0 && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <GovStaff govStaff={config.govStaff} />
           </Suspense>
         )}
 

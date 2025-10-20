@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, User, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
+import MemberPopupModal from './MemberPopupModal';
 
 interface PanchayatProps {
   panchayat: any;
@@ -10,6 +12,13 @@ interface PanchayatProps {
 
 const Panchayat = ({ panchayat }: PanchayatProps) => {
   const { t } = useTranslation();
+  const [selectedMember, setSelectedMember] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleMemberClick = (member: any) => {
+    setSelectedMember(member);
+    setIsModalOpen(true);
+  };
 
   return (
     <section id="panchayat" className="py-20 bg-background">
@@ -79,11 +88,14 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16" >
           <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
             <CardHeader className="text-center">
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary">
+              <div 
+                className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary cursor-pointer hover:border-primary transition-colors"
+                onClick={() => handleMemberClick(panchayat.sarpanch)}
+              >
                 <img 
                   src={panchayat.sarpanch.image} 
                   alt={panchayat.sarpanch.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <CardTitle className="text-2xl">{panchayat.sarpanch.name}</CardTitle>
@@ -122,11 +134,14 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
           </Card>
           <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
             <CardHeader className="text-center">
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary">
+              <div 
+                className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary cursor-pointer hover:border-primary transition-colors"
+                onClick={() => handleMemberClick(panchayat.secretary)}
+              >
                 <img 
                   src={panchayat.secretary.image} 
                   alt={panchayat.secretary.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <CardTitle className="text-2xl">{panchayat.secretary.name}</CardTitle>
@@ -179,11 +194,14 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardHeader className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-accent">
+                  <div 
+                    className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-accent cursor-pointer hover:border-primary transition-colors"
+                    onClick={() => handleMemberClick(member)}
+                  >
                     <img 
                       src={member.image} 
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <CardTitle className="text-xl">{member.name}</CardTitle>
@@ -221,11 +239,14 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardHeader className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-muted">
+                  <div 
+                    className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-muted cursor-pointer hover:border-primary transition-colors"
+                    onClick={() => handleMemberClick(staff)}
+                  >
                     <img 
                       src={staff.image} 
                       alt={staff.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <CardTitle className="text-lg">{staff.name}</CardTitle>
@@ -281,6 +302,12 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
           </Card>
         </div>
       </div>
+
+      <MemberPopupModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        member={selectedMember}
+      />
     </section>
   );
 };

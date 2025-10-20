@@ -63,6 +63,22 @@ export interface VillageConfig {
   };
   documents: any[];
   services: any[];
+  social?: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+    whatsapp?: string;
+    youtube?: string;
+    arattai?: string;
+  };
+  govStaff?: Array<{
+    name: string;
+    role: string;
+    photo: string;
+    work: string;
+    contact: string;
+    email?: string;
+  }>;
 }
 
 export const useVillageConfig = (village?: string, language: string = 'en') => {

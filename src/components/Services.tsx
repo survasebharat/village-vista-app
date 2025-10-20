@@ -1,9 +1,10 @@
-import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart } from "lucide-react";
+import { useState, memo } from 'react';
+import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
-import { memo } from 'react';
+import MemberPopupModal from './MemberPopupModal';
 
 interface ServicesProps {
   services: any[];
@@ -11,6 +12,43 @@ interface ServicesProps {
 
 const Services = ({ services }: ServicesProps) => {
   const { t } = useTranslation();
+  const [selectedMember, setSelectedMember] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState<{ [key: string]: number }>({});
+
+  const handleOwnerClick = (service: any) => {
+    const owner = service.owner || service.doctor || service.teacher || service.pujari;
+    if (!owner) return;
+
+    setSelectedMember({
+      name: owner,
+      image: Array.isArray(service.photos) ? service.photos[0] : service.image,
+      role: service.owner ? 'Owner' : service.doctor ? 'Doctor' : service.teacher ? 'Teacher' : 'Pujari',
+      description: service.speciality || service.subjects || service.services || '',
+      contact: service.contact,
+    });
+    setIsModalOpen(true);
+  };
+
+  const getServicePhotos = (service: any): string[] => {
+    if (Array.isArray(service.photos)) return service.photos;
+    if (service.image) return [service.image];
+    return [];
+  };
+
+  const nextPhoto = (serviceKey: string, totalPhotos: number) => {
+    setCurrentPhotoIndex(prev => ({
+      ...prev,
+      [serviceKey]: ((prev[serviceKey] || 0) + 1) % totalPhotos
+    }));
+  };
+
+  const prevPhoto = (serviceKey: string, totalPhotos: number) => {
+    setCurrentPhotoIndex(prev => ({
+      ...prev,
+      [serviceKey]: ((prev[serviceKey] || 0) - 1 + totalPhotos) % totalPhotos
+    }));
+  };
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
@@ -66,47 +104,100 @@ const Services = ({ services }: ServicesProps) => {
                 </div>
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.items.map((service, serviceIndex) => (
-                    <Card 
-                      key={service.name}
-                      className="card-elegant hover-lift animate-slide-up"
-                      style={{ animationDelay: `${(categoryIndex * 3 + serviceIndex) * 100}ms` }}
-                    >
-                      <CardHeader>
-                        <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
-                          <img 
-                            src={service.image} 
-                            alt={service.name}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </div>
-                        <CardTitle className="text-xl">{service.name}</CardTitle>
-                        {service.owner && (
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <User className="h-4 w-4" />
-                            <span>{t('services.owner')}: {service.owner}</span>
+                  {category.items.map((service, serviceIndex) => {
+                    const serviceKey = `${category.category}-${serviceIndex}`;
+                    const photos = getServicePhotos(service);
+                    const currentIndex = currentPhotoIndex[serviceKey] || 0;
+
+                    return (
+                      <Card 
+                        key={service.name}
+                        className="card-elegant hover-lift animate-slide-up"
+                        style={{ animationDelay: `${(categoryIndex * 3 + serviceIndex) * 100}ms` }}
+                      >
+                        <CardHeader>
+                          <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4 group">
+                            <img 
+                              src={photos[currentIndex]} 
+                              alt={service.name}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                            
+                            {/* Photo Navigation */}
+                            {photos.length > 1 && (
+                              <>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    prevPhoto(serviceKey, photos.length);
+                                  }}
+                                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <ChevronLeft className="h-5 w-5" />
+                                </button>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    nextPhoto(serviceKey, photos.length);
+                                  }}
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <ChevronRight className="h-5 w-5" />
+                                </button>
+                                
+                                {/* Photo Indicators */}
+                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                                  {photos.map((_, idx) => (
+                                    <div
+                                      key={idx}
+                                      className={`w-2 h-2 rounded-full transition-all ${
+                                        idx === currentIndex ? 'bg-primary w-4' : 'bg-background/50'
+                                      }`}
+                                    />
+                                  ))}
+                                </div>
+                              </>
+                            )}
                           </div>
-                        )}
-                        {service.doctor && (
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <User className="h-4 w-4" />
-                            <span>{t('services.doctor')}: {service.doctor}</span>
-                          </div>
-                        )}
-                        {service.teacher && (
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <User className="h-4 w-4" />
-                            <span>{t('services.teacher')}: {service.teacher}</span>
-                          </div>
-                        )}
-                        {service.pujari && (
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <User className="h-4 w-4" />
-                            <span>{t('services.pujari')}: {service.pujari}</span>
-                          </div>
-                        )}
+                          <CardTitle className="text-xl">{service.name}</CardTitle>
+                          {service.owner && (
+                            <div 
+                              className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+                              onClick={() => handleOwnerClick(service)}
+                            >
+                              <User className="h-4 w-4" />
+                              <span>{t('services.owner')}: {service.owner}</span>
+                            </div>
+                          )}
+                          {service.doctor && (
+                            <div 
+                              className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+                              onClick={() => handleOwnerClick(service)}
+                            >
+                              <User className="h-4 w-4" />
+                              <span>{t('services.doctor')}: {service.doctor}</span>
+                            </div>
+                          )}
+                          {service.teacher && (
+                            <div 
+                              className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+                              onClick={() => handleOwnerClick(service)}
+                            >
+                              <User className="h-4 w-4" />
+                              <span>{t('services.teacher')}: {service.teacher}</span>
+                            </div>
+                          )}
+                          {service.pujari && (
+                            <div 
+                              className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+                              onClick={() => handleOwnerClick(service)}
+                            >
+                              <User className="h-4 w-4" />
+                              <span>{t('services.pujari')}: {service.pujari}</span>
+                            </div>
+                          )}
                       </CardHeader>
                       <CardContent className="space-y-3">
                         {service.address && (
@@ -163,15 +254,22 @@ const Services = ({ services }: ServicesProps) => {
                           <Phone className="h-4 w-4 mr-2" />
                           {service.contact}
                         </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      <MemberPopupModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        member={selectedMember}
+      />
     </section>
   );
 };

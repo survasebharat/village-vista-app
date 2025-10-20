@@ -4,6 +4,7 @@ import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import LanguageToggle from "./LanguageToggle";
+import SocialMediaButtons from "./SocialMediaButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { usePageVisibility } from "@/hooks/usePageVisibility";
 import { supabase } from "@/integrations/supabase/client";
@@ -90,6 +91,10 @@ const Header = () => {
                 </Button>
               ))}
             </nav>
+            
+            {/* Social Media Icons */}
+            <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
+            
             <LanguageToggle />
             
             {/* Auth Buttons */}
