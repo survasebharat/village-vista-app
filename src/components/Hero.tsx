@@ -1,11 +1,5 @@
 import { Card } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useTranslation } from "react-i18next";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef, memo } from "react";
@@ -63,21 +57,18 @@ const Hero = ({ village, panchayat }: HeroProps) => {
               {t("hero.title")}
             </h1>
 
-            <p className="text-lg md:text-xl mb-4 text-primary-foreground/95 drop-shadow-md">
-              {t("hero.subtitle")}
-            </p>
+            <p className="text-lg md:text-xl mb-4 text-primary-foreground/95 drop-shadow-md">{t("hero.subtitle")}</p>
 
             <p className="text-sm mb-8 text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
               {t("hero.description")}
             </p>
 
             {/* Sarpanch Message */}
-            <Card className="bg-card/20 backdrop-blur-md border-primary-foreground/20 p-6 mb-8 max-w-2xl mx-auto shadow-lg">
+            {/*<Card className="bg-card/20 backdrop-blur-md border-primary-foreground/20 p-6 mb-8 max-w-2xl mx-auto shadow-lg">
               <blockquote className="text-primary-foreground/95 italic text-base mb-4 drop-shadow">
                 "{t("panchayat.message")}"
               </blockquote>
               <div className="flex items-center justify-center gap-3">
-                {/* image */}
                 {panchayat.sarpanch.image ? (
                   <img
                     src={panchayat.sarpanch.image}
@@ -98,7 +89,7 @@ const Hero = ({ village, panchayat }: HeroProps) => {
                   </p>
                 </div>
               </div>
-            </Card>
+            </Card>*/}
 
             {/* Action Buttons */}
             {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
