@@ -38,7 +38,8 @@ const Services = ({ services }: ServicesProps) => {
     // Support multiple field names for backward compatibility
     if (Array.isArray(service.images)) return service.images;
     if (Array.isArray(service.photos)) return service.photos;
-    if (service.image) return [service.image];
+    if (Array.isArray(service.image)) return service.image; // Handle when 'image' is an array
+    if (service.image) return [service.image]; // Handle single image string
     return [];
   };
 
