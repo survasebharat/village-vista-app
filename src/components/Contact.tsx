@@ -5,9 +5,21 @@ import { Badge } from "@/components/ui/badge";
 import { useTranslation } from 'react-i18next';
 import ContactForm from "./ContactForm";
 import { Link } from "react-router-dom";
+import DocumentsModal from "./DocumentsModal";
+import { useState } from "react";
 
 const Contact = ({contact, documents=[]}) => {
   const { t } = useTranslation();
+  const [isDocsModalOpen, setIsDocsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<{name: string, documents: string[]}>({name: "", documents: []});
+
+  const handleApplyClick = (service: any) => {
+    setSelectedService({
+      name: service.name || "",
+      documents: service.documents || []
+    });
+    setIsDocsModalOpen(true);
+  };
 
   return (
     <section id="contact" className="py-20 bg-background">
@@ -137,12 +149,13 @@ const Contact = ({contact, documents=[]}) => {
                   {documents.map((service, index) => (
                     <div 
                       key={service.name}
-                      className="flex items-center justify-between p-3 rounded-lg bg-muted/20 hover-lift cursor-pointer"
+                      onClick={() => handleApplyClick(service)}
+                      className="flex items-center justify-between p-3 rounded-lg bg-muted/20 hover-lift cursor-pointer transition-all duration-300"
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <span className="text-sm font-medium">{service.name || ""}</span>
-                      <Badge variant="outline" className="text-xs">
-                        Apply
+                      <Badge variant="outline" className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors">
+                        {t('contact.apply')}
                       </Badge>
                     </div>
                   ))}
@@ -152,6 +165,13 @@ const Contact = ({contact, documents=[]}) => {
           </div>
         </div>
       </div>
+
+      <DocumentsModal
+        isOpen={isDocsModalOpen}
+        onClose={() => setIsDocsModalOpen(false)}
+        serviceName={selectedService.name}
+        documents={selectedService.documents}
+      />
     </section>
   );
 };
