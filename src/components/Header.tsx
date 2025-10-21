@@ -52,7 +52,7 @@ const Header = () => {
             </div>
             {/* Social Media Icons */}
             <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
-            /*<div className="text-sm">{config.contact.office.hours}</div>*/
+            {/*<div className="text-sm">{config.contact.office.hours}</div>*/}
           </div>
         )}
 
