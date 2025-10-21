@@ -1,10 +1,11 @@
 import { useState, memo } from 'react';
-import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import MemberPopupModal from './MemberPopupModal';
+import GalleryModal from './GalleryModal';
 
 interface ServicesProps {
   services: any[];
@@ -15,6 +16,9 @@ const Services = ({ services }: ServicesProps) => {
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<{ [key: string]: number }>({});
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [galleryTitle, setGalleryTitle] = useState('');
 
   const handleOwnerClick = (service: any) => {
     const owner = service.owner || service.doctor || service.teacher || service.pujari;
@@ -31,9 +35,20 @@ const Services = ({ services }: ServicesProps) => {
   };
 
   const getServicePhotos = (service: any): string[] => {
+    // Support multiple field names for backward compatibility
+    if (Array.isArray(service.images)) return service.images;
     if (Array.isArray(service.photos)) return service.photos;
     if (service.image) return [service.image];
     return [];
+  };
+
+  const openGallery = (service: any) => {
+    const photos = getServicePhotos(service);
+    if (photos.length > 0) {
+      setGalleryImages(photos);
+      setGalleryTitle(service.name);
+      setGalleryOpen(true);
+    }
   };
 
   const nextPhoto = (serviceKey: string, totalPhotos: number) => {
@@ -116,7 +131,10 @@ const Services = ({ services }: ServicesProps) => {
                         style={{ animationDelay: `${(categoryIndex * 3 + serviceIndex) * 100}ms` }}
                       >
                         <CardHeader>
-                          <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4 group">
+                          <div 
+                            className="relative w-full h-48 rounded-lg overflow-hidden mb-4 group cursor-pointer"
+                            onClick={() => openGallery(service)}
+                          >
                             <img 
                               src={photos[currentIndex]} 
                               alt={service.name}
@@ -124,6 +142,16 @@ const Services = ({ services }: ServicesProps) => {
                               loading="lazy"
                               decoding="async"
                             />
+                            
+                            {/* View Gallery Overlay */}
+                            <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <div className="bg-primary text-primary-foreground px-4 py-2 rounded-lg flex items-center gap-2">
+                                <ImageIcon className="h-5 w-5" />
+                                <span className="font-medium">
+                                  {photos.length > 1 ? `View ${photos.length} Photos` : 'View Photo'}
+                                </span>
+                              </div>
+                            </div>
                             
                             {/* Photo Navigation */}
                             {photos.length > 1 && (
@@ -133,7 +161,7 @@ const Services = ({ services }: ServicesProps) => {
                                     e.stopPropagation();
                                     prevPhoto(serviceKey, photos.length);
                                   }}
-                                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
                                 >
                                   <ChevronLeft className="h-5 w-5" />
                                 </button>
@@ -142,13 +170,13 @@ const Services = ({ services }: ServicesProps) => {
                                     e.stopPropagation();
                                     nextPhoto(serviceKey, photos.length);
                                   }}
-                                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
                                 >
                                   <ChevronRight className="h-5 w-5" />
                                 </button>
                                 
                                 {/* Photo Indicators */}
-                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
                                   {photos.map((_, idx) => (
                                     <div
                                       key={idx}
@@ -269,6 +297,13 @@ const Services = ({ services }: ServicesProps) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         member={selectedMember}
+      />
+
+      <GalleryModal
+        isOpen={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+        images={galleryImages}
+        title={galleryTitle}
       />
     </section>
   );
