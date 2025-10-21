@@ -2,7 +2,7 @@ import { useState, useContext, memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import LanguageToggle from "./LanguageToggle";
 import SocialMediaButtons from "./SocialMediaButtons";
 import { useAuth } from "@/hooks/useAuth";
@@ -32,7 +32,7 @@ const Header = () => {
   ];
 
   // Filter navigation items based on visibility
-  const navItems = allNavItems.filter(item => isPageVisible(item.pageKey));
+  const navItems = allNavItems.filter((item) => isPageVisible(item.pageKey));
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
@@ -50,31 +50,31 @@ const Header = () => {
                 <span>{config.contact.office.email}</span>
               </div>
             </div>
-            <div className="text-sm">
-              {config.contact.office.hours}
-            </div>
+            {/* Social Media Icons */}
+            <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
+            /*<div className="text-sm">{config.contact.office.hours}</div>*/
           </div>
         )}
 
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo & Title */}
-          <Link to={CUSTOM_ROUTES.HOME} >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl shadow-sm">
-              शि
+          <Link to={CUSTOM_ROUTES.HOME}>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl shadow-sm">
+                शि
+              </div>
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                  {t("header.title")}
+                </h1>
+                {config?.village && (
+                  <p className="text-sm text-muted-foreground">
+                    {config.village.state} {config.village.district && ","} {config.village.district}
+                  </p>
+                )}
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                {t('header.title')}
-              </h1>
-              {config?.village && (
-                <p className="text-sm text-muted-foreground">
-                  {config.village.state} {config.village.district && ","} {config.village.district}
-                </p>
-              )}
-            </div>
-          </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -87,48 +87,30 @@ const Header = () => {
                   className="text-foreground hover:text-primary hover:bg-primary/10"
                   asChild
                 >
-                   <Link to={item.href}>{item.name}</Link>
+                  <Link to={item.href}>{item.name}</Link>
                 </Button>
               ))}
             </nav>
-            
-            {/* Social Media Icons */}
-            <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
-            
+
             <LanguageToggle />
-            
+
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center gap-2">
               {user ? (
                 <>
                   {isAdmin && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => navigate("/admin")}
-                      className="gap-2"
-                    >
+                    <Button variant="outline" size="sm" onClick={() => navigate("/admin")} className="gap-2">
                       <Shield className="h-4 w-4" />
                       Admin
                     </Button>
                   )}
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleLogout}
-                    className="gap-2"
-                  >
+                  <Button variant="ghost" size="sm" onClick={handleLogout} className="gap-2">
                     <LogOut className="h-4 w-4" />
                     Logout
                   </Button>
                 </>
               ) : (
-                <Button
-                  variant="default"
-                  size="sm"
-                  onClick={() => navigate("/auth")}
-                  className="gap-2"
-                >
+                <Button variant="default" size="sm" onClick={() => navigate("/auth")} className="gap-2">
                   <LogIn className="h-4 w-4" />
                   Login
                 </Button>
@@ -137,17 +119,8 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
 
@@ -166,7 +139,7 @@ const Header = () => {
                   <Link to={item.href}>{item.name}</Link>
                 </Button>
               ))}
-              
+
               {/* Mobile Auth Buttons */}
               <div className="mt-4 space-y-2">
                 {user ? (
@@ -184,11 +157,7 @@ const Header = () => {
                         Admin Panel
                       </Button>
                     )}
-                    <Button
-                      variant="ghost"
-                      className="w-full gap-2"
-                      onClick={handleLogout}
-                    >
+                    <Button variant="ghost" className="w-full gap-2" onClick={handleLogout}>
                       <LogOut className="h-4 w-4" />
                       Logout
                     </Button>
