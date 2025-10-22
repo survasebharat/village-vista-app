@@ -28,6 +28,8 @@ const Header = () => {
     { name: t("header.about"), href: CUSTOM_ROUTES.ABOUT, pageKey: "about" },
     { name: t("header.services"), href: CUSTOM_ROUTES.SERVICES, pageKey: "services" },
     { name: t("header.panchayat"), href: CUSTOM_ROUTES.PANCHAYAT, pageKey: "panchayat" },
+    { name: "Notices", href: CUSTOM_ROUTES.NOTICES, pageKey: "notices" },
+    { name: "Market Prices", href: CUSTOM_ROUTES.MARKET_PRICES, pageKey: "market_prices" },
     { name: t("header.contact"), href: CUSTOM_ROUTES.CONTACT_US, pageKey: "contact" },
   ];
 

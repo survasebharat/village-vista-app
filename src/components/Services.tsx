@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState, memo, useContext } from 'react';
 import { Phone, Clock, MapPin, Store, Car, User, GraduationCap, Coffee, Heart, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import MemberPopupModal from './MemberPopupModal';
 import GalleryModal from './GalleryModal';
+import StarRating from './StarRating';
+import { VillageContext } from '@/context/VillageContextConfig';
 
 interface ServicesProps {
   services: any[];
@@ -13,6 +15,7 @@ interface ServicesProps {
 
 const Services = ({ services }: ServicesProps) => {
   const { t } = useTranslation();
+  const { config } = useContext(VillageContext);
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<{ [key: string]: number }>({});
@@ -283,6 +286,13 @@ const Services = ({ services }: ServicesProps) => {
                           <Phone className="h-4 w-4 mr-2" />
                           {service.contact}
                         </Button>
+                        
+                        {/* Star Rating */}
+                        <StarRating 
+                          serviceId={`${category.category}-${service.name}`}
+                          serviceName={service.name}
+                          villageId={undefined}
+                        />
                         </CardContent>
                       </Card>
                     );

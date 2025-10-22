@@ -205,6 +205,114 @@ export type Database = {
           },
         ]
       }
+      feedback_submissions: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          mobile: string
+          name: string
+          status: string | null
+          type: string
+          updated_at: string
+          village_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          mobile: string
+          name: string
+          status?: string | null
+          type: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          mobile?: string
+          name?: string
+          status?: string | null
+          type?: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices: {
+        Row: {
+          created_at: string
+          crop_name: string
+          id: string
+          last_updated: string
+          price: number
+          unit: string
+          updated_at: string
+          village_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_name: string
+          id?: string
+          last_updated?: string
+          price: number
+          unit?: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_name?: string
+          id?: string
+          last_updated?: string
+          price?: number
+          unit?: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Relationships: []
+      }
+      notices: {
+        Row: {
+          attachment_url: string | null
+          category: string
+          created_at: string
+          description: string
+          id: string
+          is_active: boolean | null
+          notice_date: string
+          title: string
+          updated_at: string
+          village_id: string | null
+        }
+        Insert: {
+          attachment_url?: string | null
+          category: string
+          created_at?: string
+          description: string
+          id?: string
+          is_active?: boolean | null
+          notice_date?: string
+          title: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Update: {
+          attachment_url?: string | null
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          is_active?: boolean | null
+          notice_date?: string
+          title?: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Relationships: []
+      }
       page_visibility: {
         Row: {
           id: string
@@ -420,6 +528,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      service_ratings: {
+        Row: {
+          created_at: string
+          id: string
+          rating: number
+          service_id: string
+          session_id: string
+          updated_at: string
+          village_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          rating: number
+          service_id: string
+          session_id: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          rating?: number
+          service_id?: string
+          session_id?: string
+          updated_at?: string
+          village_id?: string | null
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {

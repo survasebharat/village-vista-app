@@ -14,5 +14,7 @@ export const CUSTOM_ROUTES = {
     DEVELOPMENT: "/development",
     GALLERY: "/gallery",
     ANNOUNCEMENTS: "/announcements",
+    NOTICES: "/notices",
+    MARKET_PRICES: "/market-prices",
     NOT_FOUND: "*"
 }
