@@ -559,6 +559,65 @@ export type Database = {
         }
         Relationships: []
       }
+      tax_payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          order_id: string
+          payer_email: string | null
+          payer_mobile: string
+          payer_name: string
+          payment_date: string | null
+          payment_id: string | null
+          payment_status: string
+          tax_type: string
+          updated_at: string
+          village_account: string | null
+          village_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          order_id: string
+          payer_email?: string | null
+          payer_mobile: string
+          payer_name: string
+          payment_date?: string | null
+          payment_id?: string | null
+          payment_status?: string
+          tax_type: string
+          updated_at?: string
+          village_account?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          order_id?: string
+          payer_email?: string | null
+          payer_mobile?: string
+          payer_name?: string
+          payment_date?: string | null
+          payment_id?: string | null
+          payment_status?: string
+          tax_type?: string
+          updated_at?: string
+          village_account?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_payments_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null
