@@ -16,5 +16,7 @@ export const CUSTOM_ROUTES = {
     ANNOUNCEMENTS: "/announcements",
     NOTICES: "/notices",
     MARKET_PRICES: "/market-prices",
+    TAX_PAYMENT: "/tax-payment",
+    TAX_PAYMENT_RECEIPT: "/tax-payment/receipt",
     NOT_FOUND: "*"
 }

@@ -27,6 +27,8 @@ const GalleryPage = lazy(() => import("./pages/GalleryPage"));
 const AnnouncementsPage = lazy(() => import("./pages/AnnouncementsPage"));
 const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 const MarketPricesPage = lazy(() => import("./pages/MarketPricesPage"));
+const TaxPaymentPage = lazy(() => import("./pages/TaxPaymentPage"));
+const TaxPaymentReceipt = lazy(() => import("./pages/TaxPaymentReceipt"));
 
 const queryClient = new QueryClient();
 
@@ -83,6 +85,14 @@ const App = () => (
                   <Route
                     path={CUSTOM_ROUTES.MARKET_PRICES}
                     element={<MarketPricesPage />}
+                  />
+                  <Route
+                    path={CUSTOM_ROUTES.TAX_PAYMENT}
+                    element={<TaxPaymentPage />}
+                  />
+                  <Route
+                    path={CUSTOM_ROUTES.TAX_PAYMENT_RECEIPT}
+                    element={<TaxPaymentReceipt />}
                   />
                   <Route
                     path={CUSTOM_ROUTES.NOT_FOUND}

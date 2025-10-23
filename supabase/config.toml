@@ -1,1 +1,7 @@
 project_id = "eapbulrifjyhlxpsydin"
+
+[functions.create-tax-payment]
+verify_jwt = false
+
+[functions.verify-tax-payment]
+verify_jwt = false
