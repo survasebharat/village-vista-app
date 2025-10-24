@@ -29,6 +29,8 @@ const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 const MarketPricesPage = lazy(() => import("./pages/MarketPricesPage"));
 const TaxPaymentPage = lazy(() => import("./pages/TaxPaymentPage"));
 const TaxPaymentReceipt = lazy(() => import("./pages/TaxPaymentReceipt"));
+const ForumPage = lazy(() => import("./pages/ForumPage"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 const queryClient = new QueryClient();
 

@@ -1,7 +1,9 @@
 import { useState, useEffect, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
+import { CUSTOM_ROUTES } from '@/custom-routes';
 
 interface StarRatingProps {
   serviceId: string;
@@ -10,14 +12,21 @@ interface StarRatingProps {
 }
 
 const StarRating = ({ serviceId, serviceName, villageId }: StarRatingProps) => {
+  const navigate = useNavigate();
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [totalRatings, setTotalRatings] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [sessionId, setSessionId] = useState('');
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    // Get or create session ID
+    // Check authentication
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUserId(session?.user?.id || null);
+    });
+
+    // Get or create session ID for viewing
     let sid = localStorage.getItem('session_id');
     if (!sid) {
       sid = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -64,6 +73,16 @@ const StarRating = ({ serviceId, serviceName, villageId }: StarRatingProps) => {
   };
 
   const handleRating = async (newRating: number) => {
+    if (!userId) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to rate this service",
+        variant: "destructive",
+      });
+      navigate(CUSTOM_ROUTES.AUTH);
+      return;
+    }
+
     try {
       // Check if user already rated
       const { data: existing } = await supabase

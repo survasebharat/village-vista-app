@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "@/hooks/useAuth";
+import { CUSTOM_ROUTES } from "@/custom-routes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +29,7 @@ interface TaxType {
 const TaxPaymentPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [selectedTax, setSelectedTax] = useState<string>("");
   const [formData, setFormData] = useState({
@@ -42,6 +45,13 @@ const TaxPaymentPage = () => {
     keywords: ["tax payment", "online tax", "village tax", "property tax", "water tax"],
   });
 
+  useEffect(() => {
+    if (!authLoading && !user) {
+      toast.error("Please log in to pay your village tax online");
+      navigate(CUSTOM_ROUTES.AUTH);
+    }
+  }, [user, authLoading, navigate]);
+
   // Tax types configuration
   const taxTypes: TaxType[] = [
     { code: "PROPERTY", label: "Property Tax", amount: "500" },
@@ -51,6 +61,18 @@ const TaxPaymentPage = () => {
   ];
 
   const selectedTaxType = taxTypes.find((t) => t.code === selectedTax);
+
+  if (authLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8 max-w-2xl flex items-center justify-center min-h-[400px]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

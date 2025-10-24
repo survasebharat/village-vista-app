@@ -228,11 +228,11 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
-                  disabled
+                  onClick={() => navigate(CUSTOM_ROUTES.ADMIN_DASHBOARD)}
                 >
-                  <div className="text-lg font-semibold">📢 Announcements</div>
+                  <div className="text-lg font-semibold">📊 Admin Dashboard</div>
                   <div className="text-sm text-muted-foreground text-left">
-                    Manage village announcements (Coming Soon)
+                    View users, posts, and ratings analytics
                   </div>
                 </Button>
               </div>
