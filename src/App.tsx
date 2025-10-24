@@ -97,6 +97,14 @@ const App = () => (
                     element={<TaxPaymentReceipt />}
                   />
                   <Route
+                    path={CUSTOM_ROUTES.FORUM}
+                    element={<ForumPage />}
+                  />
+                  <Route
+                    path={CUSTOM_ROUTES.ADMIN_DASHBOARD}
+                    element={<AdminDashboard />}
+                  />
+                  <Route
                     path={CUSTOM_ROUTES.NOT_FOUND}
                     element={<NotFound />}
                   />
