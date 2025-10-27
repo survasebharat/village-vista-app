@@ -1,3 +1,5 @@
+
+
 08-10-25
 # 🌾 **Shivankhed Khurd Village Website – UI & Feature Specification**
 
@@ -123,7 +125,7 @@ List local services with photos, contact details, and timings.
 * Farmers
 * Plumbers
 * Electricians
-* Mistris / Contractors
+* Mistris / Contractorsa
 * Pharma Shops
 
 Each entry should include:
@@ -249,3 +251,39 @@ Each gallery should display images in a grid view (click to expand full image).
 * All external links and assets (social media, forms) must open in new tabs.
 
 
+TODO : 27-10-25
+- Lazy loading 
+- Scroller Strip for the announcement
+- Minimize, the home page image size to 70% and 20 & announcemnt scroller & 10% strip scroller
+- Remove Stay Updated board 
+- Add actual links for socual media links, what's app.
+- remove Panchayat Responsibilities
+- Integrate gov api to get the gov schemes.
+- remvoe learn more from schemes 
+- services.category.retailsgrocery check in all languages 
+  - User shoudl able to upload services details by uploading photoes and providing service details.
+- user shoudl able to signup , 
+   - Admin should able to approve the registered users 
+
+- Only approved user shoudl able to login
+    - Gramsevak or any servant should able to review user's details and approve as a village member.
+    - email and mobile verify
+      integrate sms services. 
+    - aadhar approvals 
+- Remvoe Need Help with Applications page 
+    Add Help page for services related to web application.
+- Village Gallery 
+    - Update village history, spciality, events, related photoes
+- Remvoe : Share Your Village Moments
+- Add a captcha feature for signup/ send messages. 
+- Display the feedback and complaint resolutions on the dashboard with proper graphical representation. 
+- Generate APK
+    - Test on Mobile view. 
+- Apply SEO.
+    -: Generate a sample 8A 
+- People engament Ideas:
+    -: Education, exams, prises: P1 
+        - Student signup.
+    -: Services availablility, car service/ weekly services/ etc.
+    -: Rental service/ Repido service ola uber service. 
+    -: Send a note to shop keeper to deliver the items. 
