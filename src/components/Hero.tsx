@@ -35,7 +35,8 @@ const Hero = ({ village, panchayat }: HeroProps) => {
                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out"
                     loading={index === 0 ? "eager" : "lazy"}
                     decoding={index === 0 ? "sync" : "async"}
-                    fetchPriority={index === 0 ? "high" : "low"}
+                    // fetchPriority={index === 0 ? "high" : "low"}
+                    {...(typeof window !== "undefined" ? { fetchpriority: "high" } : {})}
                   />
                 </div>
               </CarouselItem>

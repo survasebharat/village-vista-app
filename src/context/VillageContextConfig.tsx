@@ -28,15 +28,19 @@ export const VillageProvider = ({
 }: VillageProviderProps) => {
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
-  const { config, loading: configLoading, error } = useVillageConfig(villageName, currentLanguage);
+  const {
+    config,
+    loading: configLoading,
+    error,
+  } = useVillageConfig(villageName, currentLanguage);
   const { isPageVisible, loading: visibilityLoading } = usePageVisibility();
 
   const value = useMemo(
-    () => ({ 
-      config, 
-      loading: configLoading || visibilityLoading, 
-      error, 
-      isPageVisible 
+    () => ({
+      config,
+      loading: configLoading || visibilityLoading,
+      error,
+      isPageVisible,
     }),
     [config, configLoading, visibilityLoading, error, isPageVisible]
   );

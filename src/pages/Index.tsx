@@ -1,13 +1,14 @@
-import { useContext, lazy, Suspense } from "react";
+import React, { useContext, lazy, Suspense, useMemo, memo } from "react";
 import Hero from "@/components/Hero";
-import CustomLoader from "@/components/CustomLoader";
 import { VillageContext } from "@/context/VillageContextConfig";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import HeroSkeleton from "@/components/ui/skeletons/HeroSkeleton";
 import SectionSkeleton from "@/components/ui/skeletons/SectionSkeleton";
 import GallerySkeleton from "@/components/ui/skeletons/GallerySkeleton";
+import { VILLAGES } from "@/config/villageConfig";
+import LazySection from "@/components/LazySection";
 
-// Lazy load non-critical components
+/* Lazy-loaded components */
 const About = lazy(() => import("@/components/About"));
 const Panchayat = lazy(() => import("@/components/Panchayat"));
 const GovStaff = lazy(() => import("@/components/GovStaff"));
@@ -18,90 +19,124 @@ const Development = lazy(() => import("@/components/Development"));
 const Gallery = lazy(() => import("@/components/Gallery"));
 const Contact = lazy(() => import("@/components/Contact"));
 
-const Index = () => {
+const Index: React.FC = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
-
+  // 🧠 SEO setup
   usePageSEO({
-    title: `${config?.village.name || 'Village'} Gram Panchayat | Official Website`,
-    description: config?.village.description || `Official website of ${config?.village.name || 'Village'} Gram Panchayat. Access government schemes, development projects, announcements, services, and contact information.`,
-    keywords: ['gram panchayat', 'village website', 'government schemes', 'development projects', 'village services', config?.village.name || 'village']
+    title: `${VILLAGES.shivankhed.name} Gram Panchayat | Official Website`,
+    description: `Official website of ${VILLAGES.shivankhed.name} Gram Panchayat. Access government schemes, development projects, announcements, services, and contact information.`,
+    keywords: [
+      "gram panchayat",
+      "village website",
+      "government schemes",
+      "development projects",
+      "village services",
+      VILLAGES.shivankhed.name,
+    ],
+    canonical: "https://shivankhedkhurd.vercel.app",
   });
 
-  if (loading || !config) return <HeroSkeleton />;
+  const memoizedConfig = useMemo(() => config, [config]);
+
+  if (loading || !memoizedConfig) return <HeroSkeleton />;
 
   return (
     <div className="min-h-screen bg-background">
       <main>
-        {/* Hero Section - Load immediately */}
+        {/* Hero Section */}
         <Suspense fallback={<HeroSkeleton />}>
-          <Hero village={config.village} panchayat={config.panchayat} />
+          <Hero
+            village={memoizedConfig.village}
+            panchayat={memoizedConfig.panchayat}
+          />
         </Suspense>
 
-        {/* Latest Announcements */}
+        {/* Announcements */}
         {isPageVisible("announcement") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <Announcements announcements={config.announcements} />
-          </Suspense>
+          <LazySection
+            component={Announcements}
+            fallback={<SectionSkeleton />}
+            props={{ announcements: memoizedConfig.announcements }}
+          />
         )}
 
-        {/* About Village Section */}
+        {/* About */}
         {isPageVisible("about") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <About village={config.village} />
-          </Suspense>
+          <LazySection
+            component={About}
+            fallback={<SectionSkeleton />}
+            props={{ village: memoizedConfig.village }}
+          />
         )}
 
-        {/* Panchayat Information */}
+        {/* Panchayat */}
         {isPageVisible("panchayat") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <Panchayat panchayat={config.panchayat} />
-          </Suspense>
+          <LazySection
+            component={Panchayat}
+            fallback={<SectionSkeleton />}
+            props={{ panchayat: memoizedConfig.panchayat }}
+          />
         )}
 
         {/* Government Staff */}
-        {config.govStaff && config.govStaff.length > 0 && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <GovStaff govStaff={config.govStaff} />
-          </Suspense>
+        {memoizedConfig.govStaff?.length > 0 && (
+          <LazySection
+            component={GovStaff}
+            fallback={<SectionSkeleton />}
+            props={{ govStaff: memoizedConfig.govStaff }}
+          />
         )}
 
-        {/* Government Schemes */}
+        {/* Schemes */}
         {isPageVisible("schemes") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <Schemes schemes={config.schemes} />
-          </Suspense>
+          <LazySection
+            component={Schemes}
+            fallback={<SectionSkeleton />}
+            props={{ schemes: memoizedConfig.schemes }}
+          />
         )}
 
-        {/* Village Services */}
+        {/* Services */}
         {isPageVisible("services") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <Services services={config.services} />
-          </Suspense>
+          <LazySection
+            component={Services}
+            fallback={<SectionSkeleton />}
+            props={{ services: memoizedConfig.services }}
+          />
         )}
 
-        {/* Development Projects */}
+        {/* Development */}
         {isPageVisible("development") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <Development developmentWorks={config.developmentWorks} />
-          </Suspense>
+          <LazySection
+            component={Development}
+            fallback={<SectionSkeleton />}
+            props={{ developmentWorks: memoizedConfig.developmentWorks }}
+          />
         )}
 
         {/* Gallery */}
         {isPageVisible("gallery") && (
-          <Suspense fallback={<GallerySkeleton />}>
-            <Gallery gallery={config.gallery} />
-          </Suspense>
+          <LazySection
+            component={Gallery}
+            fallback={<GallerySkeleton />}
+            props={{ gallery: memoizedConfig.gallery }}
+          />
         )}
 
-        {/* Contact Information */}
+        {/* Contact */}
         {isPageVisible("contact") && (
-          <Suspense fallback={<SectionSkeleton />}>
-            <Contact contact={config.contact} documents={config.documents} />
-          </Suspense>
+          <LazySection
+            component={Contact}
+            fallback={<SectionSkeleton />}
+            props={{
+              contact: memoizedConfig.contact,
+              documents: memoizedConfig.documents,
+            }}
+          />
         )}
       </main>
     </div>
   );
 };
 
-export default Index;
+export default memo(Index);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { getCurrentVillage } from "@/config/villageConfig";
+// import { getCurrentVillage } from "@/config/villageConfig";
 
 export interface Geography {
   altitude: string;
@@ -85,9 +85,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
   const [config, setConfig] = useState<VillageConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const {name} = getCurrentVillage();
 
-  let villageName = name || village
   
   // Normalize language code to base language (e.g., 'en-US' -> 'en')
   const normalizedLanguage = language.split('-')[0]
@@ -99,7 +97,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
         setError(null);
 
         // If no village name specified, use static data as fallback
-        if (!villageName) {
+        if (!village) {
           setLoading(false);
           return;
         }
@@ -108,7 +106,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
         const { data: villageData, error: villageError } = await supabase
           .from("villages")
           .select("id")
-          .eq("name", villageName)
+          .eq("name", village)
           .single();
 
         if (villageError) {
@@ -182,7 +180,7 @@ export const useVillageConfig = (village?: string, language: string = 'en') => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [villageName, normalizedLanguage]);
+  }, [village, normalizedLanguage]);
 
   return { config, loading, error };
 };

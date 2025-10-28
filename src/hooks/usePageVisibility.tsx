@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { getCurrentVillage } from "@/config/villageConfig";
+import { VILLAGES } from "@/config/villageConfig";
 
 interface PageVisibilityMap {
   [key: string]: boolean;
@@ -13,8 +13,6 @@ export const usePageVisibility = () => {
   useEffect(() => {
     fetchPageVisibility();
 
-    // Set up real-time subscription for page visibility updates
-    const village = getCurrentVillage();
     const channel = supabase
       .channel('page-visibility-changes')
       .on(
@@ -23,7 +21,7 @@ export const usePageVisibility = () => {
           event: '*',
           schema: 'public',
           table: 'page_visibility',
-          filter: `village_name=eq.${village.name}`
+          filter: `village_name=eq.${VILLAGES.shivankhed.name}`
         },
         (payload) => {
           if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
@@ -44,12 +42,11 @@ export const usePageVisibility = () => {
 
   const fetchPageVisibility = async () => {
     try {
-      const village = getCurrentVillage();
       
       const { data, error } = await supabase
         .from("page_visibility")
         .select("page_key, is_visible")
-        .eq("village_name", village.name);
+        .eq("village_name", VILLAGES.shivankhed.name);
 
       if (error) throw error;
 
@@ -68,7 +65,7 @@ export const usePageVisibility = () => {
   };
 
   const isPageVisible = (pageKey: string): boolean => {
-    return visibility[pageKey] ?? true; // Default to visible if not found
+    return visibility[pageKey] ?? true; 
   };
 
   return { visibility, isPageVisible, loading };
