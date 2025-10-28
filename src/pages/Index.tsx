@@ -9,6 +9,7 @@ import { VILLAGES } from "@/config/villageConfig";
 import LazySection from "@/components/LazySection";
 
 /* Lazy-loaded components */
+const NewsTicker = lazy(() => import("@/components/NewsTicker"));
 const About = lazy(() => import("@/components/About"));
 const Panchayat = lazy(() => import("@/components/Panchayat"));
 const GovStaff = lazy(() => import("@/components/GovStaff"));
@@ -50,6 +51,13 @@ const Index: React.FC = () => {
             panchayat={memoizedConfig.panchayat}
           />
         </Suspense>
+
+        {/* News Ticker */}
+        {memoizedConfig.newsTicker?.length > 0 && (
+          <Suspense fallback={null}>
+            <NewsTicker news={memoizedConfig.newsTicker} />
+          </Suspense>
+        )}
 
         {/* Announcements */}
         {isPageVisible("announcement") && (

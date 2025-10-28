@@ -79,6 +79,11 @@ export interface VillageConfig {
     contact: string;
     email?: string;
   }>;
+  newsTicker?: Array<{
+    id: string;
+    text: string;
+    priority?: "high" | "medium" | "low";
+  }>;
 }
 
 export const useVillageConfig = (village?: string, language: string = 'en') => {

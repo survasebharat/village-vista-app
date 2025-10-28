@@ -17,7 +17,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageSEO } from "@/hooks/usePageSEO";
-import { getCurrentVillage } from "@/config/villageConfig";
+import { VILLAGES } from "@/config/villageConfig";
 import { Loader2 } from "lucide-react";
 
 interface TaxType {
@@ -95,13 +95,11 @@ const TaxPaymentPage = () => {
     setLoading(true);
 
     try {
-      const currentVillage = getCurrentVillage();
-      
       // Get village ID from database
       const { data: villageData } = await supabase
         .from("villages")
         .select("id")
-        .eq("name", currentVillage.name)
+        .eq("name", VILLAGES.shivankhed.name)
         .maybeSingle();
 
       const { data, error } = await supabase.functions.invoke("create-tax-payment", {
