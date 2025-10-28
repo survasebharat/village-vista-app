@@ -267,7 +267,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
         </div>
 
         {/* Responsibilities Section */}
-        <div className="mt-16">
+        {/* <div className="mt-16">
           <Card className="card-elegant animate-fade-in">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 text-2xl">
@@ -300,7 +300,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
       </div>
 
       <MemberPopupModal 

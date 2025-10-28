@@ -196,7 +196,7 @@ const Gallery = ({ gallery }: GalleryProps) => {
         </Card>
 
         {/* Upload Section */}
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <Card className="card-elegant max-w-2xl mx-auto">
             <CardContent className="p-8">
               <div className="text-6xl mb-4">📷</div>
@@ -219,7 +219,7 @@ const Gallery = ({ gallery }: GalleryProps) => {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
       </div>
     </section>
   );

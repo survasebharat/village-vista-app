@@ -142,9 +142,9 @@ const Schemes = ({ schemes }: SchemesProps) => {
                   >
                     Apply Now
                   </Button>
-                  <Button variant="outline" size="sm">
+                  {/* <Button variant="outline" size="sm">
                     Learn More
-                  </Button>
+                  </Button> */}
                 </div>
               </CardContent>
             </Card>
@@ -152,7 +152,7 @@ const Schemes = ({ schemes }: SchemesProps) => {
         </div>
 
         {/* Help Section */}
-        <Card className="card-elegant animate-fade-in">
+        {/* <Card className="card-elegant animate-fade-in">
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-3 text-2xl">
               <Phone className="h-6 w-6 text-primary" />
@@ -184,7 +184,7 @@ const Schemes = ({ schemes }: SchemesProps) => {
               </div>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
 
         <DocumentsModal 
           isOpen={isDocsModalOpen}
