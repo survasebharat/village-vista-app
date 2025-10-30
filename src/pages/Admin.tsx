@@ -156,6 +156,16 @@ const Admin = () => {
                 <Button
                   variant="outline"
                   className="h-auto p-6 flex flex-col items-start gap-2"
+                  onClick={() => navigate(CUSTOM_ROUTES.USER_MANAGEMENT)}
+                >
+                  <div className="text-lg font-semibold">👥 User Management</div>
+                  <div className="text-sm text-muted-foreground text-left">
+                    Review, approve, and reject user registrations
+                  </div>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="h-auto p-6 flex flex-col items-start gap-2"
                   onClick={() => navigate(CUSTOM_ROUTES.VILLAGE_MANAGEMENT)}
                 >
                   <div className="text-lg font-semibold">🏘️ Village Management</div>
