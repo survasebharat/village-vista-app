@@ -114,6 +114,12 @@ export default function UserManagementDashboard() {
 
   const handleApprove = async (userId: string) => {
     try {
+      // Get user details before approval
+      const userProfile = users.find(u => u.id === userId);
+      if (!userProfile) {
+        throw new Error("User not found");
+      }
+
       const { error } = await supabase
         .from("profiles")
         .update({
@@ -127,8 +133,23 @@ export default function UserManagementDashboard() {
 
       toast({
         title: "Success",
-        description: "User approved successfully",
+        description: "User approved successfully. Sending notification email...",
       });
+
+      // Send approval email in background
+      try {
+        await supabase.functions.invoke("send-user-status-email", {
+          body: {
+            email: userProfile.email,
+            fullName: userProfile.full_name,
+            status: "approved",
+          },
+        });
+        console.log("Approval email sent successfully");
+      } catch (emailError: any) {
+        console.error("Failed to send approval email:", emailError);
+        // Don't fail the approval if email fails
+      }
 
       fetchUsers();
     } catch (error: any) {
@@ -165,8 +186,24 @@ export default function UserManagementDashboard() {
 
       toast({
         title: "Success",
-        description: "User rejected",
+        description: "User rejected. Sending notification email...",
       });
+
+      // Send rejection email in background
+      try {
+        await supabase.functions.invoke("send-user-status-email", {
+          body: {
+            email: selectedUser.email,
+            fullName: selectedUser.full_name,
+            status: "rejected",
+            rejectionReason: rejectionReason,
+          },
+        });
+        console.log("Rejection email sent successfully");
+      } catch (emailError: any) {
+        console.error("Failed to send rejection email:", emailError);
+        // Don't fail the rejection if email fails
+      }
 
       setRejectDialogOpen(false);
       setRejectionReason("");
