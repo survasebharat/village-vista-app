@@ -512,22 +512,47 @@ export type Database = {
       }
       profiles: {
         Row: {
+          aadhar_number: string | null
+          approval_status: Database["public"]["Enums"]["approval_status"] | null
+          approved_at: string | null
+          approved_by: string | null
           created_at: string | null
           email: string | null
           full_name: string | null
           id: string
+          mobile: string | null
+          rejection_reason: string | null
+          updated_at: string | null
         }
         Insert: {
+          aadhar_number?: string | null
+          approval_status?:
+            | Database["public"]["Enums"]["approval_status"]
+            | null
+          approved_at?: string | null
+          approved_by?: string | null
           created_at?: string | null
           email?: string | null
           full_name?: string | null
           id: string
+          mobile?: string | null
+          rejection_reason?: string | null
+          updated_at?: string | null
         }
         Update: {
+          aadhar_number?: string | null
+          approval_status?:
+            | Database["public"]["Enums"]["approval_status"]
+            | null
+          approved_at?: string | null
+          approved_by?: string | null
           created_at?: string | null
           email?: string | null
           full_name?: string | null
           id?: string
+          mobile?: string | null
+          rejection_reason?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -983,9 +1008,11 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_user_approved: { Args: { user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user" | "gramsevak"
+      approval_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1114,6 +1141,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user", "gramsevak"],
+      approval_status: ["pending", "approved", "rejected"],
     },
   },
 } as const
