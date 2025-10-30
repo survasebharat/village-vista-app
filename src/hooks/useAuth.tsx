@@ -12,17 +12,41 @@ export const useAuth = () => {
   const [isApproved, setIsApproved] = useState(false);
 
   useEffect(() => {
-    // Set up auth state listener first
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+    let mounted = true;
+
+    const initAuth = async () => {
+      try {
+        // Get existing session first
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!mounted) return;
+        
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Check roles and approval status when session changes
         if (session?.user) {
-          setTimeout(() => {
-            checkUserRoles(session.user.id);
-          }, 0);
+          await checkUserRoles(session.user.id);
+        }
+      } catch (error) {
+        console.error("❌ Error initializing auth:", error);
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (!mounted) return;
+        
+        console.log("🔐 Auth state changed:", event);
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          await checkUserRoles(session.user.id);
         } else {
           setIsAdmin(false);
           setIsGramsevak(false);
@@ -32,21 +56,12 @@ export const useAuth = () => {
       }
     );
 
-    // Then check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        setTimeout(() => {
-          checkUserRoles(session.user.id);
-        }, 0);
-      }
-      
-      setLoading(false);
-    });
+    initAuth();
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const checkUserRoles = async (userId: string) => {
