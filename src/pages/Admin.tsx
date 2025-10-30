@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -21,8 +22,7 @@ interface PageVisibility {
 }
 
 const Admin = () => {
-  const [loading, setLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { user, isAdmin, isSubAdmin, loading: authLoading } = useAuth();
   const [selectedVillage, setSelectedVillage] = useState("Shivankhed");
   const [pages, setPages] = useState<PageVisibility[]>([]);
   const [updating, setUpdating] = useState(false);
@@ -30,60 +30,19 @@ const Admin = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    checkAdminAccess();
-  }, []);
-
-  useEffect(() => {
-    if (isAdmin) {
+    if (!authLoading && !user) {
+      navigate("/auth");
+    } else if (!authLoading && user && !isAdmin && !isSubAdmin) {
+      toast({
+        title: "Access Denied",
+        description: "Only administrators can access this page.",
+        variant: "destructive",
+      });
+      navigate("/");
+    } else if (!authLoading && (isAdmin || isSubAdmin)) {
       fetchPageVisibility();
     }
-  }, [isAdmin, selectedVillage]);
-
-  const checkAdminAccess = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        navigate("/auth");
-        return;
-      }
-
-      // Check if user has admin or sub_admin role
-      const { data: roleData, error: roleError } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", session.user.id)
-        .in("role", ["admin", "sub_admin"]);
-
-      if (roleError) {
-        console.error("Error checking admin role:", roleError);
-        toast({
-          title: "Access Denied",
-          description: "You don't have permission to access this page.",
-          variant: "destructive",
-        });
-        navigate("/");
-        return;
-      }
-
-      if (!roleData || roleData.length === 0) {
-        toast({
-          title: "Access Denied",
-          description: "Only administrators can access this page.",
-          variant: "destructive",
-        });
-        navigate("/");
-        return;
-      }
-
-      setIsAdmin(true);
-    } catch (error) {
-      console.error("Error:", error);
-      navigate("/");
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [authLoading, user, isAdmin, isSubAdmin, navigate, toast, selectedVillage]);
 
   const fetchPageVisibility = async () => {
     try {
@@ -147,7 +106,7 @@ const Admin = () => {
     navigate("/");
   };
 
-  if (loading) {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -155,7 +114,7 @@ const Admin = () => {
     );
   }
 
-  if (!isAdmin) {
+  if (!user || (!isAdmin && !isSubAdmin)) {
     return null;
   }
 

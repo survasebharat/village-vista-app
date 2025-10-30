@@ -174,7 +174,7 @@ export default function AdminDashboard() {
     );
   }
 
-  if (!user || !isAdmin) {
+  if (!user || (!isAdmin && !isSubAdmin)) {
     return null;
   }
 
