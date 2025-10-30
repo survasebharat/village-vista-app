@@ -48,13 +48,12 @@ const Admin = () => {
         return;
       }
 
-      // Check if user has admin role
+      // Check if user has admin or sub_admin role
       const { data: roleData, error: roleError } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", session.user.id)
-        .eq("role", "admin")
-        .maybeSingle();
+        .in("role", ["admin", "sub_admin"]);
 
       if (roleError) {
         console.error("Error checking admin role:", roleError);
@@ -67,7 +66,7 @@ const Admin = () => {
         return;
       }
 
-      if (!roleData) {
+      if (!roleData || roleData.length === 0) {
         toast({
           title: "Access Denied",
           description: "Only administrators can access this page.",
