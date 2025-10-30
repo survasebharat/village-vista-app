@@ -106,11 +106,11 @@ All colors MUST be HSL format for theming support.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+
 .animate-scroll-left {
   display: inline-flex;
-  animation: scroll-left 15s linear infinite; /* faster scroll */
+  animation: scroll-left 15s linear infinite;
 }
-
 
 @layer base {
   * {
@@ -198,7 +198,6 @@ All colors MUST be HSL format for theming support.
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
-  
 
   /* Interactive Elements */
   .hover-lift {
@@ -210,7 +209,6 @@ All colors MUST be HSL format for theming support.
     box-shadow: var(--shadow-elegant);
   }
 
-  
   /* Text Gradients */
   .text-gradient {
     background: var(--gradient-primary);
