@@ -44,7 +44,7 @@ export default function AdminDashboard() {
     description: "View and manage users, posts, and ratings",
   });
   
-  const { user, isAdmin, loading: authLoading } = useAuth();
+  const { user, isAdmin, isSubAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
@@ -66,14 +66,14 @@ export default function AdminDashboard() {
         variant: "destructive",
       });
       navigate(CUSTOM_ROUTES.AUTH);
-    } else if (!authLoading && user && !isAdmin) {
+    } else if (!authLoading && user && !isAdmin && !isSubAdmin) {
       toast({
         title: "Access Denied",
         description: "Only administrators can access this page",
         variant: "destructive",
       });
       navigate("/");
-    } else if (!authLoading && user && isAdmin) {
+    } else if (!authLoading && user && (isAdmin || isSubAdmin)) {
       fetchData();
     }
   }, [user, isAdmin, authLoading, navigate, toast]);
