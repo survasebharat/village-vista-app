@@ -58,6 +58,7 @@ const resources = {
       "services.doctor": "Doctor",
       "services.teacher": "Teacher", 
       "services.pujari": "Pujari",
+      
       "services.category.retailsgrocery": "Retail & Grocery",
       "services.category.transportation": "Transportation",
       "services.category.religiousservices": "Religious Services",
