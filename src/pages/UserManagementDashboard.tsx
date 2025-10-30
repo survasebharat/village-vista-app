@@ -47,7 +47,7 @@ interface UserProfile {
 
 export default function UserManagementDashboard() {
   usePageSEO({ title: "User Management", description: "Manage user registrations and approvals" });
-  const { user, loading: authLoading, isAdmin, isGramsevak } = useAuth();
+  const { user, loading: authLoading, isAdmin, isGramsevak, isSubAdmin } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -63,7 +63,7 @@ export default function UserManagementDashboard() {
     if (!authLoading) {
       if (!user) {
         navigate("/auth");
-      } else if (!isAdmin && !isGramsevak) {
+      } else if (!isAdmin && !isGramsevak && !isSubAdmin) {
         toast({
           title: "Access Denied",
           description: "You don't have permission to access this page",
@@ -74,7 +74,7 @@ export default function UserManagementDashboard() {
         fetchUsers();
       }
     }
-  }, [authLoading, user, isAdmin, isGramsevak, navigate]);
+  }, [authLoading, user, isAdmin, isGramsevak, isSubAdmin, navigate]);
 
   const fetchUsers = async () => {
     try {
