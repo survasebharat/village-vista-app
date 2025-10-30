@@ -51,27 +51,42 @@ export const useAuth = () => {
 
   const checkUserRoles = async (userId: string) => {
     try {
+      console.log("🔍 Checking roles for user:", userId);
+      
       // Check roles
-      const { data: rolesData } = await supabase
+      const { data: rolesData, error: rolesError } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", userId);
       
+      console.log("📊 Roles data:", rolesData, "Error:", rolesError);
+      
       const roles = rolesData?.map(r => r.role) || [];
-      setIsAdmin(roles.includes("admin"));
-      setIsGramsevak(roles.includes("gramsevak"));
-      setIsSubAdmin(roles.includes("sub_admin"));
+      const hasAdmin = roles.includes("admin");
+      const hasGramsevak = roles.includes("gramsevak");
+      const hasSubAdmin = roles.includes("sub_admin");
+      
+      console.log("👤 User roles:", { hasAdmin, hasGramsevak, hasSubAdmin });
+      
+      setIsAdmin(hasAdmin);
+      setIsGramsevak(hasGramsevak);
+      setIsSubAdmin(hasSubAdmin);
 
       // Check approval status
-      const { data: profileData } = await supabase
+      const { data: profileData, error: profileError } = await supabase
         .from("profiles")
         .select("approval_status")
         .eq("id", userId)
         .maybeSingle();
       
-      setIsApproved(profileData?.approval_status === "approved");
+      console.log("✅ Profile data:", profileData, "Error:", profileError);
+      
+      const approved = profileData?.approval_status === "approved";
+      console.log("🎯 Is approved:", approved);
+      
+      setIsApproved(approved);
     } catch (error) {
-      console.error("Error checking user roles:", error);
+      console.error("❌ Error checking user roles:", error);
       setIsAdmin(false);
       setIsGramsevak(false);
       setIsSubAdmin(false);
