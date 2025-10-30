@@ -24,21 +24,58 @@ const Auth = () => {
 
   useEffect(() => {
     // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (session) {
-        navigate("/");
+        const destination = await checkUserRoleAndRedirect(session.user.id);
+        navigate(destination);
       }
     });
 
     // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        navigate("/");
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session && event === 'SIGNED_IN') {
+        const destination = await checkUserRoleAndRedirect(session.user.id);
+        navigate(destination);
       }
     });
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  const checkUserRoleAndRedirect = async (userId: string) => {
+    try {
+      // Check user roles
+      const { data: roleData } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId);
+
+      if (roleData && roleData.length > 0) {
+        const roles = roleData.map(r => r.role);
+        // If user is admin or sub_admin, redirect to admin dashboard
+        if (roles.includes("admin") || roles.includes("sub_admin")) {
+          return "/admin/dashboard";
+        }
+      }
+
+      // Check approval status for regular users
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("approval_status")
+        .eq("id", userId)
+        .single();
+
+      if (profileData?.approval_status === "approved") {
+        return "/my-dashboard";
+      }
+
+      // If not approved, go to home
+      return "/";
+    } catch (error) {
+      console.error("Error checking user role:", error);
+      return "/";
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

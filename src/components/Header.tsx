@@ -1,6 +1,6 @@
 import { useState, useContext, memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, Phone, Mail, Shield, LogIn, LogOut } from "lucide-react";
+import { Menu, X, Phone, Mail, Shield, LogIn, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "./LanguageToggle";
@@ -14,7 +14,7 @@ import { VillageContext } from "@/context/VillageContextConfig";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, isSubAdmin } = useAuth();
   const { isPageVisible } = usePageVisibility();
   const navigate = useNavigate();
   const { config } = useContext(VillageContext);
@@ -102,10 +102,15 @@ const Header = () => {
             <div className="hidden lg:flex items-center gap-2">
               {user ? (
                 <>
-                  {isAdmin && (
-                    <Button variant="outline" size="sm" onClick={() => navigate("/admin")} className="gap-2">
+                  {(isAdmin || isSubAdmin) ? (
+                    <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-2">
                       <Shield className="h-4 w-4" />
                       Admin
+                    </Button>
+                  ) : (
+                    <Button variant="outline" size="sm" onClick={() => navigate(CUSTOM_ROUTES.USER_DASHBOARD)} className="gap-2">
+                      <User className="h-4 w-4" />
+                      My Profile
                     </Button>
                   )}
                   <Button variant="ghost" size="sm" onClick={handleLogout} className="gap-2">
@@ -148,17 +153,29 @@ const Header = () => {
               <div className="mt-4 space-y-2">
                 {user ? (
                   <>
-                    {isAdmin && (
+                    {(isAdmin || isSubAdmin) ? (
                       <Button
                         variant="outline"
                         className="w-full gap-2"
                         onClick={() => {
-                          navigate("/admin");
+                          navigate("/admin/dashboard");
                           setIsMenuOpen(false);
                         }}
                       >
                         <Shield className="h-4 w-4" />
-                        Admin Panel
+                        Admin Dashboard
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        className="w-full gap-2"
+                        onClick={() => {
+                          navigate(CUSTOM_ROUTES.USER_DASHBOARD);
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        <User className="h-4 w-4" />
+                        My Profile
                       </Button>
                     )}
                     <Button variant="ghost" className="w-full gap-2" onClick={handleLogout}>
