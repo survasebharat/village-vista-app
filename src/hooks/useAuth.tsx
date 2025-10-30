@@ -7,6 +7,8 @@ export const useAuth = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isGramsevak, setIsGramsevak] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
 
   useEffect(() => {
     // Set up auth state listener first
@@ -15,13 +17,15 @@ export const useAuth = () => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Check admin role when session changes
+        // Check roles and approval status when session changes
         if (session?.user) {
           setTimeout(() => {
-            checkAdminRole(session.user.id);
+            checkUserRoles(session.user.id);
           }, 0);
         } else {
           setIsAdmin(false);
+          setIsGramsevak(false);
+          setIsApproved(false);
         }
       }
     );
@@ -33,7 +37,7 @@ export const useAuth = () => {
       
       if (session?.user) {
         setTimeout(() => {
-          checkAdminRole(session.user.id);
+          checkUserRoles(session.user.id);
         }, 0);
       }
       
@@ -43,20 +47,33 @@ export const useAuth = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const checkAdminRole = async (userId: string) => {
+  const checkUserRoles = async (userId: string) => {
     try {
-      const { data } = await supabase
+      // Check roles
+      const { data: rolesData } = await supabase
         .from("user_roles")
         .select("role")
-        .eq("user_id", userId)
-        .eq("role", "admin")
+        .eq("user_id", userId);
+      
+      const roles = rolesData?.map(r => r.role) || [];
+      setIsAdmin(roles.includes("admin"));
+      setIsGramsevak(roles.includes("gramsevak"));
+
+      // Check approval status
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("approval_status")
+        .eq("id", userId)
         .maybeSingle();
-      setIsAdmin(!!data);
+      
+      setIsApproved(profileData?.approval_status === "approved");
     } catch (error) {
-      console.error("Error checking admin role:", error);
+      console.error("Error checking user roles:", error);
       setIsAdmin(false);
+      setIsGramsevak(false);
+      setIsApproved(false);
     }
   };
 
-  return { user, session, loading, isAdmin };
+  return { user, session, loading, isAdmin, isGramsevak, isApproved };
 };

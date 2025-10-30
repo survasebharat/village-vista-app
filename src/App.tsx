@@ -16,6 +16,8 @@ const Admin = lazy(() => import("./pages/Admin"));
 const VillageManagement = lazy(() => import("./pages/VillageManagement"));
 const JsonConfigManager = lazy(() => import("./pages/JsonConfigManager"));
 const ContactMessagesAdmin = lazy(() => import("./pages/ContactMessagesAdmin"));
+const UserManagementDashboard = lazy(() => import("./pages/UserManagementDashboard"));
+const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
@@ -119,6 +121,8 @@ const App = () => (
                     element={<JsonConfigManager />}
                   />
                   <Route path={CUSTOM_ROUTES.CONTACT_MESSAGE} element={<ContactMessagesAdmin />} />
+                  <Route path={CUSTOM_ROUTES.USER_MANAGEMENT} element={<UserManagementDashboard />} />
+                  <Route path={CUSTOM_ROUTES.USER_DASHBOARD} element={<UserDashboard />} />
                 </Routes>
               </Layout>
             }

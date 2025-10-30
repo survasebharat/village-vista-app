@@ -16,6 +16,8 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [aadharNumber, setAadharNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -102,6 +104,26 @@ const Auth = () => {
         return;
       }
 
+      if (!mobile || mobile.length !== 10) {
+        toast({
+          title: "Validation Error",
+          description: "Please enter a valid 10-digit mobile number",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      if (!aadharNumber || aadharNumber.length !== 12) {
+        toast({
+          title: "Validation Error",
+          description: "Please enter a valid 12-digit Aadhar number",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
       const redirectUrl = `${window.location.origin}/`;
 
       const { error } = await supabase.auth.signUp({
@@ -110,6 +132,8 @@ const Auth = () => {
         options: {
           data: {
             full_name: fullName,
+            mobile: mobile,
+            aadhar_number: aadharNumber,
           },
           emailRedirectTo: redirectUrl,
         },
@@ -131,9 +155,14 @@ const Auth = () => {
         }
       } else {
         toast({
-          title: "Account Created!",
-          description: "Your account has been created successfully.",
+          title: "Registration Submitted!",
+          description: "Your registration has been submitted for approval. You will receive an email once approved.",
         });
+        setEmail("");
+        setPassword("");
+        setFullName("");
+        setMobile("");
+        setAadharNumber("");
       }
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -208,6 +237,30 @@ const Auth = () => {
                   />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="signup-mobile">Mobile Number</Label>
+                  <Input
+                    id="signup-mobile"
+                    type="tel"
+                    placeholder="10-digit mobile number"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    maxLength={10}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signup-aadhar">Aadhar Number</Label>
+                  <Input
+                    id="signup-aadhar"
+                    type="text"
+                    placeholder="12-digit Aadhar number"
+                    value={aadharNumber}
+                    onChange={(e) => setAadharNumber(e.target.value.replace(/\D/g, '').slice(0, 12))}
+                    maxLength={12}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="signup-email">Email</Label>
                   <Input
                     id="signup-email"
@@ -230,7 +283,7 @@ const Auth = () => {
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Creating Account..." : "Sign Up"}
+                  {loading ? "Submitting..." : "Sign Up"}
                 </Button>
               </form>
             </TabsContent>
