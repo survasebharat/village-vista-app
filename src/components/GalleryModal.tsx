@@ -1,7 +1,8 @@
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface GalleryModalProps {
   isOpen: boolean;
@@ -11,7 +12,13 @@ interface GalleryModalProps {
   initialIndex?: number;
 }
 
-const GalleryModal = ({ isOpen, onClose, images, title, initialIndex = 0 }: GalleryModalProps) => {
+const GalleryModal = ({
+  isOpen,
+  onClose,
+  images,
+  title,
+  initialIndex = 0,
+}: GalleryModalProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const nextImage = () => {
@@ -23,18 +30,18 @@ const GalleryModal = ({ isOpen, onClose, images, title, initialIndex = 0 }: Gall
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') prevImage();
-    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === "ArrowLeft") prevImage();
+    if (e.key === "ArrowRight") nextImage();
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent 
+      <DialogContent
         className="max-w-4xl w-full p-0 overflow-hidden"
         onKeyDown={handleKeyDown}
       >
         {/* Header */}
-        <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-background/95 to-transparent p-4">
+        {/* <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-background/95 to-transparent p-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-foreground">{title}</h3>
             <Button
@@ -46,7 +53,13 @@ const GalleryModal = ({ isOpen, onClose, images, title, initialIndex = 0 }: Gall
               <X className="h-5 w-5" />
             </Button>
           </div>
-        </div>
+        </div> */}
+
+        <DialogHeader>
+          <div className="flex items-start justify-between gap-4">
+            <DialogTitle className="text-lg font-semibold text-foreground">{title}</DialogTitle>
+          </div>
+        </DialogHeader>
 
         {/* Main Image */}
         <div className="relative bg-muted/30 flex items-center justify-center min-h-[400px] max-h-[80vh]">
@@ -90,8 +103,8 @@ const GalleryModal = ({ isOpen, onClose, images, title, initialIndex = 0 }: Gall
                   onClick={() => setCurrentIndex(idx)}
                   className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
                     idx === currentIndex
-                      ? 'border-primary scale-110'
-                      : 'border-transparent opacity-60 hover:opacity-100'
+                      ? "border-primary scale-110"
+                      : "border-transparent opacity-60 hover:opacity-100"
                   }`}
                 >
                   <img
