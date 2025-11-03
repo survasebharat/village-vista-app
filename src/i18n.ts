@@ -194,6 +194,9 @@ const resources = {
       "common.department": "Department",
       "common.position": "Position",
       "common.responsibilities": "Responsibilities",
+
+       // news ticker 
+      "news.latest" : "Latest News"
     }
   },
   hi: {
@@ -378,7 +381,10 @@ const resources = {
       "common.ward": "वार्ड",
       "common.department": "विभाग",
       "common.position": "पद",
-      "common.responsibilities": "जिम्मेदारियां"
+      "common.responsibilities": "जिम्मेदारियां",
+
+      // news ticker 
+       "news.latest" : "ताजा खबर"
     }
   },
   mr: {
@@ -563,7 +569,10 @@ const resources = {
       "common.ward": "प्रभाग",
       "common.department": "विभाग",
       "common.position": "पद",
-      "common.responsibilities": "जबाबदाऱ्या"
+      "common.responsibilities": "जबाबदाऱ्या",
+
+      // news ticker
+      "news.latest" : "ताज्या बातम्या"
     }
   }
 };
