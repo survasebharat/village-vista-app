@@ -84,8 +84,8 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
           </Card> */}
 
         
-        {/* Secretary Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16" >
+        {/* Sarpanch, Upsarpanch, and Secretary Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16" >
           <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
             <CardHeader className="text-center">
               <div 
@@ -132,6 +132,57 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Upsarpanch Card */}
+          {panchayat.upsarpanch && (
+            <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
+              <CardHeader className="text-center">
+                <div 
+                  className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary cursor-pointer hover:border-primary transition-colors"
+                  onClick={() => handleMemberClick(panchayat.upsarpanch)}
+                >
+                  <img 
+                    src={panchayat.upsarpanch.image} 
+                    alt={panchayat.upsarpanch.name}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <CardTitle className="text-2xl">{panchayat.upsarpanch.name}</CardTitle>
+                <Badge variant="secondary" className="mx-auto">
+                  {t('panchayat.upsarpanch')}
+                </Badge>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-center">
+                  <p className="text-lg text-muted-foreground mb-4">
+                    {panchayat.upsarpanch.education}
+                  </p>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    <span>{t('panchayat.tenure')}: {panchayat.upsarpanch.tenure}</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    {panchayat.upsarpanch.contact}
+                  </Button>
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Mail className="h-4 w-4" />
+                    {panchayat.upsarpanch.email}
+                  </Button>
+                </div>
+
+                <div className="bg-muted/30 rounded-lg p-4 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    "{panchayat.upsarpanch.message || t('panchayat.message')}"
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
             <CardHeader className="text-center">
               <div 

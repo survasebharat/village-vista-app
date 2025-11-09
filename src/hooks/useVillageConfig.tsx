@@ -61,7 +61,13 @@ export interface PersonProfile {
 
 export interface VillageConfig {
   village: VillageData;
-  panchayat: any;
+  panchayat: {
+    sarpanch: PersonProfile;
+    upsarpanch?: PersonProfile;
+    secretary: PersonProfile;
+    wardMembers: PersonProfile[];
+    staff: PersonProfile[];
+  };
   announcements: any[];
   schemes: any[];
   developmentWorks: any;
