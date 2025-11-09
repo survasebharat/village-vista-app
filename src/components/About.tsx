@@ -15,17 +15,19 @@ const About = ({ village }: AboutProps) => {
     {
       icon: MapPin,
       label: t('common.coordinates'),
-      value: `${village.geography.latitude}°N, ${village.geography.longitude}°E`,
+      value: village?.geography?.latitude && village?.geography?.longitude 
+        ? `${village.geography.latitude}°N, ${village.geography.longitude}°E`
+        : 'Not available',
     },
     {
       icon: Mountain,
       label: t('common.altitude'),
-      value: village.geography.altitude,
+      value: village?.geography?.altitude || 'Not available',
     },
     {
       icon: Compass,
       label: t('common.area'),
-      value: village.area,
+      value: village?.area || 'Not available',
     },
   ];
 
@@ -33,25 +35,25 @@ const About = ({ village }: AboutProps) => {
     {
       icon: Users,
       label: t('common.totalPopulation'),
-      value: village.population.total.toLocaleString(),
+      value: village?.population?.total?.toLocaleString() || '0',
       color: "bg-primary",
     },
     {
       icon: Users,
       label: t('common.malePopulation'),
-      value: village.population.male.toLocaleString(),
+      value: village?.population?.male?.toLocaleString() || '0',
       color: "bg-accent",
     },
     {
       icon: Users,
       label: t('common.femalePopulation'), 
-      value: village.population.female.toLocaleString(),
+      value: village?.population?.female?.toLocaleString() || '0',
       color: "bg-success",
     },
     {
       icon: GraduationCap,
       label: t('common.literacyRate'),
-      value: village.population.literacy,
+      value: village?.population?.literacy || 'Not available',
       color: "bg-warning",
     },
   ];
@@ -98,16 +100,16 @@ const About = ({ village }: AboutProps) => {
                   <p className="text-sm text-muted-foreground mb-2">{t('common.administrativeDetails')}</p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="font-medium">{t('common.district')}:</span> {village.district}
+                      <span className="font-medium">{t('common.district')}:</span> {village?.district || 'Not available'}
                     </div>
                     <div>
-                      <span className="font-medium">{t('common.state')}:</span> {village.state}
+                      <span className="font-medium">{t('common.state')}:</span> {village?.state || 'Not available'}
                     </div>
                     <div>
-                      <span className="font-medium">{t('common.pinCode')}:</span> {village.pincode}
+                      <span className="font-medium">{t('common.pinCode')}:</span> {village?.pincode || 'Not available'}
                     </div>
                     <div>
-                      <span className="font-medium">{t('about.established')}:</span> {village.established}
+                      <span className="font-medium">{t('about.established')}:</span> {village?.established || 'Not available'}
                     </div>
                   </div>
                 </div>
@@ -148,14 +150,16 @@ const About = ({ village }: AboutProps) => {
                   ))}
                 </div>
                 
-                <div className="p-4 rounded-lg bg-success/5 border border-success/20 animate-slide-up">
-                  <p className="text-success font-semibold text-center mb-2">
-                    {t('common.genderRatio')}: {Math.round((village.population.female / village.population.male) * 1000)} {t('common.femalesPerMales')}
-                  </p>
-                  <p className="text-sm text-muted-foreground text-center">
-                    {t('common.progressiveValues')}
-                  </p>
-                </div>
+                {village?.population?.female && village?.population?.male && (
+                  <div className="p-4 rounded-lg bg-success/5 border border-success/20 animate-slide-up">
+                    <p className="text-success font-semibold text-center mb-2">
+                      {t('common.genderRatio')}: {Math.round((village.population.female / village.population.male) * 1000)} {t('common.femalesPerMales')}
+                    </p>
+                    <p className="text-sm text-muted-foreground text-center">
+                      {t('common.progressiveValues')}
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -176,16 +180,20 @@ const About = ({ village }: AboutProps) => {
             </p>
             
             <div className="flex flex-wrap gap-3">
-              {village.culture.map((festival, index) => (
-                <Badge 
-                  key={festival} 
-                  variant="secondary" 
-                  className="px-4 py-2 text-sm font-medium hover-lift animate-fade-in transition-all duration-300 hover:scale-105"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {festival}
-                </Badge>
-              ))}
+              {village.culture && village.culture.length > 0 ? (
+                village.culture.map((festival, index) => (
+                  <Badge 
+                    key={festival} 
+                    variant="secondary" 
+                    className="px-4 py-2 text-sm font-medium hover-lift animate-fade-in transition-all duration-300 hover:scale-105"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    {festival}
+                  </Badge>
+                ))
+              ) : (
+                <p className="text-muted-foreground text-sm italic">No cultural events information available</p>
+              )}
             </div>
             
             <div className="mt-6 p-4 rounded-lg bg-accent/5 border border-accent/20">
