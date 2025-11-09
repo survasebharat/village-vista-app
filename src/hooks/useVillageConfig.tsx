@@ -50,6 +50,15 @@ export interface Emergency {
   local_emergency: string;
 }
 
+export interface PersonProfile {
+  name: string;
+  image: string;
+  profession: string;
+  description: string;
+  contact?: string;
+  email?: string;
+}
+
 export interface VillageConfig {
   village: VillageData;
   panchayat: any;
@@ -84,6 +93,9 @@ export interface VillageConfig {
     text: string;
     priority?: "high" | "medium" | "low";
   }>;
+  proudPeople?: PersonProfile[];
+  ashaWorkers?: PersonProfile[];
+  anganwadiWorkers?: PersonProfile[];
 }
 
 export const useVillageConfig = (village?: string, language: string = 'en') => {

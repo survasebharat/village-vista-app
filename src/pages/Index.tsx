@@ -19,6 +19,7 @@ const Services = lazy(() => import("@/components/Services"));
 const Development = lazy(() => import("@/components/Development"));
 const Gallery = lazy(() => import("@/components/Gallery"));
 const Contact = lazy(() => import("@/components/Contact"));
+const PeopleSection = lazy(() => import("@/components/PeopleSection"));
 
 const Index: React.FC = () => {
   const { config, isPageVisible, loading } = useContext(VillageContext);
@@ -119,6 +120,48 @@ const Index: React.FC = () => {
             component={Development}
             fallback={<SectionSkeleton />}
             props={{ developmentWorks: memoizedConfig.developmentWorks }}
+          />
+        )}
+
+        {/* Proud of Our People */}
+        {memoizedConfig.proudPeople?.length > 0 && (
+          <LazySection
+            component={PeopleSection}
+            fallback={<SectionSkeleton />}
+            props={{
+              title: "Proud of Our People",
+              description: "Celebrating individuals who have made our village proud through their achievements and contributions",
+              people: memoizedConfig.proudPeople,
+              sectionId: "proud-people"
+            }}
+          />
+        )}
+
+        {/* Asha Workers */}
+        {memoizedConfig.ashaWorkers?.length > 0 && (
+          <LazySection
+            component={PeopleSection}
+            fallback={<SectionSkeleton />}
+            props={{
+              title: "Asha Workers",
+              description: "Dedicated health workers serving our community with care and compassion",
+              people: memoizedConfig.ashaWorkers,
+              sectionId: "asha-workers"
+            }}
+          />
+        )}
+
+        {/* Anganwadi Karykarti */}
+        {memoizedConfig.anganwadiWorkers?.length > 0 && (
+          <LazySection
+            component={PeopleSection}
+            fallback={<SectionSkeleton />}
+            props={{
+              title: "Anganwadi Karykarti",
+              description: "Committed workers ensuring child development and women welfare in our village",
+              people: memoizedConfig.anganwadiWorkers,
+              sectionId: "anganwadi-workers"
+            }}
           />
         )}
 
