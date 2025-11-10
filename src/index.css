@@ -162,6 +162,15 @@ All colors MUST be HSL format for theming support.
       box-shadow: 0 0 30px hsl(var(--accent) / 0.5);
     }
   }
+
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 }
 
 @layer components {

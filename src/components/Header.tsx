@@ -44,27 +44,6 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
-        {/* Top Info Bar */}
-        {config?.contact?.office && (
-         <div className="flex flex-col sm:flex-row items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50 gap-2">
-
-           
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                <span>{config.contact.office.phone}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                <span>{config.contact.office.email}</span>
-              </div>
-            </div>
-            {/* Social Media Icons */}
-            <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
-            {/*<div className="text-sm">{config.contact.office.hours}</div>*/}
-          </div>
-        )}
-
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo & Title */}
@@ -86,7 +65,13 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Left side: Language & Social */}
+          <div className="flex items-center gap-4">
+            <LanguageToggle />
+            <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
+          </div>
+
+          {/* Desktop Navigation & Auth */}
           <div className="flex items-center gap-4">
             <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
@@ -100,8 +85,6 @@ const Header = () => {
                 </Button>
               ))}
             </nav>
-
-            <LanguageToggle />
 
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center gap-2">
@@ -134,20 +117,22 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {/* Mobile Social Media Buttons */}
-{config?.social && (
-  <div className="flex justify-center gap-6 mt-6">
-    <SocialMediaButtons social={config.social} className="flex" />
-  </div>
-)}
-
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Overlay */}
         {isMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-border animate-slide-up">
-            <div className="flex flex-col gap-2">
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden animate-fade-in"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
+
+        {/* Mobile Navigation Sidebar */}
+        {isMenuOpen && (
+          <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-50 lg:hidden animate-slide-in-right overflow-y-auto">
+            <div className="flex flex-col gap-2 p-4">
               {navItems.map((item) => (
                 <Button
                   key={item.name}
@@ -208,6 +193,13 @@ const Header = () => {
                   </Button>
                 )}
               </div>
+
+              {/* Mobile Social Media */}
+              {config?.social && (
+                <div className="flex justify-center gap-4 pt-4 border-t border-border">
+                  <SocialMediaButtons social={config.social} className="flex" />
+                </div>
+              )}
             </div>
           </nav>
         )}
