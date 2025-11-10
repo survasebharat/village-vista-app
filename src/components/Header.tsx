@@ -122,19 +122,20 @@ const Header = () => {
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
+      </div>
 
-        {/* Mobile Navigation Overlay */}
-        {isMenuOpen && (
-          <div 
-            className="fixed inset-0 bg-black/50 z-[60] lg:hidden animate-fade-in"
-            onClick={() => setIsMenuOpen(false)}
-          />
-        )}
+      {/* Mobile Navigation Overlay - Outside container */}
+      {isMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-[9998] lg:hidden animate-fade-in"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
 
-        {/* Mobile Navigation Sidebar */}
-        {isMenuOpen && (
-          <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-[70] lg:hidden animate-slide-in-right overflow-y-auto">
-            <div className="flex flex-col gap-2 p-4">
+      {/* Mobile Navigation Sidebar - Outside container */}
+      {isMenuOpen && (
+        <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-[9999] lg:hidden animate-slide-in-right overflow-y-auto border-l border-border">
+          <div className="flex flex-col gap-2 p-4">
               {navItems.map((item) => (
                 <Button
                   key={item.name}
@@ -208,7 +209,6 @@ const Header = () => {
             </div>
           </nav>
         )}
-      </div>
     </header>
   );
 };
