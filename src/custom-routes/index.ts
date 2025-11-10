@@ -9,6 +9,7 @@ export const CUSTOM_ROUTES = {
     CONTACT_MESSAGE : "/admin/messages",
     USER_MANAGEMENT: "/admin/users",
     ADMIN_MARKETPLACE: "/admin/marketplace",
+    SELLER_DASHBOARD: "/seller-dashboard",
     USER_DASHBOARD: "/my-dashboard",
     ABOUT: "/about",
     SERVICES: "/services",

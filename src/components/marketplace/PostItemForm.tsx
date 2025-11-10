@@ -157,8 +157,22 @@ const PostItemForm = ({ onSuccess }: PostItemFormProps) => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="sellerName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Seller Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
               control={form.control}
               name="item_name"
               render={({ field }) => (

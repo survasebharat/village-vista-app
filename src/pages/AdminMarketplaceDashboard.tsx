@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { ArrowLeft, CheckCircle, XCircle, Trash2, TrendingUp } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, Trash2, TrendingUp, CheckSquare, Square } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import CustomLoader from "@/components/CustomLoader";
@@ -35,6 +35,7 @@ export default function AdminMarketplaceDashboard() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [rejectionReason, setRejectionReason] = useState("");
   const [showRejectDialog, setShowRejectDialog] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     if (!authLoading && !isAdmin) {
@@ -134,6 +135,80 @@ export default function AdminMarketplaceDashboard() {
     setShowRejectDialog(true);
   };
 
+  const toggleItemSelection = (itemId: string) => {
+    const newSelection = new Set(selectedItems);
+    if (newSelection.has(itemId)) {
+      newSelection.delete(itemId);
+    } else {
+      newSelection.add(itemId);
+    }
+    setSelectedItems(newSelection);
+  };
+
+  const toggleSelectAll = (items: Item[]) => {
+    if (selectedItems.size === items.length) {
+      setSelectedItems(new Set());
+    } else {
+      setSelectedItems(new Set(items.map(item => item.id)));
+    }
+  };
+
+  const handleBulkApprove = async () => {
+    if (selectedItems.size === 0) {
+      toast.error("Please select items to approve");
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from("items")
+        .update({
+          status: "approved",
+          reviewed_at: new Date().toISOString(),
+          reviewed_by: (await supabase.auth.getUser()).data.user?.id,
+        })
+        .in("id", Array.from(selectedItems));
+
+      if (error) throw error;
+      toast.success(`${selectedItems.size} items approved successfully`);
+      setSelectedItems(new Set());
+      fetchItems();
+    } catch (error) {
+      console.error("Error bulk approving items:", error);
+      toast.error("Failed to approve items");
+    }
+  };
+
+  const handleBulkReject = async () => {
+    if (selectedItems.size === 0) {
+      toast.error("Please select items to reject");
+      return;
+    }
+
+    const reason = prompt("Enter rejection reason for selected items:");
+    if (!reason?.trim()) return;
+
+    try {
+      const { error } = await supabase
+        .from("items")
+        .update({
+          status: "rejected",
+          reviewed_at: new Date().toISOString(),
+          reviewed_by: (await supabase.auth.getUser()).data.user?.id,
+          rejection_reason: reason,
+        })
+        .in("id", Array.from(selectedItems));
+
+      if (error) throw error;
+      toast.success(`${selectedItems.size} items rejected`);
+      setSelectedItems(new Set());
+      fetchItems();
+    } catch (error) {
+      console.error("Error bulk rejecting items:", error);
+      toast.error("Failed to reject items");
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive"> = {
       pending: "secondary",
@@ -165,6 +240,16 @@ export default function AdminMarketplaceDashboard() {
     <Card className="mb-4">
       <CardContent className="p-4">
         <div className="flex gap-4">
+          <div 
+            className="cursor-pointer p-1"
+            onClick={() => toggleItemSelection(item.id)}
+          >
+            {selectedItems.has(item.id) ? (
+              <CheckSquare className="h-5 w-5 text-primary" />
+            ) : (
+              <Square className="h-5 w-5 text-muted-foreground" />
+            )}
+          </div>
           {item.image_urls[0] && (
             <img
               src={item.image_urls[0]}
@@ -310,7 +395,48 @@ export default function AdminMarketplaceDashboard() {
               No pending items
             </p>
           ) : (
-            pendingItems.map((item) => <ItemCard key={item.id} item={item} />)
+            <>
+              <div className="mb-4 flex gap-2 items-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => toggleSelectAll(pendingItems)}
+                >
+                  {selectedItems.size === pendingItems.length ? (
+                    <>
+                      <CheckSquare className="h-4 w-4 mr-2" />
+                      Deselect All
+                    </>
+                  ) : (
+                    <>
+                      <Square className="h-4 w-4 mr-2" />
+                      Select All
+                    </>
+                  )}
+                </Button>
+                {selectedItems.size > 0 && (
+                  <>
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={handleBulkApprove}
+                    >
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      Approve Selected ({selectedItems.size})
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={handleBulkReject}
+                    >
+                      <XCircle className="h-4 w-4 mr-2" />
+                      Reject Selected ({selectedItems.size})
+                    </Button>
+                  </>
+                )}
+              </div>
+              {pendingItems.map((item) => <ItemCard key={item.id} item={item} />)}
+            </>
           )}
         </TabsContent>
 
