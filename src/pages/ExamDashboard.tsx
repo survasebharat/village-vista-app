@@ -201,9 +201,16 @@ const ExamDashboard = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
               Online Exam System
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               Test your knowledge in GK, Science, Math, and English
             </p>
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/exam/rules")}
+              className="mt-2"
+            >
+              📖 Read Exam Rules & Guidelines
+            </Button>
           </div>
         </div>
       </section>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plus, Edit, Trash2, ArrowLeft, Upload } from "lucide-react";
+import { Plus, Edit, Trash2, ArrowLeft, Upload, Download, FileSpreadsheet } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CustomLoader from "@/components/CustomLoader";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +33,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import * as XLSX from 'xlsx';
 
 interface Question {
   id: string;
@@ -56,7 +57,10 @@ const AdminExamQuestions = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
+  const [showBulkImport, setShowBulkImport] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState<Question | null>(null);
+  const [importLoading, setImportLoading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     question: "",
@@ -222,6 +226,133 @@ const AdminExamQuestions = () => {
     return colors[difficulty || "medium"];
   };
 
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setImportLoading(true);
+      const reader = new FileReader();
+
+      reader.onload = async (e) => {
+        try {
+          const data = e.target?.result;
+          const workbook = XLSX.read(data, { type: 'binary' });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+          // Validate and transform data
+          const questionsToImport = jsonData.map((row: any, index: number) => {
+            // Validate required fields
+            if (!row.question || !row.option_a || !row.option_b || !row.option_c || !row.option_d || !row.correct_option) {
+              throw new Error(`Row ${index + 2} is missing required fields`);
+            }
+
+            // Validate correct_option
+            const correctOption = row.correct_option.toString().toUpperCase();
+            if (!['A', 'B', 'C', 'D'].includes(correctOption)) {
+              throw new Error(`Row ${index + 2} has invalid correct_option (must be A, B, C, or D)`);
+            }
+
+            return {
+              exam_id: examId,
+              subject: exam.subject as any,
+              question: row.question.toString(),
+              option_a: row.option_a.toString(),
+              option_b: row.option_b.toString(),
+              option_c: row.option_c.toString(),
+              option_d: row.option_d.toString(),
+              correct_option: correctOption,
+              explanation: row.explanation?.toString() || null,
+              difficulty: row.difficulty?.toString().toLowerCase() || 'medium'
+            };
+          });
+
+          // Insert all questions
+          const { error } = await supabase
+            .from('exam_questions')
+            .insert(questionsToImport);
+
+          if (error) throw error;
+
+          toast({
+            title: "Success",
+            description: `Imported ${questionsToImport.length} questions successfully`
+          });
+
+          setShowBulkImport(false);
+          fetchData();
+          
+          // Reset file input
+          if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+          }
+        } catch (error: any) {
+          toast({
+            title: "Import Error",
+            description: error.message,
+            variant: "destructive"
+          });
+        }
+      };
+
+      reader.readAsBinaryString(file);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setImportLoading(false);
+    }
+  };
+
+  const downloadTemplate = () => {
+    // Create sample template
+    const template = [
+      {
+        question: "What is the capital of India?",
+        option_a: "Mumbai",
+        option_b: "New Delhi",
+        option_c: "Kolkata",
+        option_d: "Chennai",
+        correct_option: "B",
+        explanation: "New Delhi is the capital of India",
+        difficulty: "easy"
+      },
+      {
+        question: "Sample question 2",
+        option_a: "Option A",
+        option_b: "Option B",
+        option_c: "Option C",
+        option_d: "Option D",
+        correct_option: "A",
+        explanation: "Optional explanation",
+        difficulty: "medium"
+      }
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(template);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Questions");
+    
+    // Auto-size columns
+    const maxWidth = 50;
+    const colWidths = Object.keys(template[0]).map(key => ({
+      wch: Math.min(maxWidth, Math.max(key.length, 15))
+    }));
+    worksheet['!cols'] = colWidths;
+
+    XLSX.writeFile(workbook, `exam_questions_template.xlsx`);
+    
+    toast({
+      title: "Template Downloaded",
+      description: "Fill in your questions and upload the file"
+    });
+  };
+
   if (loading) {
     return <CustomLoader />;
   }
@@ -248,14 +379,111 @@ const AdminExamQuestions = () => {
                 {exam?.title} - {exam?.subject}
               </p>
             </div>
-            <Dialog open={showDialog} onOpenChange={setShowDialog}>
-              <DialogTrigger asChild>
-                <Button onClick={resetForm}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Question
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex gap-2">
+              <Dialog open={showBulkImport} onOpenChange={setShowBulkImport}>
+                <DialogTrigger asChild>
+                  <Button variant="outline">
+                    <Upload className="h-4 w-4 mr-2" />
+                    Bulk Import
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle>Bulk Import Questions</DialogTitle>
+                    <DialogDescription>
+                      Upload an Excel or CSV file with multiple questions
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  <div className="space-y-6">
+                    {/* Instructions */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-lg">Instructions</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <ol className="list-decimal list-inside space-y-2 text-sm">
+                          <li>Download the template file below</li>
+                          <li>Fill in your questions following the format</li>
+                          <li>Upload the completed file</li>
+                        </ol>
+                        
+                        <div className="bg-muted p-3 rounded-lg text-sm">
+                          <p className="font-semibold mb-2">Required Columns:</p>
+                          <ul className="list-disc list-inside space-y-1 ml-2">
+                            <li><strong>question</strong> - The question text</li>
+                            <li><strong>option_a, option_b, option_c, option_d</strong> - Four options</li>
+                            <li><strong>correct_option</strong> - Must be A, B, C, or D</li>
+                            <li><strong>explanation</strong> - Optional explanation</li>
+                            <li><strong>difficulty</strong> - easy, medium, or hard (optional)</li>
+                          </ul>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Template Download */}
+                    <div className="flex justify-center">
+                      <Button 
+                        onClick={downloadTemplate}
+                        variant="outline"
+                        className="gap-2"
+                      >
+                        <Download className="h-4 w-4" />
+                        Download Template (Excel)
+                      </Button>
+                    </div>
+
+                    {/* File Upload */}
+                    <Card>
+                      <CardContent className="pt-6">
+                        <div className="space-y-4">
+                          <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
+                            <FileSpreadsheet className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                            <input
+                              ref={fileInputRef}
+                              type="file"
+                              accept=".xlsx,.xls,.csv"
+                              onChange={handleFileUpload}
+                              className="hidden"
+                              id="file-upload"
+                              disabled={importLoading}
+                            />
+                            <Label htmlFor="file-upload">
+                              <Button 
+                                variant="secondary" 
+                                disabled={importLoading}
+                                onClick={() => fileInputRef.current?.click()}
+                                type="button"
+                              >
+                                {importLoading ? (
+                                  <>Processing...</>
+                                ) : (
+                                  <>
+                                    <Upload className="h-4 w-4 mr-2" />
+                                    Choose File
+                                  </>
+                                )}
+                              </Button>
+                            </Label>
+                            <p className="text-sm text-muted-foreground mt-2">
+                              Supports Excel (.xlsx, .xls) and CSV files
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              <Dialog open={showDialog} onOpenChange={setShowDialog}>
+                <DialogTrigger asChild>
+                  <Button onClick={resetForm}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Question
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle>
                     {editingQuestion ? "Edit Question" : "Add New Question"}
@@ -383,6 +611,7 @@ const AdminExamQuestions = () => {
             </Dialog>
           </div>
         </div>
+      </div>
       </section>
 
       {/* Statistics */}
