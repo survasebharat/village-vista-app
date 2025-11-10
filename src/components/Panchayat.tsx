@@ -85,11 +85,12 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
 
         
         {/* Sarpanch, Upsarpanch, and Secretary Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16" >
-          <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {/* Sarpanch Card */}
+          <Card className="card-elegant hover-lift animate-slide-up">
             <CardHeader className="text-center">
               <div 
-                className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary cursor-pointer hover:border-primary transition-colors"
+                className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg cursor-pointer hover:border-primary transition-all duration-300"
                 onClick={() => handleMemberClick(panchayat.sarpanch)}
               >
                 <img 
@@ -98,15 +99,15 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <CardTitle className="text-2xl">{panchayat.sarpanch.name}</CardTitle>
-              <Badge variant="secondary" className="mx-auto">
+              <CardTitle className="text-2xl text-gradient">{panchayat.sarpanch.name}</CardTitle>
+              <Badge variant="secondary" className="mx-auto mt-2">
                {t('sarpanch')}
               </Badge>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center">
-                <p className="text-lg text-muted-foreground mb-4">
-                  {panchayat.sarpanch.message}
+                <p className="text-sm text-muted-foreground mb-2">
+                  {panchayat.sarpanch.education}
                 </p>
                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
@@ -114,31 +115,29 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  {panchayat.sarpanch.contact}
+              <div className="flex flex-col gap-2">
+                <Button variant="outline" size="sm" className="w-full" asChild>
+                  <a href={`tel:${panchayat.sarpanch.contact}`}>
+                    <Phone className="h-4 w-4 mr-2" />
+                    {panchayat.sarpanch.contact}
+                  </a>
                 </Button>
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  {panchayat.sarpanch.email}
+                <Button variant="outline" size="sm" className="w-full" asChild>
+                  <a href={`mailto:${panchayat.sarpanch.email}`}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    {panchayat.sarpanch.email}
+                  </a>
                 </Button>
-              </div>
-
-              <div className="bg-muted/30 rounded-lg p-4 text-center">
-                <p className="text-sm text-muted-foreground">
-                  "{t('panchayat.message')}"
-                </p>
               </div>
             </CardContent>
           </Card>
 
           {/* Upsarpanch Card */}
           {panchayat.upsarpanch && (
-            <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
+            <Card className="card-elegant hover-lift animate-slide-up">
               <CardHeader className="text-center">
                 <div 
-                  className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary cursor-pointer hover:border-primary transition-colors"
+                  className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg cursor-pointer hover:border-primary transition-all duration-300"
                   onClick={() => handleMemberClick(panchayat.upsarpanch)}
                 >
                   <img 
@@ -147,15 +146,15 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                   />
                 </div>
-                <CardTitle className="text-2xl">{panchayat.upsarpanch.name}</CardTitle>
-                <Badge variant="secondary" className="mx-auto">
+                <CardTitle className="text-2xl text-gradient">{panchayat.upsarpanch.name}</CardTitle>
+                <Badge variant="secondary" className="mx-auto mt-2">
                   {t('Upsarpanch')}
                 </Badge>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
-                  <p className="text-lg text-muted-foreground mb-4">
-                    {panchayat.upsarpanch.message}
+                  <p className="text-sm text-muted-foreground mb-2">
+                    {panchayat.upsarpanch.education}
                   </p>
                   <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
@@ -163,30 +162,29 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
-                    {panchayat.upsarpanch.contact}
+                <div className="flex flex-col gap-2">
+                  <Button variant="outline" size="sm" className="w-full" asChild>
+                    <a href={`tel:${panchayat.upsarpanch.contact}`}>
+                      <Phone className="h-4 w-4 mr-2" />
+                      {panchayat.upsarpanch.contact}
+                    </a>
                   </Button>
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" />
-                    {panchayat.upsarpanch.email}
+                  <Button variant="outline" size="sm" className="w-full" asChild>
+                    <a href={`mailto:${panchayat.upsarpanch.email}`}>
+                      <Mail className="h-4 w-4 mr-2" />
+                      {panchayat.upsarpanch.email}
+                    </a>
                   </Button>
-                </div>
-
-                <div className="bg-muted/30 rounded-lg p-4 text-center">
-                  <p className="text-sm text-muted-foreground">
-                    "{panchayat.upsarpanch.message || t('panchayat.message')}"
-                  </p>
                 </div>
               </CardContent>
             </Card>
           )}
 
-          <Card className="card-elegant max-w-2xl mx-auto animate-slide-up">
+          {/* Secretary Card */}
+          <Card className="card-elegant hover-lift animate-slide-up">
             <CardHeader className="text-center">
               <div 
-                className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-secondary cursor-pointer hover:border-primary transition-colors"
+                className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg cursor-pointer hover:border-primary transition-all duration-300"
                 onClick={() => handleMemberClick(panchayat.secretary)}
               >
                 <img 
@@ -195,40 +193,35 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <CardTitle className="text-2xl">{panchayat.secretary.name}</CardTitle>
-              <Badge variant="secondary" className="mx-auto">
+              <CardTitle className="text-2xl text-gradient">{panchayat.secretary.name}</CardTitle>
+              <Badge variant="secondary" className="mx-auto mt-2">
                 {t('Secretary')}
               </Badge>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center">
-                {panchayat.secretary.message && (
-                  <p className="text-lg text-muted-foreground mb-4">
-                    {panchayat.secretary.message}
-                  </p>
-                )}
-                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-2">
+                  {panchayat.secretary.education || panchayat.secretary.department}
+                </p>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
                   <span>{t('panchayat.officeHours')}: {panchayat.secretary.office_hours}</span>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  {panchayat.secretary.contact}
+              <div className="flex flex-col gap-2">
+                <Button variant="outline" size="sm" className="w-full" asChild>
+                  <a href={`tel:${panchayat.secretary.contact}`}>
+                    <Phone className="h-4 w-4 mr-2" />
+                    {panchayat.secretary.contact}
+                  </a>
                 </Button>
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  {panchayat.secretary.email}
+                <Button variant="outline" size="sm" className="w-full" asChild>
+                  <a href={`mailto:${panchayat.secretary.email}`}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    {panchayat.secretary.email}
+                  </a>
                 </Button>
-              </div>
-
-              <div className="bg-muted/30 rounded-lg p-4 text-center">
-                <p className="text-sm text-muted-foreground">
-                  For administrative queries, document verification, and general assistance, 
-                  please contact the Panchayat Secretary during office hours.
-                </p>
               </div>
             </CardContent>
           </Card>
@@ -236,7 +229,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
 
         {/* Ward Members Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8 text-gradient">
+          <h3 className="text-4xl font-bold text-center mb-8 text-gradient">
             {t('panchayat.wardMembers')}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -281,7 +274,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
 
         {/* Staff Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8 text-gradient">
+          <h3 className="text-4xl font-bold text-center mb-8 text-gradient">
             {t('panchayat.staff')}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
