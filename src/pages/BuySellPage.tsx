@@ -18,13 +18,13 @@ const BuySellPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary/10 via-primary/5 to-background py-12 border-b border-border">
+      <section className="bg-gradient-to-r from-primary/10 via-primary/5 to-background py-6 border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center">
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
               Buy & Sell – Market
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Buy, Sell and Exchange items in your village
             </p>
           </div>

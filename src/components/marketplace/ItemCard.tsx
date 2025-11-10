@@ -61,7 +61,7 @@ const ItemCard = ({ item, onClick }: ItemCardProps) => {
             {getCategoryIcon(item.category)}
           </div>
         )}
-        <Badge className="absolute top-2 left-2 bg-background/90 backdrop-blur-sm">
+        <Badge className="absolute top-2 left-2 bg-white dark:bg-white/90 text-green-700 dark:text-green-600 backdrop-blur-sm font-semibold">
           {getCategoryIcon(item.category)} {item.category}
         </Badge>
       </div>
