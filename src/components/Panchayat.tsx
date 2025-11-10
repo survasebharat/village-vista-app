@@ -106,7 +106,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
             <CardContent className="space-y-4">
               <div className="text-center">
                 <p className="text-lg text-muted-foreground mb-4">
-                  {panchayat.sarpanch.education}
+                  {panchayat.sarpanch.message}
                 </p>
                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
@@ -155,7 +155,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               <CardContent className="space-y-4">
                 <div className="text-center">
                   <p className="text-lg text-muted-foreground mb-4">
-                    {panchayat.upsarpanch.education}
+                    {panchayat.upsarpanch.message}
                   </p>
                   <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
@@ -202,9 +202,11 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center">
-                <p className="text-lg text-muted-foreground mb-4">
-                  {panchayat.secretary.eduacation}
-                </p>
+                {panchayat.secretary.message && (
+                  <p className="text-lg text-muted-foreground mb-4">
+                    {panchayat.secretary.message}
+                  </p>
+                )}
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
                   <Clock className="h-4 w-4" />
                   <span>{t('panchayat.officeHours')}: {panchayat.secretary.office_hours}</span>
