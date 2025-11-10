@@ -23,21 +23,40 @@ export default defineConfig(({ mode }) => ({
         theme_color: "#1a4d2e",
         background_color: "#1a4d2e",
         display: "standalone",
+        orientation: "any",
+        scope: "/",
+        start_url: "/",
         icons: [
           {
             src: "/placeholder.svg",
             sizes: "192x192",
-            type: "image/svg+xml"
+            type: "image/svg+xml",
+            purpose: "any maskable"
           },
           {
             src: "/placeholder.svg",
             sizes: "512x512",
-            type: "image/svg+xml"
+            type: "image/svg+xml",
+            purpose: "any maskable"
+          }
+        ],
+        categories: ["education", "government", "utilities"],
+        shortcuts: [
+          {
+            name: "Take Exam",
+            url: "/exam",
+            description: "Access online exams"
+          },
+          {
+            name: "Exam Rules",
+            url: "/exam/rules",
+            description: "Read exam guidelines"
           }
         ]
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}"],
+        navigateFallback: null,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -72,6 +91,30 @@ export default defineConfig(({ mode }) => ({
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              }
+            }
+          },
+          {
+            urlPattern: /\/exam\/rules/,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "exam-instructions-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 days
+              },
+              networkTimeoutSeconds: 10
+            }
+          },
+          {
+            urlPattern: /\/api\/.*/,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "api-cache",
+              networkTimeoutSeconds: 10,
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 5 // 5 minutes
               }
             }
           }

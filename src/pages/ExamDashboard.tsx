@@ -6,10 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Clock, Trophy, BookOpen, Play, CheckCircle2, XCircle } from "lucide-react";
+import { Calendar, Clock, Trophy, BookOpen, Play, CheckCircle2, XCircle, Bell, BellOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CustomLoader from "@/components/CustomLoader";
 import { format, isPast, isFuture } from "date-fns";
+import { useNotifications } from "@/hooks/useNotifications";
 
 interface Exam {
   id: string;
@@ -56,6 +57,7 @@ const ExamDashboard = () => {
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { permission, requestPermission, checkUpcomingExams, subscribeToExamReminders } = useNotifications();
 
   useEffect(() => {
     checkAuth();
@@ -74,6 +76,14 @@ const ExamDashboard = () => {
     }
     setUser(session.user);
     fetchData(session.user.id);
+    
+    // Check for upcoming exams and set up notifications
+    checkUpcomingExams(session.user.id);
+    const channel = await subscribeToExamReminders(session.user.id);
+    
+    return () => {
+      supabase.removeChannel(channel);
+    };
   };
 
   const fetchData = async (userId: string) => {
@@ -204,13 +214,28 @@ const ExamDashboard = () => {
             <p className="text-muted-foreground mb-4">
               Test your knowledge in GK, Science, Math, and English
             </p>
-            <Button 
-              variant="outline" 
-              onClick={() => navigate("/exam/rules")}
-              className="mt-2"
-            >
-              📖 Read Exam Rules & Guidelines
-            </Button>
+            <div className="flex gap-2 justify-center flex-wrap">
+              <Button 
+                variant="outline" 
+                onClick={() => navigate("/exam/rules")}
+              >
+                📖 Read Exam Rules & Guidelines
+              </Button>
+              {permission === "granted" ? (
+                <Button variant="outline" disabled>
+                  <Bell className="h-4 w-4 mr-2" />
+                  Notifications On
+                </Button>
+              ) : (
+                <Button 
+                  variant="outline"
+                  onClick={requestPermission}
+                >
+                  <BellOff className="h-4 w-4 mr-2" />
+                  Enable Notifications
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </section>

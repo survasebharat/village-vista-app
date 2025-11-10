@@ -32,7 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Edit, Trash2, Users, FileText, Calendar } from "lucide-react";
+import { Plus, Edit, Trash2, Users, FileText, Calendar, BarChart } from "lucide-react";
 import CustomLoader from "@/components/CustomLoader";
 import { format } from "date-fns";
 
@@ -282,14 +282,19 @@ const AdminExamDashboard = () => {
                 Create and manage online exams
               </p>
             </div>
-            <Dialog open={showDialog} onOpenChange={setShowDialog}>
-              <DialogTrigger asChild>
-                <Button onClick={resetForm}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create Exam
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => navigate("/exam/analytics")}>
+                <BarChart className="h-4 w-4 mr-2" />
+                View Analytics
+              </Button>
+              <Dialog open={showDialog} onOpenChange={setShowDialog}>
+                <DialogTrigger asChild>
+                  <Button onClick={resetForm}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create Exam
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle>
                     {editingExam ? "Edit Exam" : "Create New Exam"}
@@ -424,6 +429,7 @@ const AdminExamDashboard = () => {
                 </form>
               </DialogContent>
             </Dialog>
+            </div>
           </div>
         </div>
       </section>
