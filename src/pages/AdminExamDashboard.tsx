@@ -71,6 +71,8 @@ const AdminExamDashboard = () => {
     scheduled_at: string;
     ends_at: string;
     status: "draft" | "scheduled" | "active" | "completed" | "cancelled";
+    pass_marks: number;
+    is_active: boolean;
   }>({
     title: "",
     subject: "GK",
@@ -79,7 +81,9 @@ const AdminExamDashboard = () => {
     duration_minutes: 60,
     scheduled_at: "",
     ends_at: "",
-    status: "draft"
+    status: "draft",
+    pass_marks: 40,
+    is_active: true
   });
 
   useEffect(() => {
@@ -206,7 +210,9 @@ const AdminExamDashboard = () => {
       duration_minutes: exam.duration_minutes,
       scheduled_at: exam.scheduled_at,
       ends_at: exam.ends_at,
-      status: exam.status as any
+      status: exam.status as any,
+      pass_marks: (exam as any).pass_marks || 40,
+      is_active: (exam as any).is_active ?? true
     });
     setShowDialog(true);
   };
@@ -249,7 +255,9 @@ const AdminExamDashboard = () => {
       duration_minutes: 60,
       scheduled_at: "",
       ends_at: "",
-      status: "draft"
+      status: "draft",
+      pass_marks: 40,
+      is_active: true
     });
   };
 

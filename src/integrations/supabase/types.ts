@@ -391,48 +391,57 @@ export type Database = {
       }
       exam_questions: {
         Row: {
+          class: string | null
           correct_option: string
           created_at: string
           difficulty: string | null
           exam_id: string
           explanation: string | null
           id: string
+          marks_per_question: number | null
           option_a: string
           option_b: string
           option_c: string
           option_d: string
           question: string
           subject: Database["public"]["Enums"]["exam_subject"]
+          topic: string | null
           updated_at: string
         }
         Insert: {
+          class?: string | null
           correct_option: string
           created_at?: string
           difficulty?: string | null
           exam_id: string
           explanation?: string | null
           id?: string
+          marks_per_question?: number | null
           option_a: string
           option_b: string
           option_c: string
           option_d: string
           question: string
           subject: Database["public"]["Enums"]["exam_subject"]
+          topic?: string | null
           updated_at?: string
         }
         Update: {
+          class?: string | null
           correct_option?: string
           created_at?: string
           difficulty?: string | null
           exam_id?: string
           explanation?: string | null
           id?: string
+          marks_per_question?: number | null
           option_a?: string
           option_b?: string
           option_c?: string
           option_d?: string
           question?: string
           subject?: Database["public"]["Enums"]["exam_subject"]
+          topic?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -453,10 +462,13 @@ export type Database = {
           duration_minutes: number
           ends_at: string
           id: string
+          is_active: boolean | null
+          pass_marks: number | null
           scheduled_at: string
           status: Database["public"]["Enums"]["exam_status"]
           subject: Database["public"]["Enums"]["exam_subject"]
           title: string
+          total_marks: number | null
           total_questions: number
           updated_at: string
           village_id: string | null
@@ -468,10 +480,13 @@ export type Database = {
           duration_minutes?: number
           ends_at: string
           id?: string
+          is_active?: boolean | null
+          pass_marks?: number | null
           scheduled_at: string
           status?: Database["public"]["Enums"]["exam_status"]
           subject: Database["public"]["Enums"]["exam_subject"]
           title: string
+          total_marks?: number | null
           total_questions?: number
           updated_at?: string
           village_id?: string | null
@@ -483,10 +498,13 @@ export type Database = {
           duration_minutes?: number
           ends_at?: string
           id?: string
+          is_active?: boolean | null
+          pass_marks?: number | null
           scheduled_at?: string
           status?: Database["public"]["Enums"]["exam_status"]
           subject?: Database["public"]["Enums"]["exam_subject"]
           title?: string
+          total_marks?: number | null
           total_questions?: number
           updated_at?: string
           village_id?: string | null

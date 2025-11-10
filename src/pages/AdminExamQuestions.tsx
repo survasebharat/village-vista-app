@@ -70,7 +70,10 @@ const AdminExamQuestions = () => {
     option_d: "",
     correct_option: "A",
     explanation: "",
-    difficulty: "medium"
+    difficulty: "medium",
+    class: "7th Standard",
+    topic: "",
+    marks_per_question: 1
   });
 
   useEffect(() => {
@@ -170,7 +173,10 @@ const AdminExamQuestions = () => {
       option_d: question.option_d,
       correct_option: question.correct_option,
       explanation: question.explanation || "",
-      difficulty: question.difficulty || "medium"
+      difficulty: question.difficulty || "medium",
+      class: (question as any).class || "7th Standard",
+      topic: (question as any).topic || "",
+      marks_per_question: (question as any).marks_per_question || 1
     });
     setShowDialog(true);
   };
@@ -213,7 +219,10 @@ const AdminExamQuestions = () => {
       option_d: "",
       correct_option: "A",
       explanation: "",
-      difficulty: "medium"
+      difficulty: "medium",
+      class: "7th Standard",
+      topic: "",
+      marks_per_question: 1
     });
   };
 
@@ -265,7 +274,10 @@ const AdminExamQuestions = () => {
               option_d: row.option_d.toString(),
               correct_option: correctOption,
               explanation: row.explanation?.toString() || null,
-              difficulty: row.difficulty?.toString().toLowerCase() || 'medium'
+              difficulty: row.difficulty?.toString().toLowerCase() || 'medium',
+              class: row.class?.toString() || '7th Standard',
+              topic: row.topic?.toString() || null,
+              marks_per_question: row.marks_per_question ? parseInt(row.marks_per_question.toString()) : 1
             };
           });
 
