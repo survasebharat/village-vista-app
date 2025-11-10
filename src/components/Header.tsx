@@ -126,14 +126,14 @@ const Header = () => {
         {/* Mobile Navigation Overlay */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden animate-fade-in"
+            className="fixed inset-0 bg-black/50 z-[60] lg:hidden animate-fade-in"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
 
         {/* Mobile Navigation Sidebar */}
         {isMenuOpen && (
-          <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-50 lg:hidden animate-slide-in-right overflow-y-auto">
+          <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-[70] lg:hidden animate-slide-in-right overflow-y-auto">
             <div className="flex flex-col gap-2 p-4">
               {navItems.map((item) => (
                 <Button
