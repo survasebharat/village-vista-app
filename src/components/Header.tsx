@@ -1,4 +1,5 @@
 import { useState, useContext, memo } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Mail, Shield, LogIn, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -124,18 +125,18 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Overlay - Outside container */}
-      {isMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-[9998] lg:hidden animate-fade-in"
-          onClick={() => setIsMenuOpen(false)}
-        />
-      )}
-
-      {/* Mobile Navigation Sidebar - Outside container */}
-      {isMenuOpen && (
-        <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-[9999] lg:hidden animate-slide-in-right overflow-y-auto border-l border-border">
-          <div className="flex flex-col gap-2 p-4">
+      {/* Mobile Navigation - Rendered via Portal at document root */}
+      {isMenuOpen && createPortal(
+        <>
+          {/* Overlay */}
+          <div 
+            className="fixed inset-0 bg-black/50 z-[9998] lg:hidden animate-fade-in"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          
+          {/* Sidebar */}
+          <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-[9999] lg:hidden animate-slide-in-right overflow-y-auto border-l border-border">
+            <div className="flex flex-col gap-2 p-4">
               {navItems.map((item) => (
                 <Button
                   key={item.name}
@@ -208,7 +209,9 @@ const Header = () => {
               )}
             </div>
           </nav>
-        )}
+        </>,
+        document.body
+      )}
     </header>
   );
 };
