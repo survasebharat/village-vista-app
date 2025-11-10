@@ -35,12 +35,20 @@ const CATEGORIES = [
   "Other"
 ];
 
+const SORT_OPTIONS = [
+  { value: "newest", label: "Newest First" },
+  { value: "price-low", label: "Price: Low to High" },
+  { value: "price-high", label: "Price: High to Low" },
+  { value: "name", label: "Name: A to Z" }
+];
+
 const ItemList = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [sortBy, setSortBy] = useState("newest");
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const { toast } = useToast();
 
@@ -50,7 +58,7 @@ const ItemList = () => {
 
   useEffect(() => {
     filterItems();
-  }, [searchQuery, selectedCategory, items]);
+  }, [searchQuery, selectedCategory, sortBy, items]);
 
   const fetchItems = async () => {
     try {
@@ -91,6 +99,23 @@ const ItemList = () => {
       );
     }
 
+    // Sort items
+    switch (sortBy) {
+      case "price-low":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "price-high":
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case "name":
+        filtered.sort((a, b) => a.item_name.localeCompare(b.item_name));
+        break;
+      case "newest":
+      default:
+        filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        break;
+    }
+
     setFilteredItems(filtered);
   };
 
@@ -109,13 +134,25 @@ const ItemList = () => {
           />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full md:w-[250px]">
+          <SelectTrigger className="w-full md:w-[200px]">
             <SelectValue placeholder="Select category" />
           </SelectTrigger>
           <SelectContent>
             {CATEGORIES.map(category => (
               <SelectItem key={category} value={category}>
                 {category}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select value={sortBy} onValueChange={setSortBy}>
+          <SelectTrigger className="w-full md:w-[200px]">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            {SORT_OPTIONS.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
               </SelectItem>
             ))}
           </SelectContent>
