@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 import { CUSTOM_ROUTES } from "./custom-routes";
 import Layout from "./components/Layout";
 import SectionSkeleton from "./components/ui/skeletons/SectionSkeleton";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -43,10 +44,11 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
         <Suspense fallback={<SectionSkeleton />}>
           <Routes>
             {/* Auth routes without layout */}
@@ -141,9 +143,10 @@ const App = () => (
             }
           />
           </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
+         </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "./LanguageToggle";
 import SocialMediaButtons from "./SocialMediaButtons";
+import ThemeToggle from "./ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
 import { usePageVisibility } from "@/hooks/usePageVisibility";
 import { supabase } from "@/integrations/supabase/client";
@@ -65,9 +66,10 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Left side: Language & Social */}
-          <div className="flex items-center gap-4">
+          {/* Left side: Language, Theme & Social */}
+          <div className="flex items-center gap-3">
             <LanguageToggle />
+            <ThemeToggle />
             <SocialMediaButtons social={config?.social} className="hidden lg:flex" />
           </div>
 
@@ -197,7 +199,10 @@ const Header = () => {
               {/* Mobile Social Media */}
               {config?.social && (
                 <div className="flex justify-center gap-4 pt-4 border-t border-border">
-                  <SocialMediaButtons social={config.social} className="flex" />
+                  <div className="flex items-center gap-3">
+                    <ThemeToggle />
+                    <SocialMediaButtons social={config.social} className="flex" />
+                  </div>
                 </div>
               )}
             </div>
