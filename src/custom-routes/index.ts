@@ -23,6 +23,7 @@ export const CUSTOM_ROUTES = {
     FORUM: "/forum",
     TAX_PAYMENT: "/tax-payment",
     TAX_PAYMENT_RECEIPT: "/tax-payment/receipt",
+    BUY_SELL: "/buy-sell",
     
     NOT_FOUND: "*"
 }

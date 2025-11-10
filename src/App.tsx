@@ -35,6 +35,7 @@ const TaxPaymentPage = lazy(() => import("./pages/TaxPaymentPage"));
 const TaxPaymentReceipt = lazy(() => import("./pages/TaxPaymentReceipt"));
 const ForumPage = lazy(() => import("./pages/ForumPage"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const BuySellPage = lazy(() => import("./pages/BuySellPage"));
 
 const queryClient = new QueryClient();
 
@@ -102,6 +103,10 @@ const App = () => (
                   <Route
                     path={CUSTOM_ROUTES.FORUM}
                     element={<ForumPage />}
+                  />
+                  <Route
+                    path={CUSTOM_ROUTES.BUY_SELL}
+                    element={<BuySellPage />}
                   />
                   <Route
                     path={CUSTOM_ROUTES.ADMIN_DASHBOARD}

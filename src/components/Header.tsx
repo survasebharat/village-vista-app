@@ -30,6 +30,7 @@ const Header = () => {
     { name: t("header.panchayat"), href: CUSTOM_ROUTES.PANCHAYAT, pageKey: "panchayat" },
     { name: "Notices", href: CUSTOM_ROUTES.NOTICES, pageKey: "notices" },
     { name: "Market Prices", href: CUSTOM_ROUTES.MARKET_PRICES, pageKey: "market_prices" },
+    { name: "Buy & Sell", href: CUSTOM_ROUTES.BUY_SELL, pageKey: "buy_sell" },
     { name: "Forum", href: CUSTOM_ROUTES.FORUM, pageKey: "forum" },
     { name: "Pay Taxes", href: CUSTOM_ROUTES.TAX_PAYMENT, pageKey: "tax_payment" },
     { name: t("header.contact"), href: CUSTOM_ROUTES.CONTACT_US, pageKey: "contact" },

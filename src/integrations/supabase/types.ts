@@ -93,6 +93,51 @@ export type Database = {
           },
         ]
       }
+      community_workers: {
+        Row: {
+          contact: string | null
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          name: string
+          profession: string | null
+          updated_at: string | null
+          village_id: string | null
+          worker_type: string
+        }
+        Insert: {
+          contact?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name: string
+          profession?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+          worker_type: string
+        }
+        Update: {
+          contact?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string
+          profession?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+          worker_type?: string
+        }
+        Relationships: []
+      }
       contact_form_submissions: {
         Row: {
           created_at: string | null
@@ -276,6 +321,48 @@ export type Database = {
         }
         Relationships: []
       }
+      items: {
+        Row: {
+          category: string
+          contact: string
+          created_at: string
+          description: string | null
+          id: string
+          image_urls: string[] | null
+          item_name: string
+          price: number
+          updated_at: string
+          user_id: string | null
+          village: string
+        }
+        Insert: {
+          category: string
+          contact: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_urls?: string[] | null
+          item_name: string
+          price: number
+          updated_at?: string
+          user_id?: string | null
+          village?: string
+        }
+        Update: {
+          category?: string
+          contact?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_urls?: string[] | null
+          item_name?: string
+          price?: number
+          updated_at?: string
+          user_id?: string | null
+          village?: string
+        }
+        Relationships: []
+      }
       market_prices: {
         Row: {
           created_at: string
@@ -308,6 +395,56 @@ export type Database = {
           village_id?: string | null
         }
         Relationships: []
+      }
+      notable_contributors: {
+        Row: {
+          contact: string | null
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          name: string
+          profession: string | null
+          updated_at: string | null
+          village_id: string | null
+        }
+        Insert: {
+          contact?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name: string
+          profession?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Update: {
+          contact?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string
+          profession?: string | null
+          updated_at?: string | null
+          village_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notable_contributors_village_id_fkey"
+            columns: ["village_id"]
+            isOneToOne: false
+            referencedRelation: "villages"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       notices: {
         Row: {
@@ -747,6 +884,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_push_tokens: {
+        Row: {
+          created_at: string
+          id: string
+          push_token: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          push_token: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          push_token?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
