@@ -168,7 +168,32 @@ const handler = async (req: Request): Promise<Response> => {
       `;
     }
 
-    // Send email using Resend API directly
+    // TEMPORARY: Resend test mode only allows sending to verified email
+    // Once you verify your domain at https://resend.com/domains, update this
+    const VERIFIED_EMAIL = "shivankhedkhurd@gmail.com";
+    const isTestMode = !email.endsWith("@shivankhedkhurd.com"); // Change this after domain verification
+    
+    if (isTestMode && email !== VERIFIED_EMAIL) {
+      console.log(`⚠️ TEST MODE: Would send ${status} email to ${email}`);
+      console.log(`Subject: ${subject}`);
+      console.log(`To enable real emails, verify your domain at https://resend.com/domains`);
+      
+      // Return success without sending to avoid errors during testing
+      return new Response(JSON.stringify({ 
+        success: true, 
+        testMode: true,
+        message: `Email notification logged for ${email}. Verify domain to send real emails.` 
+      }), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      });
+    }
+
+    // Send email using Resend API
+    console.log(`📧 Sending real email to ${email}`);
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -190,7 +215,7 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error(resendData.message || "Failed to send email");
     }
 
-    console.log("Email sent successfully:", resendData);
+    console.log("✅ Email sent successfully:", resendData);
 
     return new Response(JSON.stringify({ success: true, data: resendData }), {
       status: 200,
