@@ -58,6 +58,8 @@ const ItemList = () => {
       const { data, error } = await supabase
         .from("items")
         .select("*")
+        .eq("status", "approved")
+        .eq("sold", false)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
