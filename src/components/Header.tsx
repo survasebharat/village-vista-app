@@ -45,7 +45,9 @@ const Header = () => {
       <div className="container mx-auto px-4">
         {/* Top Info Bar */}
         {config?.contact?.office && (
-          <div className="hidden md:flex items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50">
+         <div className="flex flex-col sm:flex-row items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50 gap-2">
+
+           
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
@@ -131,7 +133,13 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {/* Mobile Social Media Buttons */}
+{config?.social && (
+  <div className="flex justify-center gap-6 mt-6">
+    <SocialMediaButtons social={config.social} className="flex" />
+  </div>
+)}
+
           </Button>
         </div>
 
