@@ -39,6 +39,11 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const BuySellPage = lazy(() => import("./pages/BuySellPage"));
 const AdminMarketplaceDashboard = lazy(() => import("./pages/AdminMarketplaceDashboard"));
 const SellerDashboard = lazy(() => import("./pages/SellerDashboard"));
+const ExamDashboard = lazy(() => import("./pages/ExamDashboard"));
+const ExamTake = lazy(() => import("./pages/ExamTake"));
+const ExamResults = lazy(() => import("./pages/ExamResults"));
+const AdminExamDashboard = lazy(() => import("./pages/AdminExamDashboard"));
+const AdminExamQuestions = lazy(() => import("./pages/AdminExamQuestions"));
 
 const queryClient = new QueryClient();
 
@@ -120,6 +125,11 @@ const App = () => (
                     path={CUSTOM_ROUTES.ADMIN_DASHBOARD}
                     element={<AdminDashboard />}
                   />
+                  <Route path="/exam" element={<ExamDashboard />} />
+                  <Route path="/exam/:examId/take" element={<ExamTake />} />
+                  <Route path="/exam/:examId/results/:attemptId" element={<ExamResults />} />
+                  <Route path="/admin/exam-management" element={<AdminExamDashboard />} />
+                  <Route path="/admin/exam/:examId/questions" element={<AdminExamQuestions />} />
                   <Route
                     path={CUSTOM_ROUTES.NOT_FOUND}
                     element={<NotFound />}
