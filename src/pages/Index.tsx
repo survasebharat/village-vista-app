@@ -9,6 +9,7 @@ import { VILLAGES } from "@/config/villageConfig";
 import LazySection from "@/components/LazySection";
 
 /* Lazy-loaded components */
+const ScrollerCardSection = lazy(() => import("@/components/ScrollerCardSection"));
 const NewsTicker = lazy(() => import("@/components/NewsTicker"));
 const About = lazy(() => import("@/components/About"));
 const Panchayat = lazy(() => import("@/components/Panchayat"));
@@ -52,6 +53,13 @@ const Index: React.FC = () => {
             panchayat={memoizedConfig.panchayat}
           />
         </Suspense>
+
+        {/* Scroller Card Section */}
+        {memoizedConfig.scrollerCards?.length > 0 && (
+          <Suspense fallback={null}>
+            <ScrollerCardSection cards={memoizedConfig.scrollerCards} />
+          </Suspense>
+        )}
 
         {/* News Ticker */}
         {memoizedConfig.newsTicker?.length > 0 && (

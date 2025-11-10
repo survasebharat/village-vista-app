@@ -102,6 +102,13 @@ export interface VillageConfig {
   proudPeople?: PersonProfile[];
   ashaWorkers?: PersonProfile[];
   anganwadiWorkers?: PersonProfile[];
+  scrollerCards?: Array<{
+    id: string;
+    title: string;
+    description: string;
+    icon?: string;
+    image?: string;
+  }>;
 }
 
 export const useVillageConfig = (village?: string, language: string = 'en') => {
