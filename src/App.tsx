@@ -22,6 +22,9 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
 const PanchayatPage = lazy(() => import("./pages/PanchayatPage"));
 const ContactUsPage = lazy(() => import("./pages/ContactUsPage"));
+//const ProudPeoplePage = lazy(() => import("@/pages/ProudPeoplePage"));
+
+
 const SchemePage = lazy(() => import("./pages/SchemePage"));
 const DevelopmentPage = lazy(() => import("./pages/DevelopmentPage"));
 const GalleryPage = lazy(() => import("./pages/GalleryPage"));
@@ -65,6 +68,8 @@ const App = () => (
                     path={CUSTOM_ROUTES.CONTACT_US}
                     element={<ContactUsPage />}
                   />
+               
+
                   <Route path={CUSTOM_ROUTES.SCHEME} element={<SchemePage />} />
                   <Route
                     path={CUSTOM_ROUTES.DEVELOPMENT}

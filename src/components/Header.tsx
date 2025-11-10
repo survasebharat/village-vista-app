@@ -33,6 +33,8 @@ const Header = () => {
     { name: "Forum", href: CUSTOM_ROUTES.FORUM, pageKey: "forum" },
     { name: "Pay Taxes", href: CUSTOM_ROUTES.TAX_PAYMENT, pageKey: "tax_payment" },
     { name: t("header.contact"), href: CUSTOM_ROUTES.CONTACT_US, pageKey: "contact" },
+   //{ name: "", href: CUSTOM_ROUTES.PEOPLE, pageKey: "people" },
+
   ];
 
   // Filter navigation items based on visibility

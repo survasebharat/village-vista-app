@@ -6,9 +6,10 @@ const LanguageToggle = () => {
   const { i18n } = useTranslation();
 
   const languages = [
+     { code: "mr", name: "मराठी" },
     { code: "en", name: "English" },
     { code: "hi", name: "हिंदी" },
-    { code: "mr", name: "मराठी" },
+ 
   ];
 
   const currentIndex = languages.findIndex(

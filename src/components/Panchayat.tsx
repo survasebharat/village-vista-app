@@ -149,7 +149,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 </div>
                 <CardTitle className="text-2xl">{panchayat.upsarpanch.name}</CardTitle>
                 <Badge variant="secondary" className="mx-auto">
-                  {t('panchayat.upsarpanch')}
+                  {t('upsarpanch')}
                 </Badge>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -197,7 +197,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               </div>
               <CardTitle className="text-2xl">{panchayat.secretary.name}</CardTitle>
               <Badge variant="secondary" className="mx-auto">
-                {t('panchayat.secretary')}
+                {t('secretary')}
               </Badge>
             </CardHeader>
             <CardContent className="space-y-4">

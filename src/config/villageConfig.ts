@@ -13,6 +13,7 @@ export const VILLAGES: Record<string, VillageConfig> = {
     name: 'Shivankhed',
     domain: 'shivankhed'
   }
+  
 };
 
 // Get current village based on hostname

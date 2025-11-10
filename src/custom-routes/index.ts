@@ -13,6 +13,7 @@ export const CUSTOM_ROUTES = {
     SERVICES: "/services",
     PANCHAYAT: "/panchayat",
     CONTACT_US: "/contact-us",
+    
     SCHEME: "/scheme",
     DEVELOPMENT: "/development",
     GALLERY: "/gallery",
@@ -22,5 +23,6 @@ export const CUSTOM_ROUTES = {
     FORUM: "/forum",
     TAX_PAYMENT: "/tax-payment",
     TAX_PAYMENT_RECEIPT: "/tax-payment/receipt",
+    
     NOT_FOUND: "*"
 }
