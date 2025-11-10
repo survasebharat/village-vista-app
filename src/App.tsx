@@ -36,6 +36,7 @@ const TaxPaymentReceipt = lazy(() => import("./pages/TaxPaymentReceipt"));
 const ForumPage = lazy(() => import("./pages/ForumPage"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const BuySellPage = lazy(() => import("./pages/BuySellPage"));
+const AdminMarketplaceDashboard = lazy(() => import("./pages/AdminMarketplaceDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -129,6 +130,7 @@ const App = () => (
                   <Route path={CUSTOM_ROUTES.CONTACT_MESSAGE} element={<ContactMessagesAdmin />} />
                   <Route path={CUSTOM_ROUTES.USER_MANAGEMENT} element={<UserManagementDashboard />} />
                   <Route path={CUSTOM_ROUTES.USER_DASHBOARD} element={<UserDashboard />} />
+                  <Route path={CUSTOM_ROUTES.ADMIN_MARKETPLACE} element={<AdminMarketplaceDashboard />} />
                 </Routes>
               </Layout>
             }

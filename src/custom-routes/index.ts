@@ -8,6 +8,7 @@ export const CUSTOM_ROUTES = {
     JSON_CONFIG: "/admin/json-config",
     CONTACT_MESSAGE : "/admin/messages",
     USER_MANAGEMENT: "/admin/users",
+    ADMIN_MARKETPLACE: "/admin/marketplace",
     USER_DASHBOARD: "/my-dashboard",
     ABOUT: "/about",
     SERVICES: "/services",

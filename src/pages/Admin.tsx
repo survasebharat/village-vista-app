@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, LogOut, Shield } from "lucide-react";
+import { Loader2, LogOut, Shield, ShoppingBag, Users, FileText, MessagesSquare, LayoutDashboard } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CUSTOM_ROUTES } from "@/custom-routes";
@@ -153,56 +153,89 @@ const Admin = () => {
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2">
-                <Button
-                  variant="outline"
-                  className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate(CUSTOM_ROUTES.USER_MANAGEMENT)}
-                >
-                  <div className="text-lg font-semibold">👥 User Management</div>
-                  <div className="text-sm text-muted-foreground text-left">
-                    Review, approve, and reject user registrations
-                  </div>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate(CUSTOM_ROUTES.VILLAGE_MANAGEMENT)}
-                >
-                  <div className="text-lg font-semibold">🏘️ Village Management</div>
-                  <div className="text-sm text-muted-foreground text-left">
-                    Add, edit, and manage village information
-                  </div>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate(CUSTOM_ROUTES.JSON_CONFIG)}
-                >
-                  <div className="text-lg font-semibold">📝 JSON Configuration</div>
-                  <div className="text-sm text-muted-foreground text-left">
-                    Edit village configuration data dynamically
-                  </div>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate(CUSTOM_ROUTES.CONTACT_MESSAGE)}
-                >
-                  <div className="text-lg font-semibold">📧 Contact Messages</div>
-                  <div className="text-sm text-muted-foreground text-left">
-                    View and manage contact form submissions
-                  </div>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-auto p-6 flex flex-col items-start gap-2"
-                  onClick={() => navigate(CUSTOM_ROUTES.ADMIN_DASHBOARD)}
-                >
-                  <div className="text-lg font-semibold">📊 Admin Dashboard</div>
-                  <div className="text-sm text-muted-foreground text-left">
-                    View users, posts, and ratings analytics
-                  </div>
-                </Button>
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.USER_MANAGEMENT)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Users className="h-5 w-5" />
+                      User Management
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Review, approve, and reject user registrations
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.VILLAGE_MANAGEMENT)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Shield className="h-5 w-5" />
+                      Village Management
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Add, edit, and manage village information
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.JSON_CONFIG)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FileText className="h-5 w-5" />
+                      JSON Configuration
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Edit village configuration data dynamically
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.CONTACT_MESSAGE)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <MessagesSquare className="h-5 w-5" />
+                      Contact Messages
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      View and manage contact form submissions
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.ADMIN_DASHBOARD)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <LayoutDashboard className="h-5 w-5" />
+                      Admin Dashboard
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      View users, posts, and ratings analytics
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.ADMIN_MARKETPLACE)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <ShoppingBag className="h-5 w-5" />
+                      Marketplace Management
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Approve, reject, and manage marketplace listings
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
             </CardContent>
           </Card>

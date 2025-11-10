@@ -331,6 +331,10 @@ export type Database = {
           image_urls: string[] | null
           item_name: string
           price: number
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
           updated_at: string
           user_id: string | null
           village: string
@@ -344,6 +348,10 @@ export type Database = {
           image_urls?: string[] | null
           item_name: string
           price: number
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
           updated_at?: string
           user_id?: string | null
           village?: string
@@ -357,6 +365,10 @@ export type Database = {
           image_urls?: string[] | null
           item_name?: string
           price?: number
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
           updated_at?: string
           user_id?: string | null
           village?: string

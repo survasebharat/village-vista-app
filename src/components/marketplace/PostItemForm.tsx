@@ -130,7 +130,7 @@ const PostItemForm = ({ onSuccess }: PostItemFormProps) => {
 
       toast({
         title: "Success!",
-        description: "✅ Your item has been posted successfully!"
+        description: "✅ Item posted! It will be visible after admin approval."
       });
 
       // Reset form
