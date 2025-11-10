@@ -147,9 +147,14 @@ const ItemPopup = ({ item, open, onClose }: ItemPopupProps) => {
                 <MapPin className="h-5 w-5 flex-shrink-0" />
                 <span className="font-medium">{item.village}</span>
               </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Phone className="h-5 w-5 flex-shrink-0" />
-                <span className="font-medium">{item.contact}</span>
+              <div className="flex items-center gap-3">
+                <Phone className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
+                <a 
+                  href={`tel:${item.contact}`}
+                  className="font-medium text-primary hover:underline"
+                >
+                  {item.contact}
+                </a>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Calendar className="h-5 w-5 flex-shrink-0" />
@@ -166,6 +171,17 @@ const ItemPopup = ({ item, open, onClose }: ItemPopupProps) => {
               >
                 <MessageCircle className="h-5 w-5" />
                 Contact via WhatsApp
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full gap-2"
+              >
+                <a href={`tel:${item.contact}`}>
+                  <Phone className="h-5 w-5" />
+                  Call Seller
+                </a>
               </Button>
               <Button
                 onClick={handleShare}

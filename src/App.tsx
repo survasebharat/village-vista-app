@@ -37,6 +37,7 @@ const ForumPage = lazy(() => import("./pages/ForumPage"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const BuySellPage = lazy(() => import("./pages/BuySellPage"));
 const AdminMarketplaceDashboard = lazy(() => import("./pages/AdminMarketplaceDashboard"));
+const SellerDashboard = lazy(() => import("./pages/SellerDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -108,6 +109,10 @@ const App = () => (
                   <Route
                     path={CUSTOM_ROUTES.BUY_SELL}
                     element={<BuySellPage />}
+                  />
+                  <Route
+                    path={CUSTOM_ROUTES.SELLER_DASHBOARD}
+                    element={<SellerDashboard />}
                   />
                   <Route
                     path={CUSTOM_ROUTES.ADMIN_DASHBOARD}

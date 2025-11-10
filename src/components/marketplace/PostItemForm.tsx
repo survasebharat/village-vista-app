@@ -27,6 +27,7 @@ const CATEGORIES = [
 ];
 
 const formSchema = z.object({
+  seller_name: z.string().min(2, "Seller name must be at least 2 characters").max(100),
   item_name: z.string().min(3, "Item name must be at least 3 characters").max(100),
   category: z.string().min(1, "Please select a category"),
   price: z.string().min(1, "Price is required").refine(val => !isNaN(Number(val)) && Number(val) > 0, "Price must be a positive number"),
@@ -48,12 +49,13 @@ const PostItemForm = ({ onSuccess }: PostItemFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      seller_name: "Dinesh",
       item_name: "",
       category: "",
       price: "",
       description: "",
       village: "Shivankhed Khurd",
-      contact: ""
+      contact: "8975504841"
     }
   });
 
@@ -117,6 +119,7 @@ const PostItemForm = ({ onSuccess }: PostItemFormProps) => {
 
       // Insert item data
       const { error } = await supabase.from("items").insert({
+        seller_name: values.seller_name,
         item_name: values.item_name,
         category: values.category,
         price: parseFloat(values.price),
@@ -160,10 +163,10 @@ const PostItemForm = ({ onSuccess }: PostItemFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
-          name="sellerName"
+          name="seller_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Seller Name</FormLabel>
+              <FormLabel>Seller Name *</FormLabel>
               <FormControl>
                 <Input placeholder="Your name" {...field} />
               </FormControl>
