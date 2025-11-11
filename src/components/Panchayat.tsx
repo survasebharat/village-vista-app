@@ -264,10 +264,10 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
         </CardHeader>
 
         <CardContent className="text-center space-y-3">
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+        {/* <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <h1 className="h-4 w-4" />
             <span>{member.ward}</span>
-          </div>
+          </div> */} 
           <Button 
             variant="ghost" 
             size="sm" 
