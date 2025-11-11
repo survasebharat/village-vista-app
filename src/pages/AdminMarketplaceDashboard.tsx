@@ -10,6 +10,8 @@ import { toast } from "sonner";
 import { ArrowLeft, CheckCircle, XCircle, Trash2, TrendingUp, CheckSquare, Square } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import CustomLoader from "@/components/CustomLoader";
 
 interface Item {
@@ -25,6 +27,7 @@ interface Item {
   status: string;
   reviewed_at?: string;
   rejection_reason?: string;
+  is_available: boolean;
 }
 
 export default function AdminMarketplaceDashboard() {
@@ -127,6 +130,22 @@ export default function AdminMarketplaceDashboard() {
     } catch (error) {
       console.error("Error deleting item:", error);
       toast.error("Failed to delete item");
+    }
+  };
+
+  const handleToggleAvailability = async (itemId: string, currentStatus: boolean) => {
+    try {
+      const { error } = await supabase
+        .from("items")
+        .update({ is_available: !currentStatus })
+        .eq("id", itemId);
+
+      if (error) throw error;
+      toast.success(!currentStatus ? "Item marked as available" : "Item marked as unavailable");
+      fetchItems();
+    } catch (error) {
+      console.error("Error updating availability:", error);
+      toast.error("Failed to update availability");
     }
   };
 
@@ -282,7 +301,7 @@ export default function AdminMarketplaceDashboard() {
               </p>
             )}
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
             {item.status === "pending" && (
               <>
                 <Button
@@ -302,6 +321,18 @@ export default function AdminMarketplaceDashboard() {
                   Reject
                 </Button>
               </>
+            )}
+            {item.status === "approved" && (
+              <div className="flex items-center gap-2 border rounded p-2">
+                <Switch
+                  id={`admin-available-${item.id}`}
+                  checked={item.is_available}
+                  onCheckedChange={() => handleToggleAvailability(item.id, item.is_available)}
+                />
+                <Label htmlFor={`admin-available-${item.id}`} className="text-xs cursor-pointer">
+                  {item.is_available ? "Available" : "Unavailable"}
+                </Label>
+              </div>
             )}
             <Button
               size="sm"

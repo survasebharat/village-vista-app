@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { Package, CheckCircle, Clock, XCircle, TrendingUp } from "lucide-react";
+import { Package, CheckCircle, Clock, XCircle, TrendingUp, PlusCircle } from "lucide-react";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import CustomLoader from "@/components/CustomLoader";
+import PostItemForm from "@/components/marketplace/PostItemForm";
 
 interface SellerItem {
   id: string;
@@ -20,7 +26,8 @@ interface SellerItem {
   image_urls: string[];
   created_at: string;
   status: string;
-  sold: boolean;
+  is_available: boolean;
+  rejection_reason?: string;
 }
 
 export default function SellerDashboard() {
@@ -31,22 +38,29 @@ export default function SellerDashboard() {
     canonical: window.location.origin + "/seller-dashboard"
   });
 
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
   const [items, setItems] = useState<SellerItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [sellerName] = useState("Dinesh"); // Demo seller name
+  const [activeTab, setActiveTab] = useState("items");
 
   useEffect(() => {
-    fetchSellerItems();
-  }, []);
+    if (!authLoading && !user) {
+      navigate("/auth");
+    } else if (user) {
+      fetchSellerItems();
+    }
+  }, [authLoading, user, navigate]);
 
   const fetchSellerItems = async () => {
+    if (!user) return;
+    
     try {
-      // For demo purposes, filter by seller_name
-      // In production, use user_id with authentication
+      setLoading(true);
       const { data, error } = await supabase
         .from("items")
         .select("*")
-        .eq("seller_name", sellerName)
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
@@ -59,15 +73,15 @@ export default function SellerDashboard() {
     }
   };
 
-  const handleMarkAsSold = async (itemId: string, currentStatus: boolean) => {
+  const handleToggleAvailability = async (itemId: string, currentStatus: boolean) => {
     try {
       const { error } = await supabase
         .from("items")
-        .update({ sold: !currentStatus })
+        .update({ is_available: !currentStatus })
         .eq("id", itemId);
 
       if (error) throw error;
-      toast.success(!currentStatus ? "Item marked as sold" : "Item marked as available");
+      toast.success(!currentStatus ? "Item marked as available" : "Item marked as unavailable");
       fetchSellerItems();
     } catch (error) {
       console.error("Error updating item:", error);
@@ -75,9 +89,9 @@ export default function SellerDashboard() {
     }
   };
 
-  const getStatusBadge = (status: string, sold: boolean) => {
-    if (sold) {
-      return <Badge variant="secondary" className="bg-gray-500">Sold</Badge>;
+  const getStatusBadge = (status: string, isAvailable: boolean) => {
+    if (!isAvailable) {
+      return <Badge variant="secondary" className="bg-gray-500">Unavailable</Badge>;
     }
     const variants: Record<string, "default" | "secondary" | "destructive"> = {
       pending: "secondary",
@@ -89,15 +103,15 @@ export default function SellerDashboard() {
 
   const stats = {
     total: items.length,
-    approved: items.filter(item => item.status === "approved" && !item.sold).length,
+    approved: items.filter(item => item.status === "approved" && item.is_available).length,
     pending: items.filter(item => item.status === "pending").length,
-    sold: items.filter(item => item.sold).length,
+    unavailable: items.filter(item => !item.is_available).length,
     totalValue: items
-      .filter(item => item.status === "approved" && !item.sold)
+      .filter(item => item.status === "approved" && item.is_available)
       .reduce((sum, item) => sum + Number(item.price), 0),
   };
 
-  if (loading) {
+  if (authLoading || loading) {
     return <CustomLoader />;
   }
 
@@ -111,7 +125,7 @@ export default function SellerDashboard() {
               Seller Dashboard
             </h1>
             <p className="text-lg text-muted-foreground">
-              Manage your listings and track their status
+              Post items and manage your listings
             </p>
           </div>
         </div>
@@ -157,11 +171,11 @@ export default function SellerDashboard() {
             <CardHeader className="pb-2">
               <CardTitle className="text-sm flex items-center">
                 <XCircle className="h-4 w-4 mr-1" />
-                Sold
+                Unavailable
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-bold text-gray-600">{stats.sold}</p>
+              <p className="text-2xl font-bold text-gray-600">{stats.unavailable}</p>
             </CardContent>
           </Card>
           <Card>
@@ -177,61 +191,97 @@ export default function SellerDashboard() {
           </Card>
         </div>
 
-        {/* Items List */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold mb-4">Your Listings</h2>
-          {items.length === 0 ? (
-            <Card>
-              <CardContent className="p-8 text-center text-muted-foreground">
-                You haven't posted any items yet.
-              </CardContent>
-            </Card>
-          ) : (
-            items.map((item) => (
-              <Card key={item.id}>
-                <CardContent className="p-4">
-                  <div className="flex gap-4">
-                    {item.image_urls[0] && (
-                      <img
-                        src={item.image_urls[0]}
-                        alt={item.item_name}
-                        className="w-24 h-24 object-cover rounded"
-                      />
-                    )}
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-lg">{item.item_name}</h3>
-                          <p className="text-sm text-muted-foreground">{item.category}</p>
+        {/* Tabs for Post Item and Manage Items */}
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+            <TabsTrigger value="items" className="flex items-center gap-2">
+              <Package className="h-4 w-4" />
+              My Items
+            </TabsTrigger>
+            <TabsTrigger value="post" className="flex items-center gap-2">
+              <PlusCircle className="h-4 w-4" />
+              Post an Item
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="post" className="mt-0">
+            <div className="max-w-2xl mx-auto">
+              <PostItemForm onSuccess={() => {
+                setActiveTab("items");
+                fetchSellerItems();
+              }} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="items" className="mt-0">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold mb-4">Your Listings</h2>
+              {items.length === 0 ? (
+                <Card>
+                  <CardContent className="p-8 text-center text-muted-foreground">
+                    <p className="mb-4">You haven't posted any items yet.</p>
+                    <Button onClick={() => setActiveTab("post")}>
+                      <PlusCircle className="h-4 w-4 mr-2" />
+                      Post Your First Item
+                    </Button>
+                  </CardContent>
+                </Card>
+              ) : (
+                items.map((item) => (
+                  <Card key={item.id}>
+                    <CardContent className="p-4">
+                      <div className="flex gap-4">
+                        {item.image_urls[0] && (
+                          <img
+                            src={item.image_urls[0]}
+                            alt={item.item_name}
+                            className="w-24 h-24 object-cover rounded"
+                          />
+                        )}
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start mb-2">
+                            <div>
+                              <h3 className="font-semibold text-lg">{item.item_name}</h3>
+                              <p className="text-sm text-muted-foreground">{item.category}</p>
+                            </div>
+                            {getStatusBadge(item.status, item.is_available)}
+                          </div>
+                          <p className="text-sm mb-2 line-clamp-2">{item.description}</p>
+                          <div className="flex gap-4 text-sm text-muted-foreground">
+                            <span className="font-semibold text-foreground">₹{item.price}</span>
+                            <span>•</span>
+                            <span>{item.village}</span>
+                            <span>•</span>
+                            <span>Posted: {new Date(item.created_at).toLocaleDateString()}</span>
+                          </div>
                         </div>
-                        {getStatusBadge(item.status, item.sold)}
+                        <div className="flex flex-col gap-3">
+                          {item.status === "approved" && (
+                            <div className="flex items-center gap-2">
+                              <Switch
+                                id={`available-${item.id}`}
+                                checked={item.is_available}
+                                onCheckedChange={() => handleToggleAvailability(item.id, item.is_available)}
+                              />
+                              <Label htmlFor={`available-${item.id}`} className="text-sm cursor-pointer">
+                                {item.is_available ? "Available" : "Unavailable"}
+                              </Label>
+                            </div>
+                          )}
+                          {item.status === "rejected" && item.rejection_reason && (
+                            <p className="text-xs text-destructive">
+                              Reason: {item.rejection_reason}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <p className="text-sm mb-2 line-clamp-2">{item.description}</p>
-                      <div className="flex gap-4 text-sm text-muted-foreground">
-                        <span className="font-semibold text-foreground">₹{item.price}</span>
-                        <span>•</span>
-                        <span>{item.village}</span>
-                        <span>•</span>
-                        <span>Posted: {new Date(item.created_at).toLocaleDateString()}</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      {item.status === "approved" && (
-                        <Button
-                          size="sm"
-                          variant={item.sold ? "outline" : "default"}
-                          onClick={() => handleMarkAsSold(item.id, item.sold)}
-                        >
-                          {item.sold ? "Mark Available" : "Mark as Sold"}
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))
-          )}
-        </div>
+                    </CardContent>
+                  </Card>
+                ))
+              )}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

@@ -67,7 +67,7 @@ const ItemList = () => {
         .from("items")
         .select("*")
         .eq("status", "approved")
-        .eq("sold", false)
+        .eq("is_available", true)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
