@@ -229,54 +229,63 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
 
         {/* Ward Members Section */}
         <div className="mb-16">
-          <h3 className="text-4xl font-bold text-center mb-8 text-gradient">
-            {t('panchayat.wardMembers')}
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {panchayat.wardMembers.map((member, index) => (
-              <Card 
-                key={member.name} 
-                className="card-elegant hover-lift animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardHeader className="text-center">
-                  <div 
-                    className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-accent cursor-pointer hover:border-primary transition-colors"
-                    onClick={() => handleMemberClick(member)}
-                  >
-                    <img 
-                      src={member.image} 
-                      alt={member.name}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                  <Badge variant="outline" className="mx-auto">
-                    {member.position}
-                  </Badge>
-                </CardHeader>
-                <CardContent className="text-center space-y-3">
-                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    <span>{member.ward}</span>
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="w-full"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.location.href = `tel:${member.contact}`;
-                    }}
-                  >
-                    <Phone className="h-4 w-4 mr-2" />
-                    {member.contact}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+  <h3 className="text-4xl font-bold text-center mb-8 text-gradient">
+    {t('panchayat.wardMembers')}
+  </h3>
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {panchayat.wardMembers.map((member, index) => (
+      <Card 
+        key={member.name} 
+        className="card-elegant hover-lift animate-fade-in"
+        style={{ animationDelay: `${index * 100}ms` }}
+      >
+        <CardHeader className="text-center">
+          <div 
+            className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-accent cursor-pointer hover:border-primary transition-colors"
+            onClick={() => handleMemberClick(member)}
+          >
+            <img 
+              src={member.image} 
+              alt={member.name}
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+            />
           </div>
-        </div>
+          <CardTitle className="text-xl">{member.name}</CardTitle>
+          <Badge variant="outline" className="mx-auto">
+            {member.position}
+          </Badge>
+
+          {/* ✅ New CardTitle for caste */}
+          {member.caste && (
+            <CardTitle className="text-base text-muted-foreground mt-1">
+              {member.caste}
+            </CardTitle>
+          )}
+        </CardHeader>
+
+        <CardContent className="text-center space-y-3">
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <MapPin className="h-4 w-4" />
+            <span>{member.ward}</span>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="w-full"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.location.href = `tel:${member.contact}`;
+            }}
+          >
+            <Phone className="h-4 w-4 mr-2" />
+            {member.contact}
+          </Button>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</div>
+
         
 
 
