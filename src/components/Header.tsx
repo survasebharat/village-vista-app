@@ -78,7 +78,7 @@ const Header = () => {
         {/* Main Header */}
 
         {config?.contact?.office && (
-          <div className="flex flex-col sm:flex-row items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50 gap-2">
+          <div className="hidden sm:flex flex-col sm:flex-row items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50 gap-2">
             <div className="sm:flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />

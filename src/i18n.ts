@@ -582,6 +582,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
+    lng: 'mr',
     fallbackLng: 'mr',
     debug: false,
     interpolation: {
