@@ -282,7 +282,14 @@ const Services = ({ services }: ServicesProps) => {
                           </div>
                         )}
                         
-                        <Button variant="outline" className="w-full mt-4">
+                        <Button 
+                          variant="outline" 
+                          className="w-full mt-4"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.location.href = `tel:${service.contact}`;
+                          }}
+                        >
                           <Phone className="h-4 w-4 mr-2" />
                           {service.contact}
                         </Button>
