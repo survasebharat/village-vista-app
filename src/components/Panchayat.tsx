@@ -260,7 +260,15 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                     <MapPin className="h-4 w-4" />
                     <span>{member.ward}</span>
                   </div>
-                  <Button variant="ghost" size="sm" className="w-full">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `tel:${member.contact}`;
+                    }}
+                  >
                     <Phone className="h-4 w-4 mr-2" />
                     {member.contact}
                   </Button>
@@ -302,7 +310,15 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 </CardHeader>
                 <CardContent className="text-center space-y-2">
                   <p className="text-sm text-muted-foreground">{staff.department}</p>
-                  <Button variant="ghost" size="sm" className="w-full text-xs">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="w-full text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `tel:${staff.contact}`;
+                    }}
+                  >
                     <Phone className="h-3 w-3 mr-2" />
                     {staff.contact}
                   </Button>

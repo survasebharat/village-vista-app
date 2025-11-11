@@ -81,6 +81,7 @@ const GovStaff = ({ govStaff }: GovStaffProps) => {
                     className="w-full"
                     onClick={(e) => {
                       e.stopPropagation();
+                      window.location.href = `tel:${staff.contact}`;
                     }}
                   >
                     <Phone className="h-4 w-4 mr-2" />
