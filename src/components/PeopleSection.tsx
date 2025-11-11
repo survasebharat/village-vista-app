@@ -46,41 +46,38 @@ const PeopleSection = ({ title, description, people, sectionId }: PeopleSectionP
           </div>
 
           {/* People Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {people.map((person, index) => (
               <Card 
                 key={`${person.name}-${index}`}
-                className="group card-elegant hover-lift animate-fade-in cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105"
+                className="card-elegant hover-lift animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
                 onClick={() => handleMemberClick(person)}
               >
-                <CardHeader className="text-center pb-4">
-                  <div className="relative w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/20 group-hover:border-primary transition-all duration-300 shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-accent cursor-pointer hover:border-primary transition-colors">
                     <img 
                       src={person.image} 
                       alt={person.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                    {person.name}
-                  </CardTitle>
-                  <Badge variant="outline" className="mx-auto text-xs mt-2 border-primary/30 group-hover:border-primary group-hover:bg-primary/10 transition-all duration-300">
+                  <CardTitle className="text-lg">{person.name}</CardTitle>
+                  <Badge variant="outline" className="mx-auto text-xs">
                     <Briefcase className="h-3 w-3 mr-1" />
                     {person.profession}
                   </Badge>
                 </CardHeader>
-                <CardContent className="text-center space-y-3 pt-0">
-                  <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed px-2">
+                <CardContent className="text-center space-y-3">
+                  <p className="text-sm text-muted-foreground line-clamp-2">
                     {person.description}
                   </p>
                   {person.contact && (
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="w-full hover:bg-primary/10 hover:text-primary transition-colors duration-300"
+                      className="w-full"
                       onClick={(e) => {
                         e.stopPropagation();
                         window.location.href = `tel:${person.contact}`;
@@ -94,7 +91,7 @@ const PeopleSection = ({ title, description, people, sectionId }: PeopleSectionP
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="w-full hover:bg-primary/10 hover:text-primary transition-colors duration-300"
+                      className="w-full"
                       onClick={(e) => {
                         e.stopPropagation();
                         window.location.href = `mailto:${person.email}`;
