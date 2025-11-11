@@ -82,7 +82,12 @@ const Header = () => {
             <div className="sm:flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <span>{config.contact.office.phone}</span>
+                <a 
+                  href={`tel:${config.contact.office.phone}`}
+                  className="hover:text-primary transition-colors"
+                >
+                  {config.contact.office.phone}
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />

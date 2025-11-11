@@ -58,7 +58,12 @@ const Contact = ({contact, documents=[]}) => {
                     <Phone className="h-5 w-5 text-primary flex-shrink-0" />
                     <div>
                       <p className="font-medium">{t('contact.phone2')}</p>
-                      <p className="text-muted-foreground">{contact.office.phone}</p>
+                      <a 
+                        href={`tel:${contact.office.phone}`}
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {contact.office.phone}
+                      </a>
                     </div>
                   </div>
 
@@ -100,25 +105,45 @@ const Contact = ({contact, documents=[]}) => {
                   <div className="text-center p-4 rounded-lg bg-destructive/5 border border-destructive/20 hover-lift transition-all duration-300 animate-fade-in">
                     <p className="text-3xl mb-2">🚔</p>
                     <p className="font-semibold">{t('contact.police')}</p>
-                    <p className="text-destructive font-mono text-lg">{contact.emergency.police}</p>
+                    <a 
+                      href={`tel:${contact.emergency.police}`}
+                      className="text-destructive font-mono text-lg hover:underline block"
+                    >
+                      {contact.emergency.police}
+                    </a>
                   </div>
 
                   <div className="text-center p-4 rounded-lg bg-warning/5 border border-warning/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "100ms" }}>
                     <p className="text-3xl mb-2">🚒</p>
                     <p className="font-semibold">{t('contact.fire')}</p>
-                    <p className="text-warning font-mono text-lg">{contact.emergency.fire}</p>
+                    <a 
+                      href={`tel:${contact.emergency.fire}`}
+                      className="text-warning font-mono text-lg hover:underline block"
+                    >
+                      {contact.emergency.fire}
+                    </a>
                   </div>
 
                   <div className="text-center p-4 rounded-lg bg-success/5 border border-success/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "200ms" }}>
                     <p className="text-3xl mb-2">🚑</p>
                     <p className="font-semibold">{t('contact.ambulance')}</p>
-                    <p className="text-success font-mono text-lg">{contact.emergency.ambulance}</p>
+                    <a 
+                      href={`tel:${contact.emergency.ambulance}`}
+                      className="text-success font-mono text-lg hover:underline block"
+                    >
+                      {contact.emergency.ambulance}
+                    </a>
                   </div>
 
                   <div className="text-center p-4 rounded-lg bg-accent/5 border border-accent/20 hover-lift transition-all duration-300 animate-fade-in" style={{ animationDelay: "300ms" }}>
                     <p className="text-3xl mb-2">📞</p>
                     <p className="font-semibold">{t('contact.localEmergency')}</p>
-                    <p className="text-accent font-mono text-sm">{contact.emergency.local_emergency}</p>
+                    <a 
+                      href={`tel:${contact.emergency.local_emergency}`}
+                      className="text-accent font-mono text-sm hover:underline block"
+                    >
+                      {contact.emergency.local_emergency}
+                    </a>
                   </div>
                 </div>
               </CardContent>
