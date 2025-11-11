@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, LogOut, Shield, ShoppingBag, Users, FileText, MessagesSquare, LayoutDashboard } from "lucide-react";
+import { Loader2, LogOut, Shield, ShoppingBag, Users, FileText, MessagesSquare, LayoutDashboard, GraduationCap } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CUSTOM_ROUTES } from "@/custom-routes";
@@ -233,6 +233,20 @@ const Admin = () => {
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
                       Approve, reject, and manage marketplace listings
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/admin/exam-management")}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <GraduationCap className="h-5 w-5" />
+                      Exam Management
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Create, manage, and conduct online exams
                     </p>
                   </CardContent>
                 </Card>
