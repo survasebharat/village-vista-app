@@ -150,8 +150,9 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
                 </div>
                 <CardTitle className="text-2xl text-gradient">{panchayat.upsarpanch.name}</CardTitle>
                 <Badge variant="secondary" className="mx-auto mt-2">
-                  {t('Upsarpanch')}
+              {panchayat.upsarpanch.position}
                 </Badge>
+                  
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
@@ -197,7 +198,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               </div>
               <CardTitle className="text-2xl text-gradient">{panchayat.secretary.name}</CardTitle>
               <Badge variant="secondary" className="mx-auto mt-2">
-                {t('Secretary')}
+              {panchayat.secretary.position}
               </Badge>
             </CardHeader>
             <CardContent className="space-y-4">
