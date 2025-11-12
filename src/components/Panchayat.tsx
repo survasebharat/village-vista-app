@@ -101,8 +101,10 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               </div>
               <CardTitle className="text-2xl text-gradient">{panchayat.sarpanch.name}</CardTitle>
               <Badge variant="secondary" className="mx-auto mt-2">
-               {t('sarpanch')}
+               {panchayat.sarpanch.position}
               </Badge>
+
+
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center">
