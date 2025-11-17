@@ -17,7 +17,11 @@ const ContactUsPage = () => {
   if (loading || !config) return <SectionSkeleton />;
   
   return isPageVisible("contact") ? (
-    <Contact contact={config.contact} documents={config.documents} />
+    <Contact 
+      contact={config.contact} 
+      documents={config.documents}
+      quickServices={config.quickServices || []}
+    />
   ) : (
     <NotFound />
   );

@@ -59,6 +59,15 @@ export interface PersonProfile {
   email?: string;
 }
 
+export interface QuickService {
+  id: string;
+  title: string;
+  description: string;
+  requiredDocuments: string[];
+  tips: string[];
+  buttonText: string;
+}
+
 export interface VillageConfig {
   village: VillageData;
   panchayat: {
@@ -77,6 +86,7 @@ export interface VillageConfig {
     emergency: Emergency;
   };
   documents: any[];
+  quickServices?: QuickService[];
   services: any[];
   social?: {
     facebook?: string;
