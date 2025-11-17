@@ -8,15 +8,25 @@ import { Link } from "react-router-dom";
 import DocumentsModal from "./DocumentsModal";
 import { useState } from "react";
 
-const Contact = ({contact, documents=[]}) => {
+const Contact = ({contact, documents=[], quickServices=[]}) => {
   const { t } = useTranslation();
   const [isDocsModalOpen, setIsDocsModalOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<{name: string, documents: string[]}>({name: "", documents: []});
+  const [selectedService, setSelectedService] = useState<{
+    name: string;
+    description?: string;
+    documents: string[];
+    tips?: string[];
+    buttonText?: string;
+  }>({name: "", documents: []});
 
   const handleApplyClick = (service: any) => {
+    // Support both old documents format and new quickServices format
     setSelectedService({
-      name: service.name || "",
-      documents: service.documents || []
+      name: service.name || service.title || "",
+      description: service.description,
+      documents: service.documents || service.requiredDocuments || [],
+      tips: service.tips,
+      buttonText: service.buttonText
     });
     setIsDocsModalOpen(true);
   };
@@ -162,31 +172,39 @@ const Contact = ({contact, documents=[]}) => {
             </Card>
 
             {/* Quick Services */}
-            <Card className="card-elegant mt-8">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-xl">
-                  <FileText className="h-5 w-5 text-primary" />
-                  Quick Services
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-3">
-                  {documents.map((service, index) => (
-                    <div 
-                      key={service.name}
-                      onClick={() => handleApplyClick(service)}
-                      className="flex items-center justify-between p-3 rounded-lg bg-muted/20 hover-lift cursor-pointer transition-all duration-300"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                    >
-                      <span className="text-sm font-medium">{service.name || ""}</span>
-                      <Badge variant="outline" className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors">
-                        {t('contact.apply')}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {(quickServices.length > 0 || documents.length > 0) && (
+              <Card className="card-elegant mt-8">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-xl">
+                    <FileText className="h-5 w-5 text-primary" />
+                    Quick Services
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-3">
+                    {/* Use quickServices if available, fallback to old documents format */}
+                    {(quickServices.length > 0 ? quickServices : documents).map((service: any, index: number) => (
+                      <div 
+                        key={service.id || service.name || index}
+                        onClick={() => handleApplyClick(service)}
+                        className="flex items-center justify-between p-3 rounded-lg bg-muted/20 hover-lift cursor-pointer transition-all duration-300"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <div className="flex-1">
+                          <span className="text-sm font-medium block">{service.title || service.name || ""}</span>
+                          {service.description && (
+                            <span className="text-xs text-muted-foreground line-clamp-1">{service.description}</span>
+                          )}
+                        </div>
+                        <Badge variant="outline" className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors ml-2">
+                          {service.buttonText || t('contact.apply')}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
@@ -195,7 +213,10 @@ const Contact = ({contact, documents=[]}) => {
         isOpen={isDocsModalOpen}
         onClose={() => setIsDocsModalOpen(false)}
         serviceName={selectedService.name}
+        description={selectedService.description}
         documents={selectedService.documents}
+        tips={selectedService.tips}
+        buttonText={selectedService.buttonText}
       />
     </section>
   );
