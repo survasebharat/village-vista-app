@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Save, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Loader2, Save, AlertCircle, CheckCircle2, FileText } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface Village {
@@ -32,6 +32,63 @@ const JsonConfigManager = () => {
     { code: 'hi', name: 'Hindi (हिंदी)' },
     { code: 'mr', name: 'Marathi (मराठी)' }
   ];
+
+  const quickServicesTemplate = {
+    quickServices: [
+      {
+        id: "birth-certificate",
+        title: "Birth Certificate",
+        description: "Apply for birth registration certificate",
+        requiredDocuments: [
+          "Hospital birth certificate or delivery note",
+          "Parents' Aadhar cards",
+          "Marriage certificate of parents",
+          "Address proof"
+        ],
+        tips: [
+          "Apply within 21 days of birth for free registration",
+          "After 30 days, late fee applies",
+          "Bring all original documents for verification"
+        ],
+        buttonText: "Got it, Thanks!"
+      },
+      {
+        id: "death-certificate",
+        title: "Death Certificate",
+        description: "Apply for death registration certificate",
+        requiredDocuments: [
+          "Hospital death certificate or medical practitioner's certificate",
+          "Deceased person's Aadhar card (if available)",
+          "Applicant's ID proof",
+          "Address proof"
+        ],
+        tips: [
+          "Apply within 21 days of death for free registration",
+          "Cremation/burial cannot proceed without death certificate",
+          "Required for claiming insurance and other benefits"
+        ],
+        buttonText: "Understood"
+      },
+      {
+        id: "property-tax",
+        title: "Property Tax Form",
+        description: "Submit property tax payment application",
+        requiredDocuments: [
+          "Property ownership documents",
+          "Previous tax receipt",
+          "Aadhar card",
+          "Property survey number details"
+        ],
+        tips: [
+          "Pay before due date to avoid late fees",
+          "Keep previous year's receipt handy",
+          "Online payment available"
+        ],
+        buttonText: "Proceed"
+      }
+    ]
+  };
+
 
   useEffect(() => {
     checkAdminAccess();
@@ -143,6 +200,25 @@ const JsonConfigManager = () => {
     } else {
       setValidationError(null);
       setValidationSuccess(false);
+    }
+  };
+
+  const loadQuickServicesTemplate = () => {
+    try {
+      let currentConfig = jsonContent ? JSON.parse(jsonContent) : {};
+      currentConfig.quickServices = quickServicesTemplate.quickServices;
+      setJsonContent(JSON.stringify(currentConfig, null, 2));
+      validateJson(JSON.stringify(currentConfig, null, 2));
+      toast({
+        title: 'Template Loaded',
+        description: 'Quick Services template added to configuration. Review and save.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to parse current configuration. Please fix JSON errors first.',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -336,7 +412,15 @@ const JsonConfigManager = () => {
                   </Alert>
                 )}
 
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-between gap-2">
+                  <Button
+                    variant="outline"
+                    onClick={loadQuickServicesTemplate}
+                    disabled={!selectedVillage || !selectedLanguage}
+                  >
+                    <FileText className="mr-2 h-4 w-4" />
+                    Load Quick Services Template
+                  </Button>
                   <Button
                     onClick={handleSave}
                     disabled={saving || !!validationError || !jsonContent.trim()}
