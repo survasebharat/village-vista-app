@@ -20,6 +20,7 @@ const ServicePage = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
+        // Fetch services from database
         const { data, error } = await supabase
           .from('village_services')
           .select('*')
@@ -28,8 +29,8 @@ const ServicePage = () => {
 
         if (error) throw error;
 
-        // Group services by category
-        const groupedServices = data?.reduce((acc: any, service: any) => {
+        // Group database services by category
+        const dbGroupedServices = data?.reduce((acc: any, service: any) => {
           const category = service.category;
           if (!acc[category]) {
             acc[category] = {
@@ -49,7 +50,31 @@ const ServicePage = () => {
           return acc;
         }, {});
 
-        setServices(Object.values(groupedServices || {}));
+        // Merge JSON-configured services with database services
+        const jsonServices = config?.services || [];
+        const mergedServices: any = {};
+
+        // Add JSON services first (preserve original configuration)
+        jsonServices.forEach((service: any) => {
+          if (!mergedServices[service.category]) {
+            mergedServices[service.category] = {
+              category: service.category,
+              items: []
+            };
+          }
+          mergedServices[service.category].items.push(...service.items);
+        });
+
+        // Append database services (new entries)
+        Object.keys(dbGroupedServices || {}).forEach((category) => {
+          if (!mergedServices[category]) {
+            mergedServices[category] = dbGroupedServices[category];
+          } else {
+            mergedServices[category].items.push(...dbGroupedServices[category].items);
+          }
+        });
+
+        setServices(Object.values(mergedServices));
       } catch (error) {
         console.error('Error fetching services:', error);
       } finally {
@@ -57,8 +82,10 @@ const ServicePage = () => {
       }
     };
 
-    fetchServices();
-  }, []);
+    if (config) {
+      fetchServices();
+    }
+  }, [config]);
 
   if (loading || !config || servicesLoading) return <SectionSkeleton />;
   
