@@ -46,6 +46,8 @@ const ExamRules = lazy(() => import("./pages/ExamRules"));
 const ExamAnalytics = lazy(() => import("./pages/ExamAnalytics"));
 const AdminExamDashboard = lazy(() => import("./pages/AdminExamDashboard"));
 const AdminExamQuestions = lazy(() => import("./pages/AdminExamQuestions"));
+const AddService = lazy(() => import("./pages/AddService"));
+const ManageCategories = lazy(() => import("./pages/ManageCategories"));
 
 const queryClient = new QueryClient();
 
@@ -152,6 +154,8 @@ const App = () => (
                   <Route path={CUSTOM_ROUTES.USER_MANAGEMENT} element={<UserManagementDashboard />} />
                   <Route path={CUSTOM_ROUTES.USER_DASHBOARD} element={<UserDashboard />} />
                   <Route path={CUSTOM_ROUTES.ADMIN_MARKETPLACE} element={<AdminMarketplaceDashboard />} />
+                  <Route path={CUSTOM_ROUTES.ADD_SERVICE} element={<AddService />} />
+                  <Route path={CUSTOM_ROUTES.MANAGE_CATEGORIES} element={<ManageCategories />} />
                 </Routes>
               </Layout>
             }
