@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, LogOut, Shield, ShoppingBag, Users, FileText, MessagesSquare, LayoutDashboard, GraduationCap } from "lucide-react";
+import { Loader2, LogOut, Shield, ShoppingBag, Users, FileText, MessagesSquare, LayoutDashboard, GraduationCap, Plus, FolderTree } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CUSTOM_ROUTES } from "@/custom-routes";
@@ -247,6 +247,48 @@ const Admin = () => {
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
                       Create, manage, and conduct online exams
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.SERVICES_ADMIN)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FolderTree className="h-5 w-5" />
+                      Manage Services
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      View, edit, and delete village services
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.ADD_SERVICE)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Plus className="h-5 w-5" />
+                      Add Service
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Add new services to the village directory
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.MANAGE_CATEGORIES)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FolderTree className="h-5 w-5" />
+                      Manage Categories
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      Manage service categories and organization
                     </p>
                   </CardContent>
                 </Card>
