@@ -251,6 +251,20 @@ const Admin = () => {
                   </CardContent>
                 </Card>
                 
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.SERVICES_ADMIN)}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FolderTree className="h-5 w-5" />
+                      Manage Services
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      View, edit, and delete village services
+                    </p>
+                  </CardContent>
+                </Card>
+                
                 <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(CUSTOM_ROUTES.ADD_SERVICE)}>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">

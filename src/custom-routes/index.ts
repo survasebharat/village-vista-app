@@ -11,6 +11,7 @@ export const CUSTOM_ROUTES = {
     ADMIN_MARKETPLACE: "/admin/marketplace",
     ADD_SERVICE: "/admin/add-service",
     MANAGE_CATEGORIES: "/admin/manage-categories",
+    SERVICES_ADMIN: "/admin/services",
     SELLER_DASHBOARD: "/seller-dashboard",
     USER_DASHBOARD: "/my-dashboard",
     ABOUT: "/about",
