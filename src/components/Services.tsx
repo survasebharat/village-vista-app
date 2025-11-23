@@ -268,6 +268,11 @@ const Services = ({ services }: ServicesProps) => {
                             <strong>Vehicle:</strong> {service.vehicle}
                           </div>
                         )}
+                         {service.vehicle && (
+                          <div className="text-sm">
+                            <strong>Vehicle Number:</strong> {service.vehicleNumber}
+                          </div>
+                        )}
                         
                         {service.routes && (
                           <div className="text-sm">
