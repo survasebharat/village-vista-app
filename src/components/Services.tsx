@@ -97,8 +97,7 @@ const Services = ({ services }: ServicesProps) => {
             {t('services.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Discover all the essential services available in our village community, 
-            from local businesses to healthcare and education.
+            {t('services.description')}
           </p>
         </div>
 

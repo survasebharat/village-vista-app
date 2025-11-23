@@ -29,8 +29,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
             {t('panchayat.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Meet our elected representatives who work tirelessly for the development 
-            and welfare of our village community.
+            {t('panchayat.description')}
           </p>
         </div>
 
@@ -103,7 +102,6 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               <Badge variant="secondary" className="mx-auto mt-2">
                {panchayat.sarpanch.position}
               </Badge>
-
 
             </CardHeader>
             <CardContent className="space-y-4">

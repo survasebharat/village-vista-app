@@ -42,6 +42,7 @@ const resources = {
       
       // Panchayat
       "panchayat.title": "Panchayat Representatives",
+      "panchayat.description": "Meet our elected representatives who work tirelessly for the development and welfare of our village community.",
       "panchayat.sarpanch": "Sarpanch",
       "panchayat.wardMembers": "Ward Members",
       "panchayat.secretary": "Panchayat Secretary",
@@ -53,7 +54,7 @@ const resources = {
       
       // Services
       "services.title": "Village Services",
-      "services.description": "Discover all the essential services available in our village community.",
+      "services.description": "Discover all the essential services available in our village community, from local businesses to healthcare and education.",
       "services.owner": "Owner",
       "services.doctor": "Doctor",
       "services.teacher": "Teacher", 
@@ -238,6 +239,7 @@ const resources = {
       
       // Panchayat
       "panchayat.title": "पंचायत प्रतिनिधि",
+      "panchayat.description":"हमारे गांव के विकास और कल्याण के लिए निरंतर कार्य करने वाले हमारे चुने हुए प्रतिनिधियों से मिलिए।",
       "panchayat.sarpanch": "सरपंच",
       "panchayat.wardMembers": "वार्ड सदस्य",
       "panchayat.secretary": "पंचायत सचिव",
@@ -249,7 +251,7 @@ const resources = {
       
       // Services
       "services.title": "गांव की सेवाएं",
-      "services.description": "हमारे गांव समुदाय में उपलब्ध सभी आवश्यक सेवाओं की खोज करें।",
+      "services.description": "स्थानीय व्यवसायों से लेकर स्वास्थ्य और शिक्षा तक, हमारे गाँव में उपलब्ध सभी आवश्यक सेवाओं को जानें।",
       "services.owner": "मालिक",
       "services.doctor": "डॉक्टर",
       "services.teacher": "शिक्षक",
@@ -426,6 +428,7 @@ const resources = {
       
       // Panchayat
       "panchayat.title": "पंचायत प्रतिनिधी",
+       "panchayat.description":"आपल्या गावाच्या विकास आणि कल्याणासाठी अहोरात्र कार्य करणाऱ्या आपल्या निवडून आलेल्या प्रतिनिधींना भेटा.",
       "panchayat.sarpanch": "सरपंच",
       "panchayat.wardMembers": "वॉर्ड सदस्य",
       "panchayat.secretary": "पंचायत सचिव",
@@ -437,7 +440,7 @@ const resources = {
       
       // Services
       "services.title": "गावातील सेवा",
-      "services.description": "आमच्या गाव समुदायात उपलब्ध असलेल्या सर्व आवश्यक सेवांचा शोध घ्या।",
+      "services.description": "आपल्या गावातील स्थानिक व्यवसायांपासून आरोग्य व शिक्षणापर्यंत उपलब्ध असलेल्या सर्व महत्त्वाच्या सेवांची माहिती जाणून घ्या.",
       "services.owner": "मालक",
       "services.doctor": "डॉक्टर", 
       "services.teacher": "शिक्षक",
