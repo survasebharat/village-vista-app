@@ -155,7 +155,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
               <CardContent className="space-y-4">
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground mb-2">
-                    {panchayat.upsarpanch.education}
+                    {panchayat.upsarpanch.description}
                   </p>
                   <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
@@ -202,7 +202,7 @@ const Panchayat = ({ panchayat }: PanchayatProps) => {
             <CardContent className="space-y-4">
               <div className="text-center">
                 <p className="text-sm text-muted-foreground mb-2">
-                  {panchayat.secretary.education || panchayat.secretary.department}
+                  {panchayat.secretary.description || panchayat.secretary.department}
                 </p>
                 <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
