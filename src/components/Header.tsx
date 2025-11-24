@@ -1,6 +1,6 @@
 import { useState, useContext, memo } from "react";
 import { createPortal } from "react-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Menu,
   X,
@@ -10,8 +10,17 @@ import {
   LogIn,
   LogOut,
   User,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "./LanguageToggle";
 import SocialMediaButtons from "./SocialMediaButtons";
@@ -21,13 +30,16 @@ import { usePageVisibility } from "@/hooks/usePageVisibility";
 import { supabase } from "@/integrations/supabase/client";
 import { CUSTOM_ROUTES } from "@/custom-routes";
 import { VillageContext } from "@/context/VillageContextConfig";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileHomeOpen, setIsMobileHomeOpen] = useState(false);
   const { t } = useTranslation();
   const { user, isAdmin, isSubAdmin } = useAuth();
   const { isPageVisible } = usePageVisibility();
   const navigate = useNavigate();
+  const location = useLocation();
   const { config } = useContext(VillageContext);
 
   const handleLogout = async () => {
@@ -35,18 +47,8 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const allNavItems = [
-    { name: t("header.about"), href: CUSTOM_ROUTES.ABOUT, pageKey: "about" },
-    {
-      name: t("header.services"),
-      href: CUSTOM_ROUTES.SERVICES,
-      pageKey: "services",
-    },
-    {
-      name: t("header.panchayat"),
-      href: CUSTOM_ROUTES.PANCHAYAT,
-      pageKey: "panchayat",
-    },
+  // Standalone navigation items (not in HOME dropdown)
+  const standaloneNavItems = [
     { name: "Notices", href: CUSTOM_ROUTES.NOTICES, pageKey: "notices" },
     {
       name: "Market Prices",
@@ -66,11 +68,58 @@ const Header = () => {
       href: CUSTOM_ROUTES.CONTACT_US,
       pageKey: "contact",
     },
-    //{ name: "", href: CUSTOM_ROUTES.PEOPLE, pageKey: "people" },
-  ];
+  ].filter((item) => isPageVisible(item.pageKey));
 
-  // Filter navigation items based on visibility
-  const navItems = allNavItems.filter((item) => isPageVisible(item.pageKey));
+  // HOME dropdown menu structure
+  const homeMenuSections = [
+    {
+      title: "About Village",
+      items: [
+        { name: "History", href: CUSTOM_ROUTES.ABOUT, pageKey: "about" },
+        { name: "Village Map", href: CUSTOM_ROUTES.ABOUT + "#map", pageKey: "about" },
+        { name: "Festivals & Culture", href: CUSTOM_ROUTES.ABOUT + "#culture", pageKey: "about" },
+      ],
+    },
+    {
+      title: "Government & Administration",
+      items: [
+        { name: "Panchayat Representatives", href: CUSTOM_ROUTES.PANCHAYAT, pageKey: "panchayat" },
+        { name: "Ward Members", href: CUSTOM_ROUTES.PANCHAYAT + "#ward", pageKey: "panchayat" },
+        { name: "Panchayat Staff", href: CUSTOM_ROUTES.PANCHAYAT + "#staff", pageKey: "panchayat" },
+        { name: "Government Staff", href: CUSTOM_ROUTES.PANCHAYAT + "#govt", pageKey: "panchayat" },
+      ],
+    },
+    {
+      title: "Services",
+      items: [
+        { name: "Shops / Business", href: CUSTOM_ROUTES.SERVICES + "#shops", pageKey: "services" },
+        { name: "Health", href: CUSTOM_ROUTES.SERVICES + "#health", pageKey: "services" },
+        { name: "Education", href: CUSTOM_ROUTES.SERVICES + "#education", pageKey: "services" },
+        { name: "Transportation", href: CUSTOM_ROUTES.SERVICES + "#transport", pageKey: "services" },
+        { name: "Food & Dining", href: CUSTOM_ROUTES.SERVICES + "#food", pageKey: "services" },
+      ],
+    },
+    {
+      title: "Women & Child Care",
+      items: [
+        { name: "Asha Workers", href: "/people#asha", pageKey: "people" },
+        { name: "Anganwadi Karyakarta", href: "/people#anganwadi", pageKey: "people" },
+      ],
+    },
+    {
+      title: "Documents & Certificates",
+      items: [
+        { name: "Birth Certificate", href: CUSTOM_ROUTES.SERVICES + "#birth-cert", pageKey: "services" },
+        { name: "Death Certificate", href: CUSTOM_ROUTES.SERVICES + "#death-cert", pageKey: "services" },
+        { name: "Property Tax Form", href: CUSTOM_ROUTES.TAX_PAYMENT, pageKey: "tax_payment" },
+        { name: "RTI Application", href: CUSTOM_ROUTES.SERVICES + "#rti", pageKey: "services" },
+        { name: "Gram Sabha Resolution 2024", href: CUSTOM_ROUTES.NOTICES, pageKey: "notices" },
+      ],
+    },
+  ].map(section => ({
+    ...section,
+    items: section.items.filter(item => isPageVisible(item.pageKey))
+  })).filter(section => section.items.length > 0);
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
@@ -128,11 +177,54 @@ const Header = () => {
           {/* Desktop Navigation & Auth */}
           <div className="flex items-center gap-2">
             <nav className="hidden lg:flex items-center gap-0.5">
-              {navItems.map((item) => (
+              {/* HOME Mega Menu */}
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-foreground hover:text-primary hover:bg-primary/10 bg-transparent">
+                      Home
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="grid w-[800px] gap-3 p-6 md:grid-cols-2 lg:grid-cols-3">
+                        {homeMenuSections.map((section) => (
+                          <div key={section.title} className="space-y-3">
+                            <h4 className="font-semibold text-sm text-primary border-b border-border pb-2">
+                              {section.title}
+                            </h4>
+                            <ul className="space-y-2">
+                              {section.items.map((item) => (
+                                <li key={item.name}>
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      to={item.href}
+                                      className={cn(
+                                        "block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-sm",
+                                        location.pathname === item.href && "bg-accent/50"
+                                      )}
+                                    >
+                                      {item.name}
+                                    </Link>
+                                  </NavigationMenuLink>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+
+              {/* Standalone Navigation Items */}
+              {standaloneNavItems.map((item) => (
                 <Button
                   key={item.name}
                   variant="ghost"
-                  className="text-foreground hover:text-primary hover:bg-primary/10"
+                  className={cn(
+                    "text-foreground hover:text-primary hover:bg-primary/10",
+                    location.pathname === item.href && "bg-primary/10 text-primary"
+                  )}
                   asChild
                 >
                   <Link to={item.href}>{item.name}</Link>
@@ -221,13 +313,61 @@ const Header = () => {
             />
 
             {/* Sidebar */}
-            <nav className="fixed top-0 right-0 h-full w-64 bg-card shadow-2xl z-[9999] lg:hidden animate-slide-in-right overflow-y-auto border-l border-border">
+            <nav className="fixed top-0 right-0 h-full w-72 bg-card shadow-2xl z-[9999] lg:hidden animate-slide-in-right overflow-y-auto border-l border-border">
               <div className="flex flex-col gap-2 p-4">
-                {navItems.map((item) => (
+                {/* HOME Dropdown for Mobile */}
+                <div className="space-y-1">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-between text-foreground hover:text-primary hover:bg-primary/10"
+                    onClick={() => setIsMobileHomeOpen(!isMobileHomeOpen)}
+                  >
+                    <span>Home</span>
+                    <ChevronDown className={cn("h-4 w-4 transition-transform", isMobileHomeOpen && "rotate-180")} />
+                  </Button>
+                  
+                  {isMobileHomeOpen && (
+                    <div className="pl-4 space-y-3 pt-2 animate-accordion-down">
+                      {homeMenuSections.map((section) => (
+                        <div key={section.title} className="space-y-2">
+                          <h4 className="font-semibold text-xs text-primary uppercase tracking-wide">
+                            {section.title}
+                          </h4>
+                          <div className="space-y-1">
+                            {section.items.map((item) => (
+                              <Button
+                                key={item.name}
+                                variant="ghost"
+                                size="sm"
+                                className={cn(
+                                  "w-full justify-start text-sm text-muted-foreground hover:text-primary hover:bg-primary/10",
+                                  location.pathname === item.href && "bg-primary/10 text-primary"
+                                )}
+                                asChild
+                                onClick={() => {
+                                  setIsMenuOpen(false);
+                                  setIsMobileHomeOpen(false);
+                                }}
+                              >
+                                <Link to={item.href}>{item.name}</Link>
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Standalone Navigation Items for Mobile */}
+                {standaloneNavItems.map((item) => (
                   <Button
                     key={item.name}
                     variant="ghost"
-                    className="justify-start text-foreground hover:text-primary hover:bg-primary/10"
+                    className={cn(
+                      "justify-start text-foreground hover:text-primary hover:bg-primary/10",
+                      location.pathname === item.href && "bg-primary/10 text-primary"
+                    )}
                     asChild
                     onClick={() => setIsMenuOpen(false)}
                   >
