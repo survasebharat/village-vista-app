@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { MessageSquare, X } from 'lucide-react';
+import { useFooterVisibility } from '@/hooks/useFooterVisibility';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -35,6 +36,10 @@ const FeedbackForm = () => {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { config } = useContext(VillageContext);
+  const isFooterVisible = useFooterVisibility();
+
+  // Dynamic colors based on footer visibility
+  const bgColor = isFooterVisible ? "#32D26C" : "#0B5C38";
 
   const {
     register,
@@ -89,10 +94,11 @@ const FeedbackForm = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform z-40"
+          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-all duration-500 z-40"
+          style={{ backgroundColor: bgColor }}
           size="icon"
         >
-          <MessageSquare className="h-6 w-6" />
+          <MessageSquare className="h-6 w-6 text-white" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
