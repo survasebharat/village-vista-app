@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import FeedbackForm from "./FeedbackForm";
+import VillageChatbot from "./VillageChatbot";
 import { VillageProvider } from "@/context/VillageContextConfig";
 
 const Layout = ({ children }) => {
@@ -11,6 +12,7 @@ const Layout = ({ children }) => {
         {children}
         <Footer />
         <FeedbackForm />
+        <VillageChatbot />
       </VillageProvider>
     </div>
   );
