@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { useFooterVisibility } from "@/hooks/useFooterVisibility";
 
 type Message = {
   role: "user" | "assistant";
@@ -18,6 +19,13 @@ const VillageChatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { i18n } = useTranslation();
+  const isFooterVisible = useFooterVisibility();
+
+  // Dynamic colors based on footer visibility
+  const bgColor = isFooterVisible ? "#32D26C" : "#0B5C38";
+  const gradientStyle = {
+    background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor} 100%)`,
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -146,10 +154,8 @@ const VillageChatbot = () => {
       <div className="fixed bottom-24 right-6 z-[60]">
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-          style={{
-            background: "linear-gradient(135deg, #4ade80 0%, #16a34a 100%)",
-          }}
+          className="h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-110"
+          style={gradientStyle}
           size="icon"
         >
           {isOpen ? (
@@ -166,9 +172,7 @@ const VillageChatbot = () => {
           {/* Header */}
           <div
             className="p-4 text-white flex items-center gap-3"
-            style={{
-              background: "linear-gradient(135deg, #4ade80 0%, #16a34a 100%)",
-            }}
+            style={gradientStyle}
           >
             <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
               <Bot className="h-6 w-6" />
